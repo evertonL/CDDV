@@ -1,12 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    
+    <title>Cadastrar Unidade Basica de Saude</title>
+
 </head>
+
 <body>
-    
+
+    <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
+    <nav class="navbar navbar-fixed-top navbar-light navbar-expand-sm">
+
+        <!-- LOGO -->
+        <a class="navbar-brand" routerLink="/">
+
+            <img src="assets/logoxx.png" width="50" height="50" class="d-inline-block align-top" alt="">
+
+        </a>
+
+        <!-- BOTÃO PARA RESPONSIVIDADE -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- BOTOES DA NAVBAR -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+
+                    <button type="button" class="btn btn-outline-success" routerLink="/">VOLTAR</button>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Campos De Cadastramento -->
+    <div id="main" class="container-fluid">
+
+        <h3 class="page-header">Cadastrar Unidade Basica de Saude</h3>
+
+        <form>
+            <!-- Campos : CNES, Nome da UBS e Municipio -->
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="">Numero do CNES:</label>
+                    <input type="number" class="form-control" id="" placeholder="Digite o numero do CNES">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputEmail1">Nome da UBS:</label>
+                    <input type="text" class="form-control" id="" placeholder="Digite o Nome da UBS">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="">Municipio da Unidade:</label>
+                    <input type="text" class="form-control" id="" placeholder="Digite o Municipio da Unidade">
+                </div>
+            </div>
+
+            <!-- Campos : Bairro, Endereço e Estado -->
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="exampleInputEmail1">Bairro:</label>
+                    <input type="text" class="form-control" id="" placeholder="Digite o Bairro da Unidade">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="exampleInputEmail1">Endereço:</label>
+                    <input type="text" class="form-control" id="" placeholder="Digite o Endereço da Unidade">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="exampleInputEmail1">Estado:</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1"
+                        placeholder="Digite o estado EX:(MG)">
+                </div>
+            </div>
+
+            <!-- Campos : Telefone e CEP -->
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="">Telefone:</label>
+                    <input type="text" class="form-control" id="" placeholder="Digite o Telefone de Contato">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">CEP:</label>
+                    <input type="email" class="form-control" id="" placeholder="Digite o CEP">
+                </div>
+            </div>
+
+            <!-- Campos : Botão de REGISTRAR(falta Arrumar) -->
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <button type="button" class="btn btn-success">Success</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!--Rodapé-->
+    <footer class="footer sticky-row text-center container-fluid">
+        <div class="container">
+            <div>
+                <p>--Rodapé--</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>

@@ -1,12 +1,38 @@
-h11 {
-    color:red;
+/* COMPONENTES DO CABEÇALHO */
+    
+#main {
+    margin-top: 1%;
+  }
+nav{
+    background-color: #1a2588;
+}
+a{
+    margin-inline-start: 5%;
 }
 
-#logo {
-        width:50%;
-        height:50%;
+button{
+    background:none;
+    border:none;
+    color: rgb(255, 255, 255);
+    cursor:pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-inline-start: 80%;
 }
-
-.panel-heading{
-    font-size:150%;
+ul{
+    margin-inline-start: 5%;
+}
+.footer{
+    background-color: #1a2588;
+    color: white;
+    margin: auto;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
+img{
+    position: center;   
+}
+.fundo{
+    margin-inline-start: 2%;
+    margin-inline-end: 2%;
 }

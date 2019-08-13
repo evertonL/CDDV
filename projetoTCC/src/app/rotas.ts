@@ -17,19 +17,19 @@ import { WorkspaceAdsComponent                } from "./workspace-ads/workspace-
 
 export const rotas : Routes = [
     
-    { path: ''                              , component: TelaInicialComponent                  },
-    { path: "login-populacao"               , component: LoginPopulacaoComponent               },
-    { path: "login-ads"                     , component: LoginAdsComponent                     },
-    { path: "login-ubs"                     , component: LoginUbsComponent                     },
-    { path: "cartao-populacao"              , component: CartaoPopulacaoComponent              },
-    { path: "administrador"                 , component: AdministradorComponent                },
-    { path: "cadastrar-ads"                 , component: CadastrarAdsComponent                 },
-    { path: "cadastrar-populacao"           , component: CadastrarPopulacaoComponent           },
-    { path: "cadastrar-vacina"              , component: CadastrarVacinaComponent              },
-    { path: "workspace-ads"                 , component: WorkspaceAdsComponent                 },
-    { path: "workspace-ubs"                 , component: WorkspaceUbsComponent                 },
-    { path: "relatorio"                     , component: RelatorioUbsComponent                 },
-    { path: "cadastrar-ubs"                 , component: CadastrarUbsComponent                 },
-    { path: '', redirectTo :  ''                 , pathMatch: 'full'                           }
+    { path: ''                                  , component: TelaInicialComponent                  },
+    { path: "login-ubs"                         , component: LoginUbsComponent                     },
+    { path: "login-ads"                         , component: LoginAdsComponent                     },
+    { path: "cadastrar-populacao"               , component: CadastrarPopulacaoComponent           },
+    { path: "login-populacao"                   , component: LoginPopulacaoComponent               },
+    { path: "workspace-ubs"                     , component: WorkspaceUbsComponent                 },
+    { path: "workspace-ubs/cadastrar-ads"       , component: CadastrarAdsComponent                 },
+    { path: "workspace-ubs/cadastrar-vacina"    , component: CadastrarVacinaComponent              },
+    { path: "workspace-ubs/relatorio"           , component: RelatorioUbsComponent                 },
+    { path: "workspace-ads"                     , component: WorkspaceAdsComponent                 },
+    { path: "cartao-populacao"                  , component: CartaoPopulacaoComponent              },
+    { path: "administrador"                     , component: AdministradorComponent                },
+    { path: "administrador/cadastrar-ubs"       , component: CadastrarUbsComponent                 },
+    { path: '', redirectTo :  ''                , pathMatch: 'full'                                }
 
 ];  
