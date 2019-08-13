@@ -1,0 +1,54 @@
+Pré-requisitos para executar o projeto:
+
+1 - Instalar Node.js:
+
+    https://nodejs.org/en/
+
+2 - Instalar o Angular Cli:
+
+    npm install -g @angular/cli
+
+3 - Abrir o terminal estando dentro da pasta do projeto execute o comando
+    
+    npm install
+    "esse comando vai baixar e Instalar as dependencias do projeto
+    (tudo que precisa pra rodar o projeto pode ser encontrado no arquivo package.json)"
+
+4 - executar o projeto atraves do terminal estando dentro da pasta APP
+
+    ng serve -o
+
+---------------------------------------------------------
+
+Comandos basicos:
+
+1 - Criar um novo projeto:
+
+    ng new nomeDoProjeto
+
+2 - Executar o projeto:
+
+    ng serve -o
+
+3 - Criar um novo  Filtro (Pipe):
+
+	ng generate pipe nomeDoPipe
+
+4 - Criar um novo componente:
+
+	ng generate component nomeDoComponent
+
+5 - Criar uma Diretiva:
+    
+    ng generate directive nome-da-diretiva
+
+6 - Criar um novo Serviço (Service):
+
+    ng generate service nome-do-servico
+
+7 - Criar um novo Módulo (Module):
+
+ 	ng generate module nome-do-modulo
+    
+
+
