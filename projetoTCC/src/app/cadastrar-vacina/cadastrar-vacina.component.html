@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Cadsatro da População</title>
+    <title>Cadastro de Vacina</title>
 
 </head>
 
@@ -33,100 +33,60 @@
             <div class="container">
                 <ul class="navbar-nav mr-auto">
 
-                    <button type="button" class="btn btn-outline-success" routerLink="/">VOLTAR</button>
+                    <button type="button" class="voltar btn btn-outline-success" routerLink="/">VOLTAR</button>
 
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Campos De Cadastramento -->
     <div id="main" class="container-fluid">
 
-        <h3 class="page-header">Adicionar Item</h3>
+        <h3 class="page-header">Cadastro de Vacina</h3>
 
-        <form action="index.html">
+        <form>
+            <!-- Campos : Nome da Vacina, Lote e Seu Nome -->
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="exampleInputEmail1">Cartão do SUS</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Numero do cartâo">
+                    <label for="">Nome da Vacina:</label>
+                    <input type="text" class="form-control" id="" placeholder="Nome da vacina">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="exampleInputEmail1">Nome da Mãe</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome da sua Mãe">
+                    <label for="">Lote:</label>
+                    <input type="text" class="form-control" id="" placeholder="Digite o lote da vacina">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="exampleInputEmail1">Municipio de Nacimento</label>
+                    <label for="exampleInputEmail1">Seu Nome:</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
-                        placeholder="Municipio de Nacimento">
+                        placeholder="Responsavel por esse Cadastramento">
                 </div>
             </div>
 
+            <!-- Campos : Quantidade de Vacinas e Tempo de Imunização -->
             <div class="row">
                 <div class="form-group col-md-3">
-                    <label for="exampleInputEmail1">Estado</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Digite seu Estado">
+                    <label for="">Quantidade de Vacinas:</label>
+                    <input type="number" class="form-control" id="" placeholder="Digite a Quantidade">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="exampleInputEmail1">Endereço</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Digite seu Endereço">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="exampleInputEmail1">Nome do Pai</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome do seu Pai">
-                </div>
-
-                <div class="form-group col-md-3">
-                    <legend class="col-form-label col-sm-2 pt-0">Sexo</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridMasculino"
-                                value="option1" checked>
-                            <label class="form-check-label" for="gridRadios1"> M </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridFeminino"
-                                value="option2">
-                            <label class="form-check-label" for="gridRadios2"> F </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Nome</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Digite seu Nome">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Data de Nacimento</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1"
-                        placeholder="Digite sua Data de Nacimento">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label for="exampleInputEmail1">Senha</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1"
-                        placeholder="Digite a Senha para sua conta">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <button type="button" class="btn btn-success">Success</button>
+                    <label for="">Tempo de Imunização:</label>
+                    <input type="text" class="form-control" id="" placeholder=" Digite o Tempo de Imunização">
                 </div>
             </div>
         </form>
+        
+    </div>
+    
+    <!-- Botão de Registrar Cadastro -->
+    <div>
+            <button type="button" class="btRegistrar btn btn-outline-success" >Registrar</button>
     </div>
 
     <!--Rodapé-->
-    <footer class="footer sticky-row text-center container-fluid">
-        <div class="container">
-            <div>
-                <p>--Rodapé--</p>
-            </div>
-        </div>
+   <!--Rodapé-->
+   <footer class="footer text-center">
+        <p>--Rodapé--</p>
     </footer>
 </body>
 
