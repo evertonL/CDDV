@@ -44,42 +44,48 @@
     <!-- Campos De Cadastramento -->
     <div id="main" class="container-fluid">
 
-        <h3 class="page-header">Cadsatro de Agente De Saude</h3>
+        <h3 class="page-header">Cadastro de Agente De Saude</h3>
 
         <form>
-            <!-- Campos : CPF e Nome do Agente-->
+            <!-- Campos : CPF e Nome do Agente -->
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="">CPF do Agente:</label>
-                    <input type="number" class="form-control" id="" placeholder="Numero do CPF">
+                    <label for="inputCpfAgente">CPF do Agente:</label>
+                    <input type="number" class="form-control" id="inputCpfAgente" name="inputCpfAgente" maxlength=11
+                        placeholder="Numero do CPF">
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="">Nome do Agente:</label>
-                    <input type="text" class="form-control" id="" placeholder="Nome do Agente">
+                    <label for="inputNameAgente">Nome do Agente:</label>
+                    <input type="text" class="form-control" id="inputNameAgente" name="inputNameAgente" maxlength="50"
+                        placeholder="Nome do Agente">
                 </div>
             </div>
 
-            <!-- Campos : Senha e RG do Agente-->
+            <!-- Campos : Senha e RG do Agente -->
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="">Senha:</label>
-                    <input type="password" class="form-control" id="" placeholder="insira a Senha">
-                    <label for="">Confirmar Senha:</label>
-                    <input type="password" class="form-control" id="" placeholder="confime sua Senha">
+                    <label for="inputSenhaAgente">Senha:</label>
+                    <input type="password" class="form-control" id="inputSenhaAgente" name="inputSenhaAgente"
+                        placeholder="insira a Senha">
+                    <label for="inputConfirmaSenhaAgente">Confirmar Senha:</label>
+                    <input type="password" class="form-control" id="inputConfirmaSenhaAgente"
+                        name="inputConfirmaSenhaAgente" placeholder="confime sua Senha">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="">RG do agente:</label>
-                    <input type="number" class="form-control" id="" placeholder="Digite o numero do RG">
+                    <label for="inputRgAgente">RG do agente:</label>
+                    <input type="number" class="form-control" id="inputRgAgente" name="inputRgAgente"
+                        placeholder="Digite o numero do RG">
                 </div>
             </div>
 
         </form>
 
-        <!-- Botao de Registrar -->
+        <!-- Botao de Registrar  -->
         <div class="row">
             <div class="form-group col-md-3">
-                <button type="button" class="btRegistrar btn btn-outline-success">Registrar</button>
+                <button type="button" class="btRegistrar btn btn-outline-success"
+                    (click)="registrarConta()">Registrar</button>
             </div>
         </div>
     </div>
