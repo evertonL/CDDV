@@ -27,7 +27,7 @@ export const rotas : Routes = [
     { path: "workspace-ubs/cadastrar-vacina"    , component: CadastrarVacinaComponent              },
     { path: "workspace-ubs/relatorio"           , component: RelatorioUbsComponent                 },
     { path: "workspace-ads"                     , component: WorkspaceAdsComponent                 },
-    { path: "cartao-populacao"                  , component: CartaoPopulacaoComponent              },
+    { path: "workspace-ads/cartao-populacao"    , component: CartaoPopulacaoComponent              },
     { path: "administrador"                     , component: AdministradorComponent                },
     { path: "administrador/cadastrar-ubs"       , component: CadastrarUbsComponent                 },
     { path: '', redirectTo :  ''                , pathMatch: 'full'                                }

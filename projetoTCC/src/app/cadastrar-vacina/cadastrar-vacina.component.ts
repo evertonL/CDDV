@@ -20,7 +20,7 @@ export class CadastrarVacinaComponent implements OnInit {
 
   /**
    * @description Retorna instancia de CadastroVaciana alocado.
-   * @return {ubs} - Instância alocada em memória
+   * @return {Vacina} - Instância alocada em memória
    */
   private getCadastrarVacina():Vacina{
 

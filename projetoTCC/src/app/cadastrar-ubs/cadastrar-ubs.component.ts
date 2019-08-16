@@ -20,7 +20,7 @@ export class CadastrarUbsComponent implements OnInit {
 
   /**
    * @description Retorna instancia de CadastroUbs alocado.
-   * @return {ubs} - Instância alocada em memória
+   * @return {Ubs} - Instância alocada em memória
    */
   private getCadastrarUbs():Ubs{
 
