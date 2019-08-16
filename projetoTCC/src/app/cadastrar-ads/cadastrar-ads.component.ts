@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Agente } from './agente';
 
 @Component({
   selector: 'app-cadastrar-ads',
@@ -7,32 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastrarAdsComponent implements OnInit {
 
-  private inputCpfAgente: number;
-  private inputNameAgente: string;
-  private inputSenhaAgente: number; //preciso tratar que so posso adicionar a senha ao banco quando senha e confirmar senhar for igual
-  private inputConfirmaSenhaAgente: number;
-  private inputRgAgente: number;
+  private agente: Agente = null;
 
-  
-    /**
-     * @constructor
-     * @param {number } inputCpfAgente  
-     * @param {string } inputNameAgente 
-     * @param {number } inputSenhaAgente
-     * @param {number } inputConfirmaSenhaAgente
-     * @param {number } inputRgAgente
-     */
-  constructor(inputCpfAgente?: number, inputNameAgente?: string, inputSenhaAgente?: number,
-    inputConfirmaSenhaAgente?: number, inputRgAgente?: number) {
-
-    this.inputCpfAgente = inputCpfAgente;
-    this.inputNameAgente = inputNameAgente;
-    this.inputSenhaAgente = inputSenhaAgente;
-    this.inputConfirmaSenhaAgente = inputConfirmaSenhaAgente;
-    this.inputRgAgente = inputRgAgente;
-  }
+  constructor() {}
 
   ngOnInit() {
+
+    this.getCadastrarAds();
+    
+  }
+
+  /**
+   * @description Retorna instancia de CadastroAgente alocado.
+   * @return {Agente} - Instância alocada em memória
+   */
+  private getCadastrarAds():Agente{
+
+    if( this.agente == null ){
+
+      this.agente = new Agente();
+    }
+
+    return this.agente;
   }
 
 }

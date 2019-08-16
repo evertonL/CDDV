@@ -49,16 +49,33 @@
             <!-- Campos : Nome da Vacina, Lote e Seu Nome -->
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="">Nome da Vacina:</label>
-                    <input type="text" class="form-control" id="" placeholder="Nome da vacina">
+                    <label for="nome">Nome da Vacina:</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="ubs.nome"
+                        id="nome"
+                        name="nome"
+                        maxlength="50"
+                        placeholder="Nome da vacina">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="">Lote:</label>
-                    <input type="text" class="form-control" id="" placeholder="Digite o lote da vacina">
+                    <label for="lote">Lote:</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="ubs.lote"
+                        id="lote"
+                        name="lote"
+                        maxlength="25"
+                        placeholder="Digite o lote da vacina">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="exampleInputEmail1">Seu Nome:</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1"
+                    <label for="nome_da_unidade">Seu Nome:</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="ubs.nome_da_unidade"
+                        id="nome_da_unidade"
+                        name="nome_da_unidade"
+                        maxlength="50"
                         placeholder="Responsavel por esse Cadastramento">
                 </div>
             </div>
@@ -67,11 +84,20 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label for="">Quantidade de Vacinas:</label>
-                    <input type="number" class="form-control" id="" placeholder="Digite a Quantidade">
+                    <input class="form-control"
+                        type="number"
+                        id=""
+                        placeholder="Digite a Quantidade">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="">Tempo de Imunização:</label>
-                    <input type="text" class="form-control" id="" placeholder=" Digite o Tempo de Imunização">
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="ubs.periodo_de_imunizacao"
+                        id="periodo_de_imunizacao"
+                        name="periodo_de_imunizacao"
+                        maxlength="5"
+                        placeholder=" Digite o Tempo de Imunização">
                 </div>
             </div>
         </form>

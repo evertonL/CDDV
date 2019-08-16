@@ -1,12 +1,12 @@
 // MÓDULOS PADRÕES
 import { RouterModule } from '@angular/router';
-import { NgModule     } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule  } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { CadastrarAdsComponent        } from './cadastrar-ads.component';
+import { CadastrarAdsComponent } from './cadastrar-ads.component';
 
-import { rotas                          } from 'src/app/rotas';
+import { rotas } from 'src/app/rotas';
 
 const appRoutes = rotas
 
@@ -20,4 +20,5 @@ const appRoutes = rotas
     RouterModule.forRoot(appRoutes),
   ]
 })
-export class CadastrarAdsModule { }
+
+export class CadastrarAdsModule {}

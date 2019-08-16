@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Vacina } from './vacina';
 
 @Component({
   selector: 'app-cadastrar-vacina',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastrarVacinaComponent implements OnInit {
 
+  private vacina : Vacina = null
+  
   constructor() { }
 
   ngOnInit() {
+
+    this.getCadastrarVacina();
+
+  }
+
+  /**
+   * @description Retorna instancia de CadastroVaciana alocado.
+   * @return {ubs} - Instância alocada em memória
+   */
+  private getCadastrarVacina():Vacina{
+
+    if( this.vacina == null ){
+
+      this.vacina = new Vacina();
+    }
+
+    return this.vacina;
   }
 
 }

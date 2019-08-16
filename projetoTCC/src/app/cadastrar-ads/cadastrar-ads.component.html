@@ -49,34 +49,61 @@
         <form>
             <!-- Campos : CPF e Nome do Agente -->
             <div class="row">
+
                 <div class="form-group col-md-4">
-                    <label for="inputCpfAgente">CPF do Agente:</label>
-                    <input type="number" class="form-control" id="inputCpfAgente" name="inputCpfAgente" maxlength=11
-                        placeholder="Numero do CPF">
+                    <label for="cpf">CPF do Agente:</label>
+                    <input class="form-control"
+                           type="number" 
+                           [(ngModel)]="agente.cpf" 
+                           id="cpf" 
+                           name="cpf" 
+                           maxlength=11
+                           placeholder="Numero do CPF">
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="inputNameAgente">Nome do Agente:</label>
-                    <input type="text" class="form-control" id="inputNameAgente" name="inputNameAgente" maxlength="50"
-                        placeholder="Nome do Agente">
+                    <label for="nome">Nome do Agente:</label>
+                    <input class="form-control"
+                           type="text" 
+                           [(ngModel)]="agente.nome" 
+                           class="form-control" 
+                           id="nome" 
+                           name="nome" 
+                           maxlength="50"
+                           placeholder="Nome do Agente">
                 </div>
+
             </div>
 
             <!-- Campos : Senha e RG do Agente -->
             <div class="row">
+                                <!-- faltando arumar algumas coisas -->
                 <div class="form-group col-md-4">
-                    <label for="inputSenhaAgente">Senha:</label>
-                    <input type="password" class="form-control" id="inputSenhaAgente" name="inputSenhaAgente"
-                        placeholder="insira a Senha">
-                    <label for="inputConfirmaSenhaAgente">Confirmar Senha:</label>
-                    <input type="password" class="form-control" id="inputConfirmaSenhaAgente"
-                        name="inputConfirmaSenhaAgente" placeholder="confime sua Senha">
+                    <label for="senha">Senha:</label>
+                    <input class="form-control"
+                           type="password"
+                           [(ngModel)]="agente.senha" 
+                           id="senha"
+                           name="senha"
+                           placeholder="insira a Senha">
+                    <label for="confirmaSenha">Confirmar Senha:</label>
+                    <input class="form-control"
+                           type="password"
+                           id="confirmaSenha"
+                           name="confirmaSenha"
+                           placeholder="confime sua Senha">
                 </div>
+
                 <div class="form-group col-md-3">
-                    <label for="inputRgAgente">RG do agente:</label>
-                    <input type="number" class="form-control" id="inputRgAgente" name="inputRgAgente"
-                        placeholder="Digite o numero do RG">
+                    <label for="rg">RG do agente:</label>
+                    <input class="form-control"
+                           type="number"
+                           [(ngModel)]="agente.rg"
+                           id="rg"
+                           name="rg"
+                           placeholder="Digite o numero do RG">
                 </div>
+                
             </div>
 
         </form>

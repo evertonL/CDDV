@@ -49,72 +49,149 @@
             <!-- Campos : Cartão Do SUS, Nome da Mãe e Municipio De Nacimento -->
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="">Cartão do SUS</label>
-                    <input type="number" class="form-control" id="" placeholder="Numero do cartâo">
+                    <label for="cartao_sus">Cartão do SUS:</label>
+                    <input class="form-control" 
+                        type="number"
+                        [(ngModel)]="populacao.cartao_sus" 
+                        id="cartao_sus"
+                        name="cartao_sus"
+                        maxlength="15"
+                        placeholder="Numero do cartâo">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="">Nome da Mãe</label>
-                    <input type="text" class="form-control" id="" placeholder="Nome da sua Mãe">
+                    <label for="nome_da_mae">Nome da Mãe:</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="populacao.nome_da_mae" 
+                        id="nome_da_mae"
+                        name="nome_da_mae"
+                        maxlength="60"
+                        placeholder="Nome da sua Mãe">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="">Municipio de Nacimento</label>
-                    <input type="text" class="form-control" id="" placeholder="Municipio de Nacimento">
+                    <label for="municipio_de_nacimento">Municipio de Nacimento:</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="populacao.municipio_de_nacimento" 
+                        id="municipio_de_nacimento"
+                        name="municipio_de_nacimento"
+                        maxlength="30"
+                        placeholder="Municipio de Nacimento">
                 </div>
             </div>
 
             <!-- Campos : Estado, Endereço, Nome do Pai e Sexo -->
             <div class="row">
+
                 <div class="form-group col-md-3">
-                    <label for="">Estado</label>
-                    <input type="text" class="form-control" id="" placeholder="Digite seu Estado">
+                    <label for="estado">Estado:</label>
+                    <input class="form-control" 
+                        type="text"
+                        [(ngModel)]="populacao.estado"
+                        id="estado"
+                        name="estado"
+                        maxlength="2" 
+                        placeholder="Digite seu Estado Ex: MG">
                 </div>
+
                 <div class="form-group col-md-3">
-                    <label for="">Endereço</label>
-                    <input type="text" class="form-control" id="" placeholder="Digite seu Endereço">
+                    <label for="endereco">Endereço:</label>
+                    <input class="form-control" 
+                        type="text"
+                        [(ngModel)]="populacao.endereco"
+                        id="endereco"
+                        name="endereco"
+                        maxlength="60"
+                        placeholder="Digite seu Endereço">
                 </div>
+
                 <div class="form-group col-md-3">
-                    <label for="">Nome do Pai</label>
-                    <input type="text" class="form-control" id="" placeholder="Nome do seu Pai">
+                    <label for="nome_da_pai">Nome do Pai:</label>
+                    <input class="form-control" 
+                        type="text"
+                        [(ngModel)]="populacao.nome_da_pai"
+                        id="nome_da_pai"
+                        name="nome_da_pai"
+                        maxlength="60"
+                        placeholder="Nome do seu Pai">
                 </div>
+
                 <div class="form-group col-md-3">
-                    <legend class="col-form-label col-sm-2 pt-0">Sexo</legend>
+
+                    <legend class="col-form-label col-sm-2 pt-0">Sexo:</legend>
+
                     <div class="col-sm-10">
+                                              <!-- faltando arumar algumas coisas -->
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="" value="option1"
-                                checked>
+                            <input class="form-check-input"
+                            type="radio"
+                            name="gridRadios"
+                            id=""
+                            value="option1"
+                            checked>
                             <label class="form-check-label" for="gridRadios1"> M </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="" value="option2">
+                            <input class="form-check-input"
+                            type="radio" 
+                            name="gridRadios"
+                            id=""
+                            value="option2">
                             <label class="form-check-label" for="gridRadios2"> F </label>
                         </div>
+
                     </div>
                 </div>
             </div>
 
             <!-- Campos : Nome e Data de Nacimento -->
             <div class="row">
+
                 <div class="form-group col-md-6">
-                    <label for="">Nome</label>
-                    <input type="email" class="form-control" id="" placeholder="Digite seu Nome">
+                    <label for="nome">Nome</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="populacao.nome"
+                        id="nome"
+                        name="nome"
+                        maxlength="50" 
+                        placeholder="Digite seu Nome">
                 </div>
+
                 <div class="form-group col-md-6">
-                    <label for="">Data de Nacimento</label>
-                    <input type="email" class="form-control" id="" placeholder="Digite sua Data de Nacimento">
+                    <label for="data_nacimento">Data de Nacimento</label>
+                    <input class="form-control"
+                        type="date"
+                        [(ngModel)]="populacao.data_nacimento"
+                        id="data_nacimento"
+                        name="data_nacimento"
+                        placeholder="Digite sua Data de Nacimento">
                 </div>
+
             </div>
 
             <!-- Campos : Senha e Confirma Senha -->
             <div class="row">
+                                <!-- faltando arumar algumas coisas -->
                 <div class="form-group col-md-3">
                     <label for="">Senha:</label>
-                    <input type="email" class="form-control" id="" placeholder="Digite a Senha para sua conta">
+                    <input class="form-control"
+                        type="text"
+                        id=""
+                        maxlength="32"
+                        placeholder="Digite a Senha para sua conta">
                 </div>
+
                 <div class="form-group col-md-3">
                     <label for="">Confirmar Senha:</label>
-                    <input type="email" class="form-control" id="" placeholder="Confirme sua Senha">
+                    <input class="form-control"
+                        type="text"
+                        id=""
+                        maxlength="32"
+                        placeholder="Confirme sua Senha">
                 </div>
+
             </div>
 
         </form>
