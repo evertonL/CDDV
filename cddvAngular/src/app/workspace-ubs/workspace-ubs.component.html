@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>workspace-ubs</title>
+</head>
+
+<body>
+	<!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
+	<nav class="navbar  navbar-fixed-top navbar-light navbar-expand-sm">
+
+		<!-- LOGO -->
+		<a class="navbar-brand" routerLink="home">
+
+			<img src="assets/logoxx.png"
+				width="50"
+				height="50"
+				class="d-inline-block align-top"
+				alt=""
+			>
+
+		</a>
+
+		<!-- BOTÃO PARA RESPONSIVIDADE -->
+		<button class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation">
+
+			<span class="navbar-toggler-icon"></span>
+
+		</button>
+
+		<!-- BOTOES DA NAVBAR -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="container">
+				<ul class="navbar-nav mr-auto">
+
+					<button type="button"
+						class="btn btn-outline-success"
+						routerLink="cadastrar-ads"
+						>Cadastrar Agente
+					</button>
+
+					<button type="button"
+						class="btn btn-outline-success"
+						routerLink="cadastrar-vacina"
+						>Cadastrar Vacina
+					</button>
+
+					<button type="button"
+						class="btn btn-outline-success"
+						routerLink="relatorio"
+						>Relatorio
+					</button>
+
+					<button type="button"
+						class="btn btn-outline-success"
+						>Sair
+					</button>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!--Rodapé-->
+	<footer class="footer text-center ">
+			<p>--Rodapé--</p>
+	</footer>
+
+</body>
+
+</html>

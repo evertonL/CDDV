@@ -1,0 +1,54 @@
+/* ESTILIZAÇÃO DA TELA CADASTRO DE AGENTE DE SAUDE */
+
+/* configura a distancia da dic main em relacao ao top */
+#main {
+    margin-top: 3%;
+  }
+form{
+    margin-top: 2%;
+}
+
+/* atribuindo cor para a NavBar */
+nav{
+    background-color: #1a2588;
+}
+
+/* atribuindo a distancia do logo em relacão ao inicio da tela */
+a{
+    margin-inline-start: 5%;
+}
+
+/* configuracao da tag button */
+button{
+    background: none;
+    border:none;
+    color: rgb(255, 255, 255);
+    cursor:pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* configuração do local do botao voltar */
+.voltar{
+    margin-inline-start: 80%;
+}
+
+/* configuração do local do botao Registrar */
+.btRegistrar{
+    background: #28a745;
+    margin-inline-start: 45%;
+    margin-top: 10%;
+}
+
+/* configuracao do rodape */
+.footer{
+    background-color: #1a2588;
+    color: white;
+    height: 43px;
+    width:100%;
+}
+
+/* configurando a img do log */
+img{
+    position: center;   
+}
+

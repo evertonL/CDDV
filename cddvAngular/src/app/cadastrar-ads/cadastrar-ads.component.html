@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Cadastro de Agente</title>
+
+</head>
+
+<body>
+
+    <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
+    <nav class="navbar navbar-fixed-top navbar-light navbar-expand-sm">
+
+        <!-- LOGO -->
+        <a class="navbar-brand" routerLink="/">
+
+            <img src="assets/logoxx.png" 
+                width="50" 
+                height="50"
+                class="d-inline-block align-top" alt="">
+
+        </a>
+
+        <!-- BOTÃO PARA RESPONSIVIDADE -->
+        <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- BOTOES DA NAVBAR -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+
+                    <button class="voltar btn btn-outline-success"
+                        type="button"
+                        routerLink="workspace-ubs">
+                        VOLTAR
+                    </button>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Campos De Cadastramento -->
+    <div id="main" class="container-fluid">
+
+        <h3 class="page-header">Cadastro de Agente De Saude</h3>
+
+        <form>
+            <!-- Campos : CPF e Nome do Agente -->
+            <div class="row">
+
+                <div class="form-group col-md-4">
+                    <label for="cpf">CPF do Agente:</label>
+                    <input class="form-control"
+                        type="number"
+                        [(ngModel)]="agente.cpf"
+                        id="cpf"
+                        name="cpf" 
+                        maxlength=11
+                        placeholder="Numero do CPF">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="nome">Nome do Agente:</label>
+                    <input class="form-control"
+                        type="text"
+                        [(ngModel)]="agente.nome"
+                        id="nome"
+                        name="nome" 
+                        maxlength="50"
+                        placeholder="Nome do Agente">
+                </div>
+
+            </div>
+
+            <!-- Campos : Senha e RG do Agente -->
+            <div class="row">
+
+                <div class="form-group col-md-3">
+                    <label for="confirmaSenha">Senha:</label>
+                    <input class="form-control"
+                    type="text" 
+                    [(ngModel)]="confirmaSenha" 
+                    id="confirmaSenha"
+                    name="confirmaSenha" 
+                    maxlength="32" 
+                    placeholder="Digite a Senha para sua conta">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="confirmaSenha">Confirmar Senha:</label>
+                    <input class="form-control" 
+                    type="text"
+                    [(ngModel)]="confirmaSenha"
+                    id="confirmaSenha"
+                    name="confirmaSenhas"
+                    maxlength="32"
+                    placeholder="Confirme sua Senha">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="rg">RG do agente:</label>
+                    <input class="form-control"
+                    type="number"
+                    [(ngModel)]="agente.rg"
+                    id="rg" name="rg"
+                    placeholder="Digite o numero do RG">
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- Botao de Registrar  -->
+        <div class="row">
+            <div class="form-group col-md-3">
+                <button class="btRegistrar btn btn-outline-success"
+                    type="button"
+                    (click)="registrar()">
+                    Registrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--Rodapé-->
+    <footer class="footer text-center">
+        <p>--Rodapé--</p>
+    </footer>
+
+</body>
+
+</html>
