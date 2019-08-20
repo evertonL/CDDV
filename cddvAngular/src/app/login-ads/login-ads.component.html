@@ -58,15 +58,13 @@
 			<form method="post" autocomplete="off">
 				<!-- CPF LOGIN -->
 				<label for="inputCpfLogin">CPF</label>
-				<input type="text"
+				<input type="number"
 					placeholder="Entre com numero do CPF"
-					maxlength=14 
+					maxlength=20 
 					required
 					[(ngModel)]="user"
-					(keydown)="formataCpf(inputCpf.value)"
 					id="inputCpfLogin"
 					name="inputCpfLogin"
-					#inputCpf
 				>
 
 				<!-- SENHA -->
