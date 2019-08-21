@@ -190,27 +190,26 @@
             <div class="row">
                                 <!-- faltando arumar algumas coisas -->
                 <div class="form-group col-md-3">
-                    <label for="">Senha:</label>
+                    <label for="senha">Senha:</label>
                     <input class="form-control"
-                        type="text"
-                        [(ngModel)]="confirmaSenha"
-                        id="confirmaSenha"
-                        name="confirmaSenha"
-                        maxlength="32"
-                        placeholder="Digite a Senha para sua conta">
+                    type="password" 
+                    [(ngModel)]="agente.senha" 
+                    id="senha"
+                    name="senha" 
+                    maxlength="30" 
+                    placeholder="Digite a Senha para sua conta">
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label for="">Confirmar Senha:</label>
-                    <input class="form-control"
-                        type="text"
-                        [(ngModel)]="confirmaSenha"
-                        id="confirmaSenha"
-                        name="confirmaSenhas"
-                        maxlength="32"
-                        placeholder="Confirme sua Senha">
+                    <label for="senha">Confirmar Senha:</label>
+                    <input class="form-control" 
+                    type="password"
+                    [(ngModel)]="agente.senha"
+                    id="senha"
+                    name="senha"
+                    maxlength="30"
+                    placeholder="Confirme sua Senha">
                 </div>
-
             </div>
 
         </form>

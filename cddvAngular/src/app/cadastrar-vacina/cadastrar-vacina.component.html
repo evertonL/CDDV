@@ -84,7 +84,7 @@
                     >
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="nome_da_unidade">Seu Nome:</label>
+                    <label for="nome_da_unidade">Nome da Unidade: </label>
                     <input class="form-control"
                         type="text"
                         [(ngModel)]="vacina.nome_da_unidade"
@@ -99,11 +99,12 @@
             <!-- Campos : Quantidade de Vacinas e Tempo de Imunização -->
             <div class="row">
                 <div class="form-group col-md-3">
-                    <label for="qtdVacina">Quantidade de Vacinas:</label><!--falta arumar no objeto vacina.ts-->
+                    <label for="qtd_vacinas">Quantidade de Vacinas:</label><!--falta arumar no objeto vacina.ts-->
                     <input class="form-control"
                         type="number"
-                        id="qtdVacina"
-                        name="qtdVacina"
+                        [(ngModel)]="vacina.qtd_vacinas"
+                        id="qtd_vacinas"
+                        name="qtd_vacinas"
                         placeholder="Digite a Quantidade"
                     >
                 </div>

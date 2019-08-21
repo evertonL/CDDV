@@ -3,7 +3,7 @@
  */
 export class Vacina {
 
-    private id_vacina: number;
+    private qtd_vacinas: number;
     private nome: string;
     private lote: string;
     private nome_da_unidade: string;
@@ -11,17 +11,17 @@ export class Vacina {
 
     /**
      * @constructor
-     * @param {number } id_vacina                 
+     * @param {number } qtd_vacinas                 
      * @param {string } nome                       
      * @param {string } lote             
      * @param {string } nome_da_unidade                  
      * @param {string } periodo_de_imunizacao                                                   
      */
-    constructor(id_vacina?: number, nome?: string,
+    constructor(qtd_vacinas?: number, nome?: string,
         lote?: string, nome_da_unidade?: string,
         periodo_de_imunizacao?: string) {
 
-        this.id_vacina = id_vacina;
+        this.qtd_vacinas = qtd_vacinas;
         this.nome = nome;
         this.lote = lote;
         this.nome_da_unidade = nome_da_unidade;
@@ -32,11 +32,11 @@ export class Vacina {
     // -----------------GET----------------
 
     /**
-    * @description: Retorna numero do id_vacina.
-    * @return {number} ( id_vacina ) - código identificador.
+    * @description: Retorna numero do qtd_vacinas.
+    * @return {number} ( qtd_vacinas ) - código identificador.
     */
-    public getIdVacina(): number {
-        return this.id_vacina;
+    public getQtdVacina(): number {
+        return this.qtd_vacinas;
     }
 
     /**
@@ -76,10 +76,10 @@ export class Vacina {
 
     /**
      * @description: Seta código identicador.
-     * @param id_vacina - Código identicador.
+     * @param qtd_vacinas - Código identicador.
      */
-    public setIdVacina(id_vacina: number): void {
-        this.id_vacina = id_vacina;
+    public setQtdVacina(qtd_vacinas: number): void {
+        this.qtd_vacinas = qtd_vacinas;
     }
 
     /**
