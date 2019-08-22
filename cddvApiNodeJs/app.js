@@ -1,5 +1,5 @@
 //Bibliotecas
-const app = require("./config/server");
+const app = require("./config/serve");
 
 var port = 3000;
 

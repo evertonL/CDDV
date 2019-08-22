@@ -3,10 +3,10 @@
  */
 export class Agente{
 
-    private cpf            :   number;
-    private nome           :   string;
-    private senha          :   string;
-    private rg             :   number;
+    public cpf            :   number;
+    public nome           :   string;
+    public senha          :   string;
+    public rg             :   number;
   
     /**
      * @constructor

@@ -1,7 +1,6 @@
 //Bibliotecas
 const express    =  require("express");
 const bodyParser =  require("body-parser");
-const multiParty =  require("connect-multiparty");
 const consign    =  require("consign");
 
 //Executando objeto do express
@@ -10,7 +9,6 @@ var app = express();
 //Configurações dos middlewares da aplicação
 app.use(bodyParser.urlencoded( {extended :true} ) );
 app.use(bodyParser.json() );
-app.use(multiParty()      );        //para receber arquivos
 
 //Configuração de requisições
 app.use(function(req, res, next){
