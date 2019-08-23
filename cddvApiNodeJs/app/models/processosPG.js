@@ -1,4 +1,3 @@
-
 //Bibliotecas
 const postgreSQL = require("./../../config/dbConnectionPg");
 
@@ -7,9 +6,14 @@ const postgreSQL = require("./../../config/dbConnectionPg");
  * @param {String  } cSql, query à ser executada
  * @param {Array   } aValues, array contendo valores a serem substituidos nos parametros [ $ ]
  * @param {Response} response, objeto de response do request. 
+ * @param {String  } cMensagemSucesso, mensagem que deve ser enviada no response caso a execução da query obtenha exito
+ * @param {String  } cMensagemErro, mensagem que deve ser enviada no response caso a execução da query gere erros
  * @see https://node-postgres.com/features/queries
+ * 
+ * @example
+ * executaQuery("INSERT INTO frequencia(descricao) VALUES ( $1 )", ['mensal'], response, 'insert deu certo', 'insert deu errado'); 
  */
-function executaQuery(cSql, aValues, response){
+function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
          
     let connection = null;
 
@@ -36,6 +40,7 @@ function executaQuery(cSql, aValues, response){
                                     connection.end();
                               });
 }
+
 
 /**
  * Exportando funções

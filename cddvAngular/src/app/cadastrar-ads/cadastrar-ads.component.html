@@ -69,7 +69,7 @@
                         [(ngModel)]="agente.cpf"
                         id="cpf"
                         name="cpf" 
-                        maxlength = {{SIZE_CPF}}
+                        maxlength = "10"
                         placeholder="Numero do CPF">
                 </div>
 
@@ -80,7 +80,7 @@
                         [(ngModel)]="agente.nome"
                         id="nome"
                         name="nome" 
-                        maxlength = {{SIZE_NOME}}
+                        maxlength = "50"
                         placeholder="Nome do Agente">
                 </div>
 
@@ -96,7 +96,7 @@
                     [(ngModel)]="agente.senha" 
                     id="senha"
                     name="senha" 
-                    maxlength = {{SIZE_SENHA}}
+                    maxlength = "30"
                     placeholder="Digite a Senha para sua conta">
                 </div>
 
@@ -104,10 +104,10 @@
                     <label for="senha">Confirmar Senha:</label>
                     <input class="form-control" 
                     type="password"
-                    [(ngModel)]="agente.senha"
+                    [(ngModel)]="confirmaSenha"
                     id="senha"
                     name="senha"
-                    maxlength = {{SIZE_SENHA}}
+                    maxlength = "30"
                     placeholder="Confirme sua Senha">
                 </div>
 
@@ -118,7 +118,7 @@
                     [(ngModel)]="agente.rg"
                     id="rg"
                     name="rg"
-                    maxlength = {{SIZE_RG}}
+                    maxlength = "10"
                     placeholder="Digite o numero do RG">
                 </div>
 

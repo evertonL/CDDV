@@ -18,10 +18,13 @@ class CadastrarAdsDAO{
      */
     salvaCadastrarAds(cadastrarAds, response){
 
-        let cSql    = "INSERT INTO CadastrarAds(cpf,nome,senha,rg) VALUES ( UPPER( TRIM($1) ),$4 )";
-        let aValues = [ cadastrarAds.cpf,cadastrarAds.nome,cadastrarAds.senha,cadastrarAds.rg];
+        let cSql    = "INSERT INTO agente(cpf,nome,senha,rg) VALUES ( UPPER( TRIM($1) ),$2,3$,$4$)";
+        let aValues = [cadastrarAds.cpf,
+                      cadastrarAds.nome,
+                      cadastrarAds.senha,
+                      cadastrarAds.rg];
 
-        topConnection.executaQuery(cSql, aValues, response);
+        topConnection.executaQuery(cSql, aValues, response,'insert deu certo', 'insert deu errado');
     }
 }
 

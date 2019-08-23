@@ -17,7 +17,7 @@ class ConnectionPostgreSQL{
             user     : "postgres"  , 
             host     : "localhost" ,
             database : "cddv"    ,
-            password : "741258963"    ,
+            password : "147852369"    ,
             port     : 5432
         };
     };

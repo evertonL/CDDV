@@ -8,10 +8,14 @@
  */
 function salvaCadastrarAds(application, request, response){
 
-    let dados           = request.body;
+    let dados             = request.body;
     let modelCadastrarAds = null;
     
-     modelCadastrarAds = new application.app.models.CadastrarAdsDAO();   //Instanciando model de CadastrarAds
+     modelCadastrarAds = new application.app.models.cadastrarAdsDAO();   //Instanciando model de CadastrarAds
      modelCadastrarAds.salvaCadastrarAds(dados, response);               //Enviando CadastrarAds para o model para ser salva.
     
 };
+
+module.exports={
+    salvaCadastrarAds,   
+}

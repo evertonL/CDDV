@@ -16,7 +16,7 @@ const httpOption = {
 })
 export class AgenteService {
 
-  private AgenteApi: string = "http://localhost:3000/api/Agente"
+  private AgenteApi: string = "http://localhost:3000/api/cadastrarAds"
 
   constructor(private http: HttpClient) { }
 
@@ -29,69 +29,6 @@ export class AgenteService {
   salvaAgente(Agente: Agente): Observable<Agente> {
 
     return this.http.post<Agente>(this.AgenteApi, Agente, httpOption)
-      .pipe(
-        catchError(
-          this.errorHandler
-        )
-      );
-  }
-
-
-  /**
-   * @description envia solicitação para API atualizar Agente na base de dados.
-   * @param Agente objeto de Agente que deve ser atualizado.
-   * @returns Observable
-   */
-  atualizaAgente(Agente: Agente): Observable<Agente> {
-
-    return this.http.put<Agente>(this.AgenteApi, Agente, httpOption)
-      .pipe(
-        catchError(
-          this.errorHandler
-        )
-      );
-  }
-
-
-  /**
-   * @description envia solicitação para API deletar Agente da base de dados.
-   * @param Agente objeto de Agente que deve ser deletado
-   * @returns Observable
-   */
-  deletaAgente(Agente: Agente) {
-                            //tenho q verificar se é "/" isso mesmo
-    return this.http.delete<Agente>(this.AgenteApi + "/" + Agente.getCpfAgente())
-      .pipe(
-        catchError(
-          this.errorHandler
-        )
-      );
-  }
-
-
-  /**
-   * @description envia solicitação para API consultar todas os Agentes cadastrados 
-   *              na base de dados.
-   */
-  getAllAgentes(): Observable<Agente[]> {
-
-    return this.http.get<Agente[]>(this.AgenteApi)
-      .pipe(
-        catchError(
-          this.errorHandler
-        )
-      );
-  }
-
-
-  /**
-   * @description envia solicitação para API consultar os Agentes pela descrição.
-   * @param descricao descricao dos Agentes a serem localizadas. 
-   * @returns Observable
-   */
-  getAgentesPorDescricao(descricao: String): Observable<Agente[]> {
-                           //tenho q verificar se é "/" isso mesmo
-    return this.http.get<Agente[]>(this.AgenteApi + "/" + descricao)
       .pipe(
         catchError(
           this.errorHandler
