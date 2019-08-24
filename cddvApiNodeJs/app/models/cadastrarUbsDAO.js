@@ -1,5 +1,9 @@
 //Bibliotecas
 const topConnection                    = require("./processosPG");
+const {erro_inserindo, sucesso_inserindo} = require("./../libs/msgsErroSucessoApi"); 
+const {erro_atualizando, sucesso_atualizando} = require("./../libs/msgsErroSucessoApi"); 
+const {erro_deletando, sucesso_deletando} = require("./../libs/msgsErroSucessoApi"); 
+const {erro_consultando, sucesso_consultando} = require("./../libs/msgsErroSucessoApi"); 
 
 class CadastrarUbsDAO{
 
@@ -14,7 +18,7 @@ class CadastrarUbsDAO{
      * @description : Salva nova CadastrarUbs no banco de dados.
      * @param cadastrarUbs, objeto contendo informações da novo CadastrarUbs que deverá ser salvo.
      * @param response, objeto de response da requisição.
-     * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+     * @obs o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
     salvaCadastrarUbs(cadastrarUbs, response){
 
@@ -30,7 +34,7 @@ class CadastrarUbsDAO{
                  + "                 senha              "  //[09]
                  + "                )"  
                  + "        VALUES  ("         
-                 + "                 TRIM($1) ,  "               
+                 + "                 $1 ,  "               
                  + "                 $2 ,  "
                  + "                 $3 ,  "
                  + "                 $4 ,  "
@@ -52,8 +56,7 @@ class CadastrarUbsDAO{
                         cadastrarUbs.cep,
                         cadastrarUbs.senha
                     ];
-                    console.log("Aqui");
-        topConnection.executaQuery(cSql, aValues, response,'insert deu CERTO', 'insert deu ERRADO ',);
+        topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo ,erro_inserindo);
     }
 }
 

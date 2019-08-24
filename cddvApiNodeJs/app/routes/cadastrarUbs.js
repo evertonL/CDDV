@@ -2,14 +2,14 @@
 module.exports = function(application){
 
     application.post("/api/cadastrarUbs", function(req, res){
-
-         application.app.controllers.cadastrarUbs.salvaCadastrarUbs(application, req, res );
+        console.log(req);
+        application.app.controllers.cadastrarUbs.salvaCadastrarUbs(application, req, res );
 
     });
 
     // application.put("/api/cadastrarUbs", function(req, res){
 
-    //     application.app.controllers.cadastrarUbs.atualizacadastrarUbs(application, req, res );
+    //     application.app.controllers.cadastrarUbs.atualizaCadastrarUbs(application, req, res );
 
     // });
 
