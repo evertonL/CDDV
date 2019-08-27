@@ -1,5 +1,8 @@
-
 /**
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/eval
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+ * 
  * @description Valida se existe algum elemento vazio no objeto.
  * @param   {JSON } objeto, objeto em formato JSON contendo campos que devem ser validados.
  * @param   {Array} array, array contendo chaves dos elementos do JSON que não deve ser validadas
@@ -17,9 +20,6 @@
  * isObjectEmpty( { nome:"", sobrenome:"Luiz", idade:"19"}, ["nome"] ) //chamada
  * null //retorno, nesse exemplo o nome apesar de estar vazio não é validado
  * 
- * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values
- * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/eval
- * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
  */
  function isObjectEmpty(valida, naoValida){
 

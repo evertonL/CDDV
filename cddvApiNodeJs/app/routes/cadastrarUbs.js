@@ -1,28 +1,28 @@
-
 module.exports = function(application){
 
     application.post("/api/cadastrarUbs", function(req, res){
-        console.log(req);
+        
         application.app.controllers.cadastrarUbs.salvaCadastrarUbs(application, req, res );
 
     });
+    // erro de sintaxe
+    application.put("/api/cadastrarUbs", function(req, res){
 
-    // application.put("/api/cadastrarUbs", function(req, res){
+        application.app.controllers.cadastrarUbs.atualizaCadastrarUbs(application, req, res );
 
-    //     application.app.controllers.cadastrarUbs.atualizaCadastrarUbs(application, req, res );
+    });
+    //erro na api
+    application.delete("/api/cadastrarUbs/:cnes", function(req, res){
 
-    // });
+        application.app.controllers.cadastrarUbs.deletaCadastrarUbs(application, req, res );
 
-    // application.delete("/api/cadastrarUbs/:id", function(req, res){
+    });
 
-    //     application.app.controllers.cadastrarUbs.deletacadastrarUbs(application, req, res );
+    //nao testei
+    application.get("/api/cadastrarUbs", function(req, res){
 
-    // });
+        application.app.controllers.cadastrarUbs.getAllCadastrarUbs(application, req, res);
 
-    // application.get("/api/cadastrarUbs", function(req, res){
-
-    //     application.app.controllers.cadastrarUbs.getAllcadastrarUbss(application, req, res);
-
-    // });
+    });
 
 }

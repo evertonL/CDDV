@@ -53,7 +53,7 @@ export class CadastrarAdsComponent implements OnInit {
   }
 
   /**
- * Destruo a inscrição ao finalizar
+ * Destruo o registro ao finalizar
  */
   ngOnDestroy() {
 
@@ -65,7 +65,7 @@ export class CadastrarAdsComponent implements OnInit {
    */
   private registrar(){
 
-    if( this.isEmpty() ){
+    if( this.validarCampus() ){
 
       this.camposObrigatorios = true;
       alert("prencha todos os Campos");
@@ -117,7 +117,7 @@ export class CadastrarAdsComponent implements OnInit {
    *@description  Valida se campos estão vazios.
    *@returns true caso algum campo esteja vazio, false caso contrário.
    */
-  private isEmpty(){
+  private validarCampus(){
 
     return this.agente.getCpfAgente() == undefined ||  this.agente.getNameAgente() == undefined ||  this.agente.getSenha() == undefined ||  this.agente.getRgAgente() == undefined ||
            this.agente.getCpfAgente() == null  ||  this.agente.getNameAgente() == null  ||  this.agente.getSenha() == null  ||  this.agente.getRgAgente() == null  

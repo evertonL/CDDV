@@ -3,15 +3,15 @@
  */
 export class Ubs {
 
-    private cnes               : number;
-    private nome_da_unidade    : string;
-    private municipio          : string;
-    private bairro             : string;
-    private endereco           : string;
-    private estado             : string;
-    private telefone           : number;
-    private cep                : number;
-    private senha              : number;
+    public cnes               : number;
+    public nome_da_unidade    : string;
+    public municipio          : string;
+    public bairro             : string;
+    public endereco           : string;
+    public estado             : string;
+    public telefone           : number;
+    public cep                : number;
+    public senha              : string;
 
 
     /**
@@ -24,12 +24,12 @@ export class Ubs {
      * @param {string } estado              
      * @param {number } telefone            
      * @param {number } cep 
-     * @param {number } senha                                                                     
+     * @param {string } senha                                                                     
      */
     constructor(cnes?: number, nome_da_unidade?: string,
         municipio?: string, bairro?: string,
         endereco?: string, estado?: string,
-        telefone?: number, cep?: number, senha?: number) {
+        telefone?: number, cep?: number, senha?: string) {
 
         this.cnes = cnes;
         this.nome_da_unidade = nome_da_unidade;
@@ -48,7 +48,7 @@ export class Ubs {
     * @description: Retorna numero do cnes.
     * @return {number} ( cnes ) - código identificador.
     */
-    public getCartaoSus(): number {
+    public getCnes(): number {
         return this.cnes;
     }
 
@@ -104,15 +104,15 @@ export class Ubs {
      * @description: Retorna o cep
      * @return {number} ( cep ) - código identificador.
      */
-    public getNome(): number {
+    public getCep(): number {
         return this.cep;
     }
     
     /**
      * @description: Retorna o senha
-     * @return {number} ( senha ) - código identificador.
+     * @return {string} ( senha ) - código identificador.
      */
-    public getSenha(): number {
+    public getSenha(): string {
         return this.senha;
     }
     
@@ -123,7 +123,7 @@ export class Ubs {
      * @description: Seta código identicador.
      * @param cnes - Código identicador.
      */
-    public setCartaoSus(cnes: number): void {
+    public setCnes(cnes: number): void {
         this.cnes = cnes;
     }
 
@@ -187,7 +187,7 @@ export class Ubs {
     * @description Seta código identicador.
     * @param senha - Código identicador.
     */
-    public setSenha(senha: number): void {
+    public setSenha(senha: string): void {
     this.senha = senha;
 }
 
