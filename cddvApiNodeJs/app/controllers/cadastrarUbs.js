@@ -45,7 +45,7 @@ function salvaCadastrarUbs(application, request, response){
  * @param : response, objeto do response.
  */
 function atualizaCadastrarUbs(application, request, response){
-
+    console.log("aqui3");
     let dados           = request.body;
     let erros_aux       = null;
     let erros           = [];

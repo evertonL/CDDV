@@ -80,11 +80,11 @@ export class CadastrarUbsComponent implements OnInit {
     if( this.validarCampus() ){
 
       this.camposObrigatorios = true;
-      alert("prencha todos os Campos");
+      alert("Prencha todos os Campos");
       return;
 
     }else if(this.ubs.senha != this.confirmaSenha){
-      alert("As senhas não são iguais");
+      alert("Campo Senha e Confirma não são iguais!");
     }else{
       this.camposObrigatorios = false;
       this.salvaUbs()
@@ -148,7 +148,7 @@ export class CadastrarUbsComponent implements OnInit {
            this.ubs.getEstado()        == null  ||
            this.ubs.gettelefone()      == null  ||
            this.ubs.getCep()           == null  ||
-           this.ubs.getSenha()         == null  
+           this.ubs.getSenha()         == null 
             ? true : false;
   }
   

@@ -66,32 +66,19 @@ class CadastrarUbsDAO {
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
     atualizaCadastrarUbs(cnesUbs, response) {
-
-        let cSql = "UPDATE SET ubs("
-            + "                 cnes            ,  "  //[01]
-            + "                 nome_da_unidade ,  "  //[02]
-            + "                 municipio       ,  "  //[03]   
-            + "                 bairro          ,  "  //[04]
-            + "                 endereco        ,  "  //[05]
-            + "                 estado          ,  "  //[06]
-            + "                 telefone        ,  "  //[07]
-            + "                 cep             ,  "  //[08]
-            + "                 senha              "  //[09]
-            + "                )"
-            + "        VALUES  ("
-            + "                 $1 ,  "
-            + "                 $2 ,  "
-            + "                 $3 ,  "
-            + "                 $4 ,  "
-            + "                 $5 ,  "
-            + "                 $6 ,  "
-            + "                 $7 ,  "
-            + "                 $8 ,  "
-            + "                 $9    "
-            + "                )";
+        console.log("aqui2");
+        let cSql = "UPDATE ubs SET"
+                    + " nome_da_unidade = $1 , "
+                    + " municipio =       $2 , "
+                    + " bairro =          $3 , "
+                    + " endereco =        $4 , "
+                    + " estado =          $5 , "
+                    + " telefone =        $6 , "
+                    + " cep =             $7 , "
+                    + " senha =           $8   "
+                    + " WHERE cnes =      $9   ";
 
         let aValues = [
-            cnesUbs.cnes,
             cnesUbs.nome_da_unidade,
             cnesUbs.municipio,
             cnesUbs.bairro,
@@ -99,7 +86,8 @@ class CadastrarUbsDAO {
             cnesUbs.estado,
             cnesUbs.telefone,
             cnesUbs.cep,
-            cnesUbs.senha
+            cnesUbs.senha,
+            cnesUbs.cnes
         ];
 
         topConnection.executaQuery(cSql, aValues, response, sucesso_atualizando, erro_atualizando);
