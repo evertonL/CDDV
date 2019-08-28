@@ -11,7 +11,7 @@ const postgreSQL = require("./../../config/dbConnectionPg");
  * @param {String  } cMensagemErro, mensagem que deve ser enviada no response caso a execução da query gere erros
  * 
  * @example
- * executaQuery("INSERT INTO frequencia(descricao) VALUES ( $1 )", ['mensal'], response, 'insert deu certo', 'insert deu errado'); 
+ * executaQuery("INSERT INTO ubs(cnes) VALUES ( $1 )", ['mensal'], response, 'insert deu certo', 'insert deu errado'); 
  */
 function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
          

@@ -9,7 +9,7 @@ module.exports = function(application){
     application.put("/api/cadastrarUbs", function(req, res){
 
         application.app.controllers.cadastrarUbs.atualizaCadastrarUbs(application, req, res );
-        console.log("aqui1");
+
     });
 
     application.delete("/api/cadastrarUbs/:cnes", function(req, res){
@@ -18,11 +18,10 @@ module.exports = function(application){
 
     });
 
-    // //nao testei
-    // application.get("/api/cadastrarUbs", function(req, res){
+    application.get("/api/cadastrarUbs", function(req, res){
 
-    //     application.app.controllers.cadastrarUbs.getAllCadastrarUbs(application, req, res);
+        application.app.controllers.cadastrarUbs.getAllCadastrarUbs(application, req, res);
 
-    // });
+    });
 
 }

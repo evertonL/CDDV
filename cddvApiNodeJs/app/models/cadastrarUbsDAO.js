@@ -66,7 +66,7 @@ class CadastrarUbsDAO {
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
     atualizaCadastrarUbs(cnesUbs, response) {
-        console.log("aqui2");
+    
         let cSql = "UPDATE ubs SET"
                     + " nome_da_unidade = $1 , "
                     + " municipio =       $2 , "
@@ -113,11 +113,11 @@ class CadastrarUbsDAO {
     */
     getAllCadastrarUbs(response) {
 
-        let cSql = "SELECT cnes, descricao FROM ubs"
+        let cSql = "SELECT cnes,nome_da_unidade,municipio,bairro,endereco,estado,telefone,cep,senha FROM ubs"
             + " ORDER BY cnes "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);
-    }
+    } 
 }
 
 
