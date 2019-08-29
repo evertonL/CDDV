@@ -8,15 +8,15 @@ const {erro_api}  = require("./../libs/msgsErroSucessoApi");
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function salvaCadastrarPopulacao(application, request, response){
+function salvaCadastrarVacina(application, request, response){
 
     let dados           = request.body;
-    let modelCadastrarPopulacao = null;
+    let modelCadastrarVacinas = null;
     let erros_aux       = null;
     let erros           = [];
 
     // Validando informações 
-    erros_aux = validacao.isObjectEmpty(dados, ["cartao_sus"]);
+    erros_aux = validacao.isObjectEmpty(dados, ["id_vacina"]);
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -33,8 +33,8 @@ function salvaCadastrarPopulacao(application, request, response){
         return; 
     }
 
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();  //Instanciando model de CadastrarUbs
-    modelCadastrarPopulacao.salvaCadastrarPopulacao(dados, response);              //Enviando CadastrarUbs para o model para ser salvo.
+    modelCadastrarVacinas = new application.app.models.cadastrarVacinaDAO();  //Instanciando model de CadastrarUbs
+    modelCadastrarVacinas.salvaCadastrarVacina(dados, response);              //Enviando CadastrarUbs para o model para ser salvo.
     
 };
 
@@ -44,7 +44,7 @@ function salvaCadastrarPopulacao(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function atualizaCadastrarPopulacao(application, request, response){
+function atualizaCadastrarVacina(application, request, response){
     
     let dados           = request.body;
     let erros_aux       = null;
@@ -69,8 +69,8 @@ function atualizaCadastrarPopulacao(application, request, response){
         return; 
     }
         
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();   //Instanciando model da frequencia
-    modelCadastrarPopulacao.atualizaCadastrarPopulacao(dados, response);            //Enviando Cadastro de Ubs para o model para ser salvo.
+    modelCadastrarVacinas = new application.app.models.cadastrarVacinaDAO();   //Instanciando model da frequencia
+    modelCadastrarVacinas.atualizaCadastrarVacina(dados, response);            //Enviando Cadastro de Ubs para o model para ser salvo.
 };
 
 
@@ -80,16 +80,16 @@ function atualizaCadastrarPopulacao(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function deletaCadastrarPopulacao(application, request, response){
+function deletaCadastrarVacina(application, request, response){
 
-    let numeroCartao_sus    = Number.parseInt(request.params.cartao_sus);
-    let modelCadastrarPopulacao = null;
+    let numeroId_vacinas    = Number.parseInt(request.params.id_vacinas);
+    let modelCadastrarVacinas = null;
     let erros           = null;
            
     // Validando informações
 
-    if ( Number.isNaN( numeroCartao_sus ) ){
-        erros = ["cartao_sus"];
+    if ( Number.isNaN( numeroId_vacinas ) ){
+        erros = ["id_vacina"];
     };
 
     if( erros ){
@@ -102,8 +102,8 @@ function deletaCadastrarPopulacao(application, request, response){
         return; 
     }
 
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();   //Instanciando model de Cadastrar Agente
-    modelCadastrarPopulacao.deletaCadastrarPopulacao(numeroCartao_sus, response);   //Enviando o CadastrarPopulacao para o model para ser salvo.
+    modelCadastrarVacinas = new application.app.models.cadastrarVacinaDAO();   //Instanciando model de Cadastrar Agente
+    modelCadastrarVacinas.deletaCadastrarVacina(numeroId_vacinas, response);       //Enviando o Cadastrar Agente para o model para ser salvo.
     
 };
 
@@ -114,12 +114,12 @@ function deletaCadastrarPopulacao(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function getAllCadastrarPopulacao(application, request, response){
+function getAllCadastrarVacina(application, request, response){
 
-    let modelCadastrarPopulacao = null;
+    let modelCadastrarVacinas = null;
 
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();   //Instanciando model da frequencia
-    modelCadastrarPopulacao.getAllCadastrarPopulacao(response);       
+    modelCadastrarVacinas = new application.app.models.cadastrarVacinaDAO();   //Instanciando model da frequencia
+    modelCadastrarVacinas.getAllCadastrarVacina(response);       
 
 }
 
@@ -127,8 +127,8 @@ function getAllCadastrarPopulacao(application, request, response){
  * Exportando funções 
  */
 module.exports={
-    salvaCadastrarPopulacao, 
-    atualizaCadastrarPopulacao,
-    deletaCadastrarPopulacao,
-    getAllCadastrarPopulacao,  
+    salvaCadastrarVacina, 
+    atualizaCadastrarVacina,
+    deletaCadastrarVacina,
+    getAllCadastrarVacina,  
 }

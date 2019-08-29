@@ -8,10 +8,10 @@ const {erro_api}  = require("./../libs/msgsErroSucessoApi");
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function salvaCadastrarPopulacao(application, request, response){
+function salvaCadastrarCartao(application, request, response){
 
     let dados           = request.body;
-    let modelCadastrarPopulacao = null;
+    let modelCadastrarCartao = null;
     let erros_aux       = null;
     let erros           = [];
 
@@ -33,8 +33,8 @@ function salvaCadastrarPopulacao(application, request, response){
         return; 
     }
 
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();  //Instanciando model de CadastrarUbs
-    modelCadastrarPopulacao.salvaCadastrarPopulacao(dados, response);              //Enviando CadastrarUbs para o model para ser salvo.
+    modelCadastrarCartao = new application.app.models.cadastrarCartaoDAO();  //Instanciando model de CadastrarCartao
+    modelCadastrarCartao.salvaCadastrarCartao(dados, response);              //Enviando CadastrarCartao para o model para ser salvo.
     
 };
 
@@ -44,7 +44,7 @@ function salvaCadastrarPopulacao(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function atualizaCadastrarPopulacao(application, request, response){
+function atualizaCadastrarCartao(application, request, response){
     
     let dados           = request.body;
     let erros_aux       = null;
@@ -69,8 +69,8 @@ function atualizaCadastrarPopulacao(application, request, response){
         return; 
     }
         
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();   //Instanciando model da frequencia
-    modelCadastrarPopulacao.atualizaCadastrarPopulacao(dados, response);            //Enviando Cadastro de Ubs para o model para ser salvo.
+    modelCadastrarCartao = new application.app.models.cadastrarCartaoDAO();   //Instanciando model do cadastrarCartao
+    modelCadastrarCartao.atualizaCadastrarCartao(dados, response);            //Enviando Cadastro do cartao para o model para ser salvo.
 };
 
 
@@ -80,15 +80,15 @@ function atualizaCadastrarPopulacao(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function deletaCadastrarPopulacao(application, request, response){
+function deletaCadastrarCartao(application, request, response){
 
-    let numeroCartao_sus    = Number.parseInt(request.params.cartao_sus);
-    let modelCadastrarPopulacao = null;
+    let cartao_sus    = Number.parseInt(request.params.cnes);
+    let modelCadastrarCartao = null;
     let erros           = null;
            
     // Validando informações
 
-    if ( Number.isNaN( numeroCartao_sus ) ){
+    if ( Number.isNaN( cartao_sus ) ){
         erros = ["cartao_sus"];
     };
 
@@ -102,8 +102,8 @@ function deletaCadastrarPopulacao(application, request, response){
         return; 
     }
 
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();   //Instanciando model de Cadastrar Agente
-    modelCadastrarPopulacao.deletaCadastrarPopulacao(numeroCartao_sus, response);   //Enviando o CadastrarPopulacao para o model para ser salvo.
+    modelCadastrarCartao = new application.app.models.cadastrarCartaoDAO();   //Instanciando model de CadastrarCartao
+    modelCadastrarCartao.deletaCadastrarCartao(numeroCnes, response);       //Enviando o Cadastro do cartao para o model para ser salvo.
     
 };
 
@@ -114,12 +114,12 @@ function deletaCadastrarPopulacao(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function getAllCadastrarPopulacao(application, request, response){
+function getAllCadastrarCartao(application, request, response){
 
-    let modelCadastrarPopulacao = null;
+    let modelCadastrarCartao = null;
 
-    modelCadastrarPopulacao = new application.app.models.cadastrarPopulacaoDAO();   //Instanciando model da frequencia
-    modelCadastrarPopulacao.getAllCadastrarPopulacao(response);       
+    modelCadastrarCartao = new application.app.models.cadastrarCartaoDAO();   //Instanciando model do cartao
+    modelCadastrarCartao.getAllCadastrarCartao(response);       
 
 }
 
@@ -127,8 +127,8 @@ function getAllCadastrarPopulacao(application, request, response){
  * Exportando funções 
  */
 module.exports={
-    salvaCadastrarPopulacao, 
-    atualizaCadastrarPopulacao,
-    deletaCadastrarPopulacao,
-    getAllCadastrarPopulacao,  
+    salvaCadastrarCartao, 
+    atualizaCadastrarCartao,
+    deletaCadastrarCartao,
+    getAllCadastrarCartao,  
 }

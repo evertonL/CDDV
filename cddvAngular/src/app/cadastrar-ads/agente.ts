@@ -1,5 +1,5 @@
 /**
- * @description : Classe de Objeto de tranferecia ( TO ) do CADASTRO DE AGENTE
+ * @description : Classe de Objeto de tranferencia ( TO ) do CADASTRO DE AGENTE
  */
 export class Agente{
 
