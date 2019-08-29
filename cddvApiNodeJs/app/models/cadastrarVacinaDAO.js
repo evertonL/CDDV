@@ -23,40 +23,37 @@ class CadastrarVacinasDAO {
     salvaCadastrarVacina(cadastrarVacina, response) {
 
         let cSql = "INSERT INTO vacinas("
-            + "                 id_vacina             , "  //[01]
-            + "                 qtd_vacinas           , "  //[02]
-            + "                 nome                  , "  //[03]   
-            + "                 lote                  , "  //[04]
-            + "                 nome_da_unidade       , "  //[05]
-            + "                 periodo_de_imunizacao   "  //[06]
+            + "                 qtd_vacinas           , "  //[01]
+            + "                 nome                  , "  //[02]   
+            + "                 lote                  , "  //[03]
+            + "                 nome_da_unidade       , "  //[04]
+            + "                 periodo_de_imunizacao   "  //[05]
             + "                )"
             + "        VALUES  ("
             + "                 $1 ,  "
             + "                 $2 ,  "
             + "                 $3 ,  "
             + "                 $4 ,  "
-            + "                 $5 ,  "
-            + "                 $6    "
+            + "                 $5    "
             + "                )";
 
         let aValues = [
-            cadastrarVacina.id_vacina,
             cadastrarVacina.qtd_vacinas,
             cadastrarVacina.nome,
             cadastrarVacina.lote,
             cadastrarVacina.nome_da_unidade,
-            cadastrarVacina.periodo_de_imunizacao
+            cadastrarVacina.periodo_de_imunizacao,
         ];
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
     }
 
     /**
      * @description: Atualiza o Cadastro da vacina no banco de dados.
-     * @param {*} numeroId_vacinas, id da vacina que deve ser alterado.
+     * @param {*} numeroId_vacina, id da vacina que deve ser alterado.
      * @param response, objeto de response da requisição.
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
-    atualizaCadastrarVacina(numeroId_vacinas, response) {
+    atualizaCadastrarVacina(numeroId_vacina, response) {
     
         let cSql = "UPDATE vacinas SET"
                     + " qtd_vacinas =           $1 , "
@@ -64,15 +61,15 @@ class CadastrarVacinasDAO {
                     + " lote =                  $3 , "
                     + " nome_da_unidade =       $4 , "
                     + " periodo_de_imunizacao = $5   "
-                    + " WHERE id_vacinas =      $6   ";
+                    + " WHERE id_vacina =       $6   ";
 
         let aValues = [
-            numeroId_vacinas.qtd_vacinas,
-            numeroId_vacinas.nome,
-            numeroId_vacinas.lote,
-            numeroId_vacinas.nome_da_unidade,
-            numeroId_vacinas.periodo_de_imunizacao,
-            numeroId_vacinas.id_vacina
+            numeroId_vacina.qtd_vacinas,
+            numeroId_vacina.nome,
+            numeroId_vacina.lote,
+            numeroId_vacina.nome_da_unidade,
+            numeroId_vacina.periodo_de_imunizacao,
+            numeroId_vacina.id_vacina
         ];
 
         topConnection.executaQuery(cSql, aValues, response, sucesso_atualizando, erro_atualizando);
