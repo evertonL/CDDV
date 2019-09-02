@@ -15,7 +15,7 @@ function salvaCadastrarUbs(application, request, response){
     let erros_aux       = null;
     let erros           = [];
 
-    // Validando informações 
+    //Validando informações 
     erros_aux = validacao.isObjectEmpty(dados, ["cnes"]);
     if( erros_aux ){
 
@@ -117,7 +117,7 @@ function deletaCadastrarUbs(application, request, response){
 function getAllCadastrarUbs(application, request, response){
 
     let modelCadastrarUbs = null;
-
+    
     modelCadastrarUbs = new application.app.models.cadastrarUbsDAO();   //Instanciando model da frequencia
     modelCadastrarUbs.getAllCadastrarUbs(response);       
 

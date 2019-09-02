@@ -7,22 +7,22 @@ module.exports = function(application){
 
     });
 
-    // application.put("/api/cadastrarCartao", function(req, res){
+    application.put("/api/cadastrarCartao", function(req, res){
 
-    //     application.app.controllers.cadastrarCartao.atualizaCadastrarCartao(application, req, res );
+        application.app.controllers.cadastrarCartao.atualizaCadastrarCartao(application, req, res );
 
-    // });
+    });
 
-    // application.delete("/api/cadastrarCartao/:cartao_sus", function(req, res){
+    application.delete("/api/cadastrarCartao/:cartao_sus", function(req, res){
 
-    //     application.app.controllers.cadastrarCartao.deletaCadastrarCartao(application, req, res );
+        application.app.controllers.cadastrarCartao.deletaCadastrarCartao(application, req, res );
 
-    // });
+    });
 
-    // application.get("/api/cadastrarCartao", function(req, res){
+    application.get("/api/cadastrarCartao", function(req, res){
 
-    //     application.app.controllers.cadastrarCartao.getAllCadastrarCartao(application, req, res);
+        application.app.controllers.cadastrarCartao.getAllCadastrarCartao(application, req, res);
 
-    // });
+    });
 
 }

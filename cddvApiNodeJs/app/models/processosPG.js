@@ -29,7 +29,7 @@ function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
                                                                 registros: result.rows 
                                                              });
                               })
-              .catch(erros => {                                             
+              .catch(erros => {
                                     response.status(500).json({ 
                                                                 status:2, 
                                                                 mensagem:cMensagemErro + erros 

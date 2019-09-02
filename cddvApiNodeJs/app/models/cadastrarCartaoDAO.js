@@ -45,7 +45,7 @@ class CadastrarCartaoDAO {
             cadastrarCartao.data_aplicacao,
             cadastrarCartao.aplicada,
             cadastrarCartao.cpf_agente,
-            cadastrarCartao.data_validade
+            cadastrarCartao.data_validade,
         ];
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
     }

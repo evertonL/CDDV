@@ -82,13 +82,13 @@ function atualizaCadastrarCartao(application, request, response){
  */
 function deletaCadastrarCartao(application, request, response){
 
-    let cartao_sus    = Number.parseInt(request.params.cnes);
+    let numeroCartao_sus    = Number.parseInt(request.params.cartao_sus);
     let modelCadastrarCartao = null;
     let erros           = null;
            
     // Validando informações
 
-    if ( Number.isNaN( cartao_sus ) ){
+    if ( Number.isNaN( numeroCartao_sus ) ){
         erros = ["cartao_sus"];
     };
 
@@ -103,7 +103,7 @@ function deletaCadastrarCartao(application, request, response){
     }
 
     modelCadastrarCartao = new application.app.models.cadastrarCartaoDAO();   //Instanciando model de CadastrarCartao
-    modelCadastrarCartao.deletaCadastrarCartao(numeroCnes, response);       //Enviando o Cadastro do cartao para o model para ser salvo.
+    modelCadastrarCartao.deletaCadastrarCartao(numeroCartao_sus, response);       //Enviando o Cadastro do cartao para o model para ser salvo.
     
 };
 

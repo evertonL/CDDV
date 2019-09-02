@@ -114,7 +114,7 @@ function deletaCadastrarVacina(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function getAllCadastrarVacina(application, response){
+function getAllCadastrarVacina(application, request, response){
 
     let modelCadastrarVacina = null;
 
