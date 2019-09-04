@@ -8,12 +8,12 @@ const {erro_api}  = require("./../libs/msgsErroSucessoApi");
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function getPopulacaoPorCartao_sus(application, request, response){
+function getCartaoDaPopulacao(application, request, response){
 
-    let dados           = request.params;
+    let dados             = request.params;
     let modelWorkspaceAds = null;
-    let erros_aux       = null;
-    let erros           = [];
+    let erros_aux         = null;
+    let erros             = [];
 
     //-----------------------------------------------------
     // Validando informações 
@@ -36,7 +36,7 @@ function getPopulacaoPorCartao_sus(application, request, response){
     }    
 
     modelWorkspaceAds = new application.app.models.workSpaceAdsDAO();   //Instanciando model da workSpaceAds
-    modelWorkspaceAds.getPopulacaoPorCartao_sus(dados.cartao_sus, response);       
+    modelWorkspaceAds.getCartaoDaPopulacao(dados.cartao_sus, response);       
 
 }
 
@@ -44,5 +44,5 @@ function getPopulacaoPorCartao_sus(application, request, response){
  * Exportando funções 
  */
 module.exports = {
-    getPopulacaoPorCartao_sus,
+    getCartaoDaPopulacao,
 }

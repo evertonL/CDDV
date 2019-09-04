@@ -12,15 +12,28 @@ class WorkSpaceAdsDAO {
     }
 
     /**
-     * @description Consulta a poupulacao no banco de dados pelo numero do cartao do sus
+     * @description Consulta o cartao da populacao no banco de dados pelo numero do cartao do sus
      * @param {String  } cartao_sus, descricao à ser pesquisada.
      * @param {response} response 
      */
-    getPopulacaoPorCartao_sus(cartao_sus , response){
+    getCartaoDaPopulacao(cartao_sus , response){
 
-        let cSql    =  "SELECT cartao_sus FROM populacao "
-                    +  " WHERE cartao_sus"
-                    +  " ORDER BY cartao_sus "
+        let cSql = "SELECT populacao.nome        ,"
+                        +" vacinas.nome AS nome_vacina          , "
+                        +" cartao.aplicada       , "
+                        +" agente_de_saude.nome AS nome_agente , "
+                        +" ubs.nome_da_unidade   , "
+                        +" cartao.data_aplicacao , " 
+                        +" cartao.data_validade    "
+                +"  FROM                           "
+                        +" populacao               "
+                        +" INNER JOIN cartao ON(cartao.cartao_sus = populacao.cartao_sus)         "
+                        +" INNER JOIN vacinas ON(vacinas.id_vacina = cartao.id_vacina )           "
+                        +" INNER JOIN agente_de_saude ON(agente_de_saude.cpf = cartao.cpf_agente) "
+                        +" INNER JOIN ubs ON(ubs.cnes = agente_de_saude.cnes)                     "
+                +"  WHERE                                                                         " 
+                        +" populacao.cartao_sus  = $1                                                 "
+
                     
         let aValues = [ cartao_sus ];
 
