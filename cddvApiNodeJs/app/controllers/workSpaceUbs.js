@@ -15,9 +15,8 @@ function getAllAdsPorUbs(application, request, response){
     let erros_aux         = null;
     let erros             = [];
 
-    //-----------------------------------------------------
     // Validando informações 
-    //-----------------------------------------------------
+
     erros_aux = validacao.isObjectEmpty({cnes:dados.cnes});
     if( erros_aux ){
 

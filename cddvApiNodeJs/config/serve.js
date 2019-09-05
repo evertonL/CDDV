@@ -34,7 +34,5 @@ consign()
 	.into(app);
 
 
-/**
- * Exportando instancia do servidor configurado.
- */
+//Exportando instancia do servidor configurado.
 module.exports = app; 

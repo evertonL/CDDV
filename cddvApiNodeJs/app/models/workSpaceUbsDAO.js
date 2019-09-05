@@ -66,13 +66,33 @@ class WorkSpaceUbsDAO {
         let aValues = [ cpf ];
 
         topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
-    }    
+    }
+
+    /**
+     * @description Consulta a Ubs no banco de dados pelo cnes e senha.
+     * @param {String  } cnes, cnes da Unidade Basica de Saude
+     * @param {String  } senha, senha da Unidade Basica de Saude
+     */
+    async ProcuraUbsParaLogin(cnes , senha){
+
+        let cSql    =  "SELECT cnes, "
+                    +  "       senha " 
+                    +  " FROM ubs "
+                    +  " WHERE cnes   = TRIM( $1 ) "
+                    +  "   AND senha  = TRIM( $2 ) "
+                    +  "   AND bloqueado = false  ";
+                    
+        let aValues = [ 
+                        cnes  ,
+                        senha
+                      ];
+
+       //Executa a query e ja retorna a Ubs              
+       return topConnection.executaQueryAsync(cSql, aValues, sucesso_consultando, erro_consultando);            
+    }   
 }
 
-
-/**
- * Exportando instancia da classe
- */
+//Exportando instancia da classe
 module.exports = function () {
     return WorkSpaceUbsDAO;
 }

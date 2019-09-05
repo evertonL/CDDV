@@ -6,6 +6,7 @@ const erro_api = "Campos inválidos ou não preenchidos.";
 
 //---------------------------------------------------------------------------//
 
+//MENSAGEMS DE ERRO
 /**
  * @description: Mensagens do Projeto.
  * @param: Mensagens nas operações de inserção que contem ERRO
@@ -32,6 +33,7 @@ const erro_consultando = "Erro ao tentar realizar consulta. ";
 
 //------------------------------------------------------------------------------//
 
+//MENSAGEMS DE SUCESSO
 /**
  * @description: Mensagens do Projeto.
  * @description: Mensagens nas operações inserção realizadas com SUCESSO
@@ -57,6 +59,19 @@ const sucesso_atualizando = "Atualizado com sucesso!";
 const sucesso_consultando = "Consulta realizada com sucesso!";
 
 //-------------------------------------------------------------------------------//
+/**
+ * @description: Mensagens do Projeto.
+ * @description: Mensagens de erro : campos inválidos e/ou não preenchidos 
+ */
+const erro_campos = "Conteúdo dos campos inválidos e/ou não preenchidos.";
+
+/**
+ * @description: Mensagens do Projeto.
+ * @description: Mensagens de erro : Usuário ou senha inválidos 
+ */
+const erro_logando = "Usuário ou senha inválidos!"
+
+//-------------------------------------------------------------------------------//
 
 module.exports = {
 
@@ -69,4 +84,6 @@ module.exports = {
     sucesso_atualizando ,
     sucesso_consultando ,
     erro_api,
+    erro_campos,
+    erro_logando,
 }

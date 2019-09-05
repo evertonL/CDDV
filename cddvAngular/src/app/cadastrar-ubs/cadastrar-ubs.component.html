@@ -70,7 +70,8 @@
                         [(ngModel)]="ubs.cnes"
                         id="cnes"
                         name="cnes"
-                        maxlength="7"
+                        required
+                        maxlength={{SIZE_CNES}}
                         placeholder="Digite o numero do CNES">
                 </div>
 
@@ -81,7 +82,8 @@
                         [(ngModel)]="ubs.nome_da_unidade"
                         id="nome_da_unidade"
                         name="nome_da_unidade"
-                        maxlength="60"
+                        required
+                        maxlength={{SIZE_NOME_DA_UNIDADE}}
                         placeholder="Digite o Nome da UBS">
                 </div>
 
@@ -92,7 +94,8 @@
                         [(ngModel)]="ubs.municipio"
                         id="municipio"
                         name="municipio"
-                        maxlength="30"
+                        required
+                        maxlength={{SIZE_MUNICIPIO}}
                         placeholder="Digite o Municipio da Unidade">
                 </div>
 
@@ -108,7 +111,8 @@
                         [(ngModel)]="ubs.bairro"
                         id="bairro"
                         name="bairro"
-                        maxlength="30"
+                        required
+                        maxlength={{SIZE_BAIRRO}}
                         placeholder="Digite o Bairro da Unidade">
                 </div>
 
@@ -119,7 +123,8 @@
                         [(ngModel)]="ubs.endereco"
                         id="endereco"
                         name="endereco"
-                        maxlength="60"
+                        required
+                        maxlength={{SIZE_ENDERECO}}
                         placeholder="Digite o Endereço da Unidade">
                 </div>
 
@@ -130,7 +135,8 @@
                         [(ngModel)]="ubs.estado"
                         id="estado"
                         name="estado"
-                        maxlength="2"
+                        required
+                        maxlength={{SIZE_ESTADO}}
                         placeholder="Digite o estado EX:(MG)">
                 </div>
 
@@ -146,7 +152,8 @@
                         [(ngModel)]="ubs.telefone"
                         id="telefone"
                         name="telefone"
-                        maxlength="15"
+                        required
+                        maxlength={{SIZE_TELEFONE}}
                         placeholder="Digite o Telefone de Contato">
                 </div>
 
@@ -157,7 +164,8 @@
                         [(ngModel)]="ubs.cep"
                         id="cep"
                         name="cep"
-                        maxlength="8"
+                        required
+                        maxlength={{SIZE_CEP}}
                         placeholder="Digite o CEP">
                 </div>
 
@@ -170,10 +178,11 @@
                     <label for="senha">Senha:</label>
                     <input class="form-control"
                     type="password" 
-                    [(ngModel)]="agente.senha" 
+                    [(ngModel)]="ubs.senha" 
                     id="senha"
-                    name="senha" 
-                    maxlength = "32"
+                    name="senha"
+                    required
+                    maxlength = {{SIZE_SENHA}}
                     placeholder="Digite a Senha para sua conta">
                 </div>
 
@@ -184,8 +193,26 @@
                     [(ngModel)]="confirmaSenha"
                     id="confirmaSenha"
                     name="confirmaSenha"
-                    maxlength = "32"
+                    required
+                    maxlength = {{SIZE_SENHA}}
                     placeholder="Confirme sua Senha">
+                </div>
+
+                <!-- BLOQUEADO -->
+                <div class="form-group espaco">
+                    <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+
+                    <select id   = "inputBloqueado" 
+                            name = "inputBloqueado" 
+                            required 
+                            [(ngModel)]="usuario.bloqueado" 
+                            [class.is-invalid] = "camposObrigatorios"
+                            class="form-control"
+                    >
+
+                        <option value=false>Não</option>
+                        <option value=true>Sim</option>
+                    </select>
                 </div>
             </div>
         </form>

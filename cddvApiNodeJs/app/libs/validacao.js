@@ -21,7 +21,8 @@
  * null //retorno, nesse exemplo o nome apesar de estar vazio não é validado
  * 
  */
- function isObjectEmpty(valida, naoValida){
+
+function isObjectEmpty(valida, naoValida){
 
     let objeto          = Object.assign({}, valida);
     let chaves          = []; 
@@ -41,25 +42,29 @@
 
         chaves.push(obj);
     }
-    
+
     //Pego o valor contido dentro de cada chave 
     valores = Object.values(objeto);
-    
+
     //Verifico quais campos estão vazios
     for(let i = 0; i < chaves.length; i++){
 
-        if( valores[i] == "" ){
-
-            camposVazios.push(chaves[i]);
+        //verifico se é uma string
+        if(typeof valores[i] === 'string' ){
+            
+            if( valores[i].trim() == "" ){
+    
+                camposVazios.push(chaves[i]);
+            }
         }
     } 
 
     return ( camposVazios.length > 0 ? { campos_vazios : camposVazios } : null );
 }
 
-/**
- * Exportando funções
- */
+
+
+//Exportando funções
 module.exports = {
     isObjectEmpty,
 }

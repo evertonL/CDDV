@@ -3,15 +3,16 @@
  */
 export class Ubs {
 
-    public cnes               : number;
-    public nome_da_unidade    : string;
-    public municipio          : string;
-    public bairro             : string;
-    public endereco           : string;
-    public estado             : string;
-    public telefone           : number;
-    public cep                : number;
-    public senha              : string;
+    private cnes               : number;
+    private nome_da_unidade    : string;
+    private municipio          : string;
+    private bairro             : string;
+    private endereco           : string;
+    private estado             : string;
+    private telefone           : string;
+    private cep                : number;
+    private senha              : string;
+    private bloqueado          : boolean;
 
 
     /**
@@ -24,12 +25,13 @@ export class Ubs {
      * @param {string } estado              
      * @param {number } telefone            
      * @param {number } cep 
-     * @param {string } senha                                                                     
+     * @param {string } senha
+     * @param {boolean} bloqueado                                                                    
      */
     constructor(cnes?: number, nome_da_unidade?: string,
         municipio?: string, bairro?: string,
         endereco?: string, estado?: string,
-        telefone?: number, cep?: number, senha?: string) {
+        telefone?: string, cep?: number, senha?: string, bloqueado?: boolean) {
 
         this.cnes = cnes;
         this.nome_da_unidade = nome_da_unidade;
@@ -40,6 +42,7 @@ export class Ubs {
         this.telefone = telefone;
         this.cep = cep;
         this.senha = senha;
+        this.bloqueado = bloqueado;
     }
 
     // -----------------GET----------------
@@ -94,9 +97,9 @@ export class Ubs {
 
     /**
      * @description: Retorna o telefone
-     * @return {number} ( telefone ) - código identificador.
+     * @return {string} ( telefone ) - código identificador.
      */
-    public gettelefone(): number {
+    public gettelefone(): string {
         return this.telefone;
     }
 
@@ -114,6 +117,14 @@ export class Ubs {
      */
     public getSenha(): string {
         return this.senha;
+    }
+
+    /**
+    * @description: Retorna o senha
+    * @return {string} ( senha ) - código identificador.
+    */
+    public getBloqueado(): boolean {
+        return this.bloqueado;
     }
     
 
@@ -171,7 +182,7 @@ export class Ubs {
     * @description Seta código identicador.
     * @param telefone - Código identicador.
     */
-    public setTelefone(telefone: number): void {
+    public setTelefone(telefone: string): void {
         this.telefone = telefone;
     }
 
@@ -188,7 +199,15 @@ export class Ubs {
     * @param senha - Código identicador.
     */
     public setSenha(senha: string): void {
-    this.senha = senha;
-}
+        this.senha = senha;
+    }
+
+    /**
+    * @description Seta código identicador.
+    * @param bloqueado - Código identicador.
+    */
+    public setBloqueado(bloqueado: boolean): void {
+        this.bloqueado = bloqueado;
+    }
 
 }
