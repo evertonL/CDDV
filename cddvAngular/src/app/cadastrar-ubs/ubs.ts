@@ -3,35 +3,35 @@
  */
 export class Ubs {
 
-    private cnes               : number;
+    private cnes               : string;
     private nome_da_unidade    : string;
     private municipio          : string;
     private bairro             : string;
     private endereco           : string;
     private estado             : string;
     private telefone           : string;
-    private cep                : number;
+    private cep                : string;
     private senha              : string;
-    private bloqueado          : boolean;
+    //private bloqueado          : boolean;
 
 
     /**
      * @constructor
-     * @param {number } cnes                 
+     * @param {string } cnes                 
      * @param {string } nome_da_unidade                       
      * @param {string } municipio             
      * @param {string } bairro                  
      * @param {string } endereco                  
      * @param {string } estado              
-     * @param {number } telefone            
-     * @param {number } cep 
+     * @param {string } telefone            
+     * @param {string } cep 
      * @param {string } senha
      * @param {boolean} bloqueado                                                                    
      */
-    constructor(cnes?: number, nome_da_unidade?: string,
+    constructor(cnes?: string, nome_da_unidade?: string,
         municipio?: string, bairro?: string,
         endereco?: string, estado?: string,
-        telefone?: string, cep?: number, senha?: string, bloqueado?: boolean) {
+        telefone?: string, cep?: string, senha?: string, bloqueado?: boolean) {
 
         this.cnes = cnes;
         this.nome_da_unidade = nome_da_unidade;
@@ -42,7 +42,7 @@ export class Ubs {
         this.telefone = telefone;
         this.cep = cep;
         this.senha = senha;
-        this.bloqueado = bloqueado;
+        //this.bloqueado = bloqueado;
     }
 
     // -----------------GET----------------
@@ -51,7 +51,7 @@ export class Ubs {
     * @description: Retorna numero do cnes.
     * @return {number} ( cnes ) - código identificador.
     */
-    public getCnes(): number {
+    public getCnes(): string {
         return this.cnes;
     }
 
@@ -99,7 +99,7 @@ export class Ubs {
      * @description: Retorna o telefone
      * @return {string} ( telefone ) - código identificador.
      */
-    public gettelefone(): string {
+    public getTelefone(): string {
         return this.telefone;
     }
 
@@ -107,7 +107,7 @@ export class Ubs {
      * @description: Retorna o cep
      * @return {number} ( cep ) - código identificador.
      */
-    public getCep(): number {
+    public getCep(): string {
         return this.cep;
     }
     
@@ -119,13 +119,13 @@ export class Ubs {
         return this.senha;
     }
 
-    /**
-    * @description: Retorna o senha
-    * @return {string} ( senha ) - código identificador.
-    */
-    public getBloqueado(): boolean {
-        return this.bloqueado;
-    }
+    // /**
+    // * @description: Retorna o senha
+    // * @return {string} ( senha ) - código identificador.
+    // */
+    // public getBloqueado(): boolean {
+    //     return this.bloqueado;
+    // }
     
 
     //-----------------SET-----------------------
@@ -134,7 +134,7 @@ export class Ubs {
      * @description: Seta código identicador.
      * @param cnes - Código identicador.
      */
-    public setCnes(cnes: number): void {
+    public setCnes(cnes: string): void {
         this.cnes = cnes;
     }
 
@@ -190,7 +190,7 @@ export class Ubs {
     * @description Seta código identicador.
     * @param cep - Código identicador.
     */
-    public setCep(cep: number): void {
+    public setCep(cep: string): void {
         this.cep = cep;
     }
 
@@ -202,12 +202,12 @@ export class Ubs {
         this.senha = senha;
     }
 
-    /**
-    * @description Seta código identicador.
-    * @param bloqueado - Código identicador.
-    */
-    public setBloqueado(bloqueado: boolean): void {
-        this.bloqueado = bloqueado;
-    }
+    // /**
+    // * @description Seta código identicador.
+    // * @param bloqueado - Código identicador.
+    // */
+    // public setBloqueado(bloqueado: boolean): void {
+    //     this.bloqueado = bloqueado;
+    // }
 
 }

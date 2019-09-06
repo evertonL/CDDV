@@ -31,7 +31,6 @@ export class CadastrarUbsComponent implements OnInit {
   private camposObrigatorios      = false;
   private mensagemAviso           = null;
   private errosApi                = null;
-  private bloqueado               = false;
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -60,7 +59,7 @@ export class CadastrarUbsComponent implements OnInit {
         this.getCadastrarUbs().setTelefone(queryParams['telefone']);
         this.getCadastrarUbs().setCep(queryParams['cep']); 
         this.getCadastrarUbs().setSenha(queryParams['senha']);
-        //this.getCadastrarUbs().setBloqueado(queryParams['bloqueado']);
+        // this.getCadastrarUbs().setBloqueado(queryParams['bloqueado']);
 
       }
     );
@@ -87,10 +86,15 @@ export class CadastrarUbsComponent implements OnInit {
       return;
 
     }else if(this.getCadastrarUbs().getSenha() != this.confirmaSenha){
+
       alert("Campo Senha e Confirma Senha não são iguais!");
+      return;
+
     }else{
+
       this.camposObrigatorios = false;
       this.salvaUbs()
+
     }
   }
 
@@ -124,36 +128,44 @@ export class CadastrarUbsComponent implements OnInit {
     return this.ubs;
   }
 
-  private registrar1() {
-    console.log(this.getCadastrarUbs());
-  }
-
     /**
    *@description  Valida se campos estão vazios.
    *@returns true caso algum campo esteja vazio, false caso contrário.
    */
   private validarCampus(){
 
-    return this.getCadastrarUbs().getCnes()          == undefined ||  
-           this.getCadastrarUbs().getNomeDaUnidade() == undefined ||  
-           this.getCadastrarUbs().getMunicipio()     == undefined ||
-           this.getCadastrarUbs().getBairro()        == undefined ||
-           this.getCadastrarUbs().getEndereco()      == undefined ||
-           this.getCadastrarUbs().getEstado()        == undefined ||
-           this.getCadastrarUbs().gettelefone()      == undefined ||
-           this.getCadastrarUbs().getCep()           == undefined ||
-           this.getCadastrarUbs().getSenha()         == undefined ||
-           this.confirmaSenha                        == undefined ||
-           this.getCadastrarUbs().getCnes()          == null  ||  
-           this.getCadastrarUbs().getNomeDaUnidade() == null  ||  
-           this.getCadastrarUbs().getMunicipio()     == null  ||
-           this.getCadastrarUbs().getBairro()        == null  ||
-           this.getCadastrarUbs().getEndereco()      == null  ||
-           this.getCadastrarUbs().getEstado()        == null  ||
-           this.getCadastrarUbs().gettelefone()      == null  ||
-           this.getCadastrarUbs().getCep()           == null  ||
-           this.getCadastrarUbs().getSenha()         == null  ||
-           this.confirmaSenha                        == null  
+    return this.getCadastrarUbs().getCnes()                 == undefined ||  
+           this.getCadastrarUbs().getNomeDaUnidade()        == undefined ||  
+           this.getCadastrarUbs().getMunicipio()            == undefined ||
+           this.getCadastrarUbs().getBairro()               == undefined ||
+           this.getCadastrarUbs().getEndereco()             == undefined ||
+           this.getCadastrarUbs().getEstado()               == undefined ||
+           this.getCadastrarUbs().getTelefone()             == undefined ||
+           this.getCadastrarUbs().getCep()                  == undefined ||
+           this.getCadastrarUbs().getSenha()                == undefined ||
+           //this.getCadastrarUbs().getBloqueado()            == undefined ||
+           this.confirmaSenha                               == undefined ||
+           this.getCadastrarUbs().getCnes().trim()          == ''        ||
+           this.getCadastrarUbs().getNomeDaUnidade().trim() == ''        ||
+           this.getCadastrarUbs().getMunicipio().trim()     == ''        ||
+           this.getCadastrarUbs().getBairro().trim()        == ''        ||
+           this.getCadastrarUbs().getEndereco().trim()      == ''        ||
+           this.getCadastrarUbs().getEstado().trim()        == ''        ||
+           this.getCadastrarUbs().getTelefone().trim()      == ''        ||
+           this.getCadastrarUbs().getCep().trim()           == ''        ||
+           this.getCadastrarUbs().getSenha().trim()         == ''        ||
+           this.confirmaSenha                               == ''        ||
+           this.getCadastrarUbs().getCnes()                 == null      ||  
+           this.getCadastrarUbs().getNomeDaUnidade()        == null      ||  
+           this.getCadastrarUbs().getMunicipio()            == null      ||
+           this.getCadastrarUbs().getBairro()               == null      ||
+           this.getCadastrarUbs().getEndereco()             == null      ||
+           this.getCadastrarUbs().getEstado()               == null      ||
+           this.getCadastrarUbs().getTelefone()             == null      ||
+           this.getCadastrarUbs().getCep()                  == null      ||
+           this.getCadastrarUbs().getSenha()                == null      ||
+           //this.getCadastrarUbs().getBloqueado()            == null      ||
+           this.confirmaSenha                               == null      
             ? true : false;
   }
   
@@ -168,4 +180,5 @@ export class CadastrarUbsComponent implements OnInit {
     this.errosApi = error + " /countErros: " + CadastrarUbsComponent.countErros++  ;
     console.log(this.errosApi);
   }
+  
 }
