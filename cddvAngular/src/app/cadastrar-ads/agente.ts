@@ -3,31 +3,38 @@
  */
 export class Agente{
 
-    public cpf            :   number;
-    public nome           :   string;
-    public senha          :   string;
-    public rg             :   number;
+    private cpf            :   String;
+    private nome           :   String;
+    private senha          :   String;
+    private rg             :   String;
+    // private bloqueado      :   boolean;   imprementar no api e BD
+    private cnes  : String = '9999999';
   
     /**
      * @constructor
-     * @param {number } cpf  
-     * @param {string } nome 
-     * @param {string } senha
-     * @param {number } rg
+     * @param {String } cpf  
+     * @param {String } nome 
+     * @param {String } senha
+     * @param {String } rg
+     * @param {boolean} bloqueado
      */
-    constructor(cpf?: number, nome?: string, senha?: string, rg?: number) {
+    constructor(cpf?: String, nome?: String, senha?: String, rg?: String ,bloqueado?: boolean, cnes?: String) {
   
-      this.cpf = cpf;
-      this.nome = nome;
-      this.senha = senha;
-      this.rg = rg;
+      this.cpf       = cpf;
+      this.nome      = nome;
+      this.senha     = senha;
+      this.rg        = rg;
+      // this.bloqueado = bloqueado;
+      // this.cnes = cnes;
     }
+
+    //--------------GET-------------------//
   
     /**
      * @description: Retorna numero do cpf.
      * @return {number} ( cpf ) - código identificador.
      */
-    public getCpfAgente(): number {
+    public getCpfAgente(): String {
       return this.cpf;
     }
   
@@ -35,32 +42,41 @@ export class Agente{
      * @description: Retorna o nome do agente.
      * @return {number} ( nome ) - código identificador.
      */
-    public getNameAgente(): string {
+    public getNameAgente(): String {
       return this.nome;
     }
   
     /**
      * @description: Retorna a senha do agente.
-     * @return {number} ( senha ) - código identificador.
+     * @return {String} ( senha ) - código identificador.
      */
-    public getSenha(): string {
+    public getSenha(): String {
       return this.senha;
     }
   
     /**
      * @description: Retorna o rg do agente.
-     * @return {number} ( rg ) - código identificador.
+     * @return {String} ( rg ) - código identificador.
      */
-    public getRgAgente(): number {
+    public getRgAgente(): String {
       return this.rg;
     }
+
+    // /**
+    //  * @description: Retorna o se ta bloquado ou nao o agente.
+    //  * @return {boolean} ( bloqueado ) - código identificador.
+    //  */
+    // public getBloqueado(): boolean {
+    //   return this.bloqueado;
+    // }
   
-  
+  //---------------SET------------------
+
     /**
      * @description: Seta código identicador.
      * @param {number} cpf - Código identicador.
      */
-    public setCpfAgente(cpf: number): void {
+    public setCpfAgente(cpf: String): void {
       this.cpf = cpf;
     }
   
@@ -68,7 +84,7 @@ export class Agente{
      * @description Seta código identicador.
      * @param nome - Código identicador.
      */
-    public setNameAgente(nome: string): void {
+    public setNameAgente(nome: String): void {
       this.nome = nome;
     }
   
@@ -76,7 +92,7 @@ export class Agente{
      * @description Seta código identicador.
      * @param senha Código identicador.
      */
-    public setSenha(senha: string): void {
+    public setSenha(senha: String): void {
       this.senha = senha;
     }
   
@@ -84,7 +100,23 @@ export class Agente{
      * @description Seta código identicador.
      * @param rg - Código identicador.
      */
-    public setRgAgente(rg: number): void {
+    public setRgAgente(rg: String): void {
       this.rg = rg;
+    }
+
+    // /**
+    //  * @description Seta código identicador.
+    //  * @param bloquado - Código identicador.
+    //  */
+    // public setBloqueado(bloquado: boolean): void {
+    //   this.bloqueado = bloquado;
+    // }
+
+    public getCnes(): String {
+      return this.cnes;
+    }
+
+    public setCnes(cnes: String): void {
+      this.cnes = cnes;
     }
 }

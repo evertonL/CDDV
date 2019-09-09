@@ -9,13 +9,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './cadastrar-ads.component.html',
   styleUrls: ['./cadastrar-ads.component.css']
 })
-export class CadastrarAdsComponent implements OnInit {
+export class CadastrarAdsComponent /*implements OnInit*/ {
 
   //TAMANHO DOS CAMPOS 
-  public SIZE_CPF = 11;
-  public SIZE_NOME = 50;
+  public SIZE_CPF   = 11;
+  public SIZE_NOME  = 50;
   public SIZE_SENHA = 30;
-  public SIZE_RG = 10;
+  public SIZE_RG    = 10;
 
   private inscricao = new Subscription;
   private agente: Agente = null;
@@ -35,22 +35,24 @@ export class CadastrarAdsComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  // ngOnInit() {
 
-    //Recupera o conteudo dos parametros e inicializa campos.
-    //Também resgata a instancia da inscrição.
-    this.inscricao = this.route.queryParams.subscribe(
-      (queryParams: any) => {
+  //   //Recupera o conteudo dos parametros e inicializa campos.
+  //   //Também resgata a instancia da inscrição.
+  //   this.inscricao = this.route.queryParams.subscribe(
+  //     (queryParams: any) => {
 
-        this.agente.cpf = queryParams['cpf'];
-        this.agente.nome = queryParams['nome'];
-        this.agente.senha = queryParams['senha'];
-        this.agente.rg = queryParams['rg'];
+  //       this.getCadastrarAds().setCpfAgente(queryParams['cpf']);
+  //       this.getCadastrarAds().setNameAgente(queryParams['nome']);
+  //       this.getCadastrarAds().setSenha(queryParams['senha']);
+  //       this.getCadastrarAds().setRgAgente(queryParams['rg']);
+  //       //this.getCadastrarAds().setCnes(queryParams['cnes']);
+  //       // this.getCadastrarAds().setBloqueado(queryParams['bloqueado']);
 
-      }
-    );
+  //     }
+  //   );
 
-  }
+  // }
 
   /**
  * Destruo o registro ao finalizar
@@ -71,7 +73,7 @@ export class CadastrarAdsComponent implements OnInit {
       alert("prencha todos os Campos");
       return;
 
-    }else if(this.agente.senha != this.confirmaSenha){
+    }else if(this.getCadastrarAds().getSenha() != this.confirmaSenha){
       alert("As senhas não são iguais");
     }else{
       this.camposObrigatorios = false;
@@ -83,12 +85,13 @@ export class CadastrarAdsComponent implements OnInit {
    * @description Se inscreve no serviço que envia solicitação para API salvar frequência na base de dados.
    */
   private salvaAgente(){
-   
-    this.agenteService.salvaAgente(this.agente)
+   console.log(this.getCadastrarAds());
+    this.agenteService.salvaAgente(this.getCadastrarAds())
                           .subscribe( 
                                         result =>{ 
                                                     alert("Registrado com Sucesso");
                                                     this.agente = new Agente();
+                                                    this.confirmaSenha = '';
                                                  }
                                      );
 
@@ -119,22 +122,24 @@ export class CadastrarAdsComponent implements OnInit {
    */
   private validarCampus(){
 
-    return this.agente.getCpfAgente() == undefined ||  this.agente.getNameAgente() == undefined ||  this.agente.getSenha() == undefined ||  this.agente.getRgAgente() == undefined ||
-           this.agente.getCpfAgente() == null  ||  this.agente.getNameAgente() == null  ||  this.agente.getSenha() == null  ||  this.agente.getRgAgente() == null  
+    return this.getCadastrarAds().getCpfAgente()  == undefined  ||
+           this.getCadastrarAds().getNameAgente() == undefined  ||
+           this.getCadastrarAds().getSenha()      == undefined  ||  
+           this.getCadastrarAds().getRgAgente()   == undefined  ||
+          // this.getCadastrarAds().getBloqueado()  == undefined  ||
+           this.confirmaSenha                     == undefined  ||
+           this.getCadastrarAds().getCpfAgente()  == ''         ||            
+           this.getCadastrarAds().getNameAgente() == ''         || 
+           this.getCadastrarAds().getSenha()      == ''         || 
+           this.getCadastrarAds().getRgAgente()   == ''         ||
+           this.confirmaSenha                     == ''         || 
+           this.getCadastrarAds().getCpfAgente()  == null       ||  
+           this.getCadastrarAds().getNameAgente() == null       ||  
+           this.getCadastrarAds().getSenha()      == null       ||  
+           this.getCadastrarAds().getRgAgente()   == null       ||
+           //this.getCadastrarAds().getBloqueado()  == null       ||
+           this.confirmaSenha                     == null  
             ? true : false;
   }
-  
-  /**
-   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
-   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
-   * @param error error ocasionado na aplicação. 
-   */
-  setErrosApi(error){
-
-    this.mensagemAviso = null;
-    this.errosApi = error + " /countErros: " + CadastrarAdsComponent.countErros++  ;
-    console.log(this.errosApi);
-  }
-
 
 }

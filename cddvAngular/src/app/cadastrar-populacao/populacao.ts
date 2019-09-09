@@ -3,34 +3,34 @@
  */
 export class Populacao {
 
-    private cartao_sus              : number;
-    private nome_da_mae             : string;
-    private municipio_de_nacimento  : string;
-    private estado                  : string;
-    private endereco                : string
-    private nome_do_pai             : string;
-    private sexo                    : string;
-    private nome                    : string;
+    private cartao_sus              : String;
+    private nome_da_mae             : String;
+    private municipio_de_nacimento  : String;
+    private estado                  : String;
+    private endereco                : String
+    private nome_do_pai             : String;
+    private sexo                    : String;
+    private nome                    : String;
     private data_nacimento          : Date;
-    private senha                   : string;
+    private senha                   : String;
 
     /**
      * @constructor
-     * @param {number } cartao_sus            
-     * @param {string } nome_da_mae            
-     * @param {string } municipio_de_nacimento 
-     * @param {string } estado
-     * @param {string } endereco                 
-     * @param {string } nome_do_pai            
-     * @param {string } sexo                   
-     * @param {string } nome                   
+     * @param {String } cartao_sus            
+     * @param {String } nome_da_mae            
+     * @param {String } municipio_de_nacimento 
+     * @param {String } estado
+     * @param {String } endereco                 
+     * @param {String } nome_do_pai            
+     * @param {String } sexo                   
+     * @param {String } nome                   
      * @param {Date   } data_nacimento         
-     * @param {string } senha                  
+     * @param {String } senha                  
      */
-    constructor(cartao_sus?: number, nome_da_mae?: string, municipio_de_nacimento?: string,
-        estado?: string, endereco?: string, nome_do_pai?: string,
-        sexo?: string, nome?: string,
-        data_nacimento?: Date, senha?: string) {
+    constructor(cartao_sus?: String, nome_da_mae?: String, municipio_de_nacimento?: String,
+        estado?: String, endereco?: String, nome_do_pai?: String,
+        sexo?: String, nome?: String,
+        data_nacimento?: Date, senha?: String) {
 
         this.cartao_sus = cartao_sus;
         this.nome_da_mae = nome_da_mae;
@@ -48,71 +48,71 @@ export class Populacao {
 
     /**
     * @description: Retorna numero do cartao_sus.
-    * @return {number} ( cartao_sus ) - código identificador.
+    * @return {String} ( cartao_sus ) - código identificador.
     */
-    public getCartaoSus(): number {
+    public getCartaoSus(): String {
         return this.cartao_sus;
     }
 
     /**
      * @description: Retorna o nome_da_mae.
-     * @return {string} ( nome_da_mae ) - código identificador.
+     * @return {String} ( nome_da_mae ) - código identificador.
      */
-    public getNomeDaMae(): string {
+    public getNomeDaMae(): String {
         return this.nome_da_mae;
     }
 
     /**
      * @description: Retorna a municipio_de_nacimento
-     * @return {string} ( municipio_de_nacimento ) - código identificador.
+     * @return {String} ( municipio_de_nacimento ) - código identificador.
      */
-    public getMunicipioDeNacimento(): string {
+    public getMunicipioDeNacimento(): String {
         return this.municipio_de_nacimento;
     }
 
     /**
      * @description: Retorna o estado
-     * @return {string} ( estado ) - código identificador.
+     * @return {String} ( estado ) - código identificador.
      */
-    public getEstado(): string {
+    public getEstado(): String {
         return this.estado;
     }
 
     /**
      * @description: Retorna o estado
-     * @return {string} ( endereco ) - código identificador.
+     * @return {String} ( endereco ) - código identificador.
      */
-    public getEndereco(): string {
+    public getEndereco(): String {
         return this.endereco;
     }
 
     /**
      * @description: Retorna o nome_do_pai
-     * @return {string} ( nome_do_pai ) - código identificador.
+     * @return {String} ( nome_do_pai ) - código identificador.
      */
-    public getNomeDoPai(): string {
+    public getNomeDoPai(): String {
         return this.nome_do_pai;
     }
 
     /**
      * @description: Retorna o sexo
-     * @return {string} ( sexo ) - código identificador.
+     * @return {String} ( sexo ) - código identificador.
      */
-    public getSexo(): string {
+    public getSexo(): String {
         return this.sexo;
     }
 
     /**
      * @description: Retorna o nome
-     * @return {string} ( nome ) - código identificador.
+     * @return {String} ( nome ) - código identificador.
      */
-    public getNome(): string {
+    public getNome(): String {
         return this.nome;
     }
 
     /**
      * @description: Retorna o data_nacimento
-     * @return {string} ( data_nacimento ) - código identificador.
+     * @return {String} ( data_nacimento ) - código identificador.
      */
     public getDataNacimento(): Date {
         return this.data_nacimento;
@@ -120,9 +120,9 @@ export class Populacao {
 
     /**
      * @description: Retorna o senha
-     * @return {string} ( senha ) - código identificador.
+     * @return {String} ( senha ) - código identificador.
      */
-    public getSenha(): string {
+    public getSenha(): String {
         return this.senha;
     }
 
@@ -132,7 +132,7 @@ export class Populacao {
      * @description: Seta código identicador.
      * @param cartao_sus - Código identicador.
      */
-    public setCartaoSus(cartao_sus: number): void {
+    public setCartaoSus(cartao_sus: String): void {
         this.cartao_sus = cartao_sus;
     }
 
@@ -140,7 +140,7 @@ export class Populacao {
      * @description Seta código identicador.
      * @param nome_da_mae - Código identicador.
      */
-    public setNomeDaMae(nome_da_mae: string): void {
+    public setNomeDaMae(nome_da_mae: String): void {
         this.nome_da_mae = nome_da_mae;
     }
 
@@ -148,7 +148,7 @@ export class Populacao {
      * @description Seta código identicador.
      * @param municipio_de_nacimento - Código identicador.
      */
-    public setMunicipioDeNacimento(municipio_de_nacimento: string): void {
+    public setMunicipioDeNacimento(municipio_de_nacimento: String): void {
         this.municipio_de_nacimento = municipio_de_nacimento;
     }
 
@@ -156,7 +156,7 @@ export class Populacao {
     * @description Seta código identicador.
     * @param estado - Código identicador.
     */
-    public setEstado(estado: string): void {
+    public setEstado(estado: String): void {
         this.estado = estado;
     }
 
@@ -164,7 +164,7 @@ export class Populacao {
     * @description Seta código identicador.
     * @param endereco - Código identicador.
     */
-    public setEndereco(endereco: string): void {
+    public setEndereco(endereco: String): void {
         this.endereco = endereco;
     }
 
@@ -172,7 +172,7 @@ export class Populacao {
     * @description Seta código identicador.
     * @param nome_do_pai - Código identicador.
     */
-    public setNomeDoPai(nome_do_pai: string): void {
+    public setNomeDoPai(nome_do_pai: String): void {
         this.nome_do_pai = nome_do_pai;
     }
 
@@ -180,7 +180,7 @@ export class Populacao {
     * @description Seta código identicador.
     * @param sexo - Código identicador.
     */
-    public setSexo(sexo: string): void {
+    public setSexo(sexo: String): void {
         this.sexo = sexo;
     }
 
@@ -188,7 +188,7 @@ export class Populacao {
     * @description Seta código identicador.
     * @param nome - Código identicador.
     */
-    public setNome(nome: string): void {
+    public setNome(nome: String): void {
         this.nome = nome;
     }
 
@@ -204,7 +204,7 @@ export class Populacao {
     * @description Seta código identicador.
     * @param senha - Código identicador.
     */
-    public setSenha(senha: string): void {
+    public setSenha(senha: String): void {
         this.senha = senha;
     }
 

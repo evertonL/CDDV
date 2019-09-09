@@ -65,11 +65,11 @@
                 <div class="form-group col-md-4">
                     <label for="cpf">CPF do Agente:</label>
                     <input class="form-control"
-                        type="number"
+                        type="text"
                         [(ngModel)]="agente.cpf"
                         id="cpf"
                         name="cpf" 
-                        maxlength = "10"
+                        maxlength = {{SIZE_CPF}}
                         placeholder="Numero do CPF">
                 </div>
 
@@ -80,7 +80,7 @@
                         [(ngModel)]="agente.nome"
                         id="nome"
                         name="nome" 
-                        maxlength = "50"
+                        maxlength = {{SIZE_NOME}}
                         placeholder="Nome do Agente">
                 </div>
 
@@ -96,7 +96,7 @@
                     [(ngModel)]="agente.senha" 
                     id="senha"
                     name="senha" 
-                    maxlength = "32"
+                    maxlength = {{SIZE_SENHA}}
                     placeholder="Digite a Senha para sua conta">
                 </div>
 
@@ -107,20 +107,37 @@
                     [(ngModel)]="confirmaSenha"
                     id="confirmaSenha"
                     name="confirmaSenha"
-                    maxlength = "32"
+                    maxlength = {{SIZE_SENHA}}
                     placeholder="Confirme sua Senha">
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="rg">RG do agente:</label>
                     <input class="form-control"
-                    type="number"
+                    type="text"
                     [(ngModel)]="agente.rg"
                     id="rg"
                     name="rg"
-                    maxlength = "10"
+                    maxlength = {{SIZE_RG}}
                     placeholder="Digite o numero do RG">
                 </div>
+
+                <!-- BLOQUEADO
+                <div class="form-group espaco">
+                    <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+
+                    <select id   = "inputBloqueado" 
+                            name = "inputBloqueado" 
+                            required 
+                            [(ngModel)]="usuario.bloqueado" 
+                            [class.is-invalid] = "camposObrigatorios"
+                            class="form-control"
+                    >
+
+                        <option value=false>Não</option>
+                        <option value=true>Sim</option>
+                    </select>
+                </div> -->
 
             </div>
 

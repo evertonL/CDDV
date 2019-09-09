@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs'; // precisa instalar
   styleUrls: ['./cadastrar-ubs.component.css']
 })
 
-export class CadastrarUbsComponent implements OnInit {
+export class CadastrarUbsComponent /*implements OnInit*/ {
 
   //TAMANHO DOS CAMPOS 
 
@@ -43,28 +43,28 @@ export class CadastrarUbsComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  // ngOnInit() {
 
-    //Recupera o conteudo dos parametros e inicializa campos.
-    //Também resgata a instancia da inscrição.
-    this.inscricao = this.route.queryParams.subscribe(
-      (queryParams: any) => {
+  //   //Recupera o conteudo dos parametros e inicializa campos.
+  //   //Também resgata a instancia da inscrição.
+  //   this.inscricao = this.route.queryParams.subscribe(
+  //     (queryParams: any) => {
 
-        this.getCadastrarUbs().setCnes(queryParams['cnes']);
-        this.getCadastrarUbs().setNomeDaUnidade( queryParams['nome_da_unidade']);
-        this.getCadastrarUbs().setMunicipio(queryParams['municipio']);
-        this.getCadastrarUbs().setBairro(queryParams['bairro']);
-        this.getCadastrarUbs().setEndereco(queryParams['endereco'])             
-        this.getCadastrarUbs().setEstado(queryParams['estado']);
-        this.getCadastrarUbs().setTelefone(queryParams['telefone']);
-        this.getCadastrarUbs().setCep(queryParams['cep']); 
-        this.getCadastrarUbs().setSenha(queryParams['senha']);
-        // this.getCadastrarUbs().setBloqueado(queryParams['bloqueado']);
+  //       this.getCadastrarUbs().setCnes(queryParams['cnes']);
+  //       this.getCadastrarUbs().setNomeDaUnidade( queryParams['nome_da_unidade']);
+  //       this.getCadastrarUbs().setMunicipio(queryParams['municipio']);
+  //       this.getCadastrarUbs().setBairro(queryParams['bairro']);
+  //       this.getCadastrarUbs().setEndereco(queryParams['endereco'])             
+  //       this.getCadastrarUbs().setEstado(queryParams['estado']);
+  //       this.getCadastrarUbs().setTelefone(queryParams['telefone']);
+  //       this.getCadastrarUbs().setCep(queryParams['cep']); 
+  //       this.getCadastrarUbs().setSenha(queryParams['senha']);
+  //       // this.getCadastrarUbs().setBloqueado(queryParams['bloqueado']);
 
-      }
-    );
+  //     }
+  //   );
 
-  }
+  // }
 
   /**
  * Destruo o registro ao finalizar
@@ -143,7 +143,7 @@ export class CadastrarUbsComponent implements OnInit {
            this.getCadastrarUbs().getTelefone()             == undefined ||
            this.getCadastrarUbs().getCep()                  == undefined ||
            this.getCadastrarUbs().getSenha()                == undefined ||
-           //this.getCadastrarUbs().getBloqueado()            == undefined ||
+           //this.getCadastrarUbs().getBloqueado()            == undefined ||    falta imprementar no banco
            this.confirmaSenha                               == undefined ||
            this.getCadastrarUbs().getCnes().trim()          == ''        ||
            this.getCadastrarUbs().getNomeDaUnidade().trim() == ''        ||
@@ -164,21 +164,8 @@ export class CadastrarUbsComponent implements OnInit {
            this.getCadastrarUbs().getTelefone()             == null      ||
            this.getCadastrarUbs().getCep()                  == null      ||
            this.getCadastrarUbs().getSenha()                == null      ||
-           //this.getCadastrarUbs().getBloqueado()            == null      ||
+           //this.getCadastrarUbs().getBloqueado()            == null      ||     falta imprementar no banco
            this.confirmaSenha                               == null      
             ? true : false;
   }
-  
-  /**
-   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
-   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
-   * @param error error ocasionado na aplicação. 
-   */
-  setErrosApi(error){
-
-    this.mensagemAviso = null;
-    this.errosApi = error + " /countErros: " + CadastrarUbsComponent.countErros++  ;
-    console.log(this.errosApi);
-  }
-  
 }

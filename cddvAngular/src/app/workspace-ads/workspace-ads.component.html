@@ -42,12 +42,12 @@
 				<ul class="navbar-nav mr-auto">
 
 					<button type="button"
-						class="btn btn-outline-success"
+						class="btn btn-outline-success" data-target="#moldal"
 						>Aplicar Vacina
 					</button>
 
 					<button type="button"
-					    routerLink="cadastrar-populacao"
+					    routerLink="cadastrar-populacao" 
 						class="btn btn-outline-success"
 						>Cadastrar Populacão
 					</button>
@@ -62,11 +62,33 @@
 		</div>
 	</nav>
 
+	<div class="form-group input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input name="consulta" id="txt_consulta" placeholder="Consultar" type="text" class="form-control">
+        </div>
+
+	<table class="table table-hover table-dark" id="tabela">
+			<thead>
+			  <tr>
+				<th scope="col">Primeiro</th>
+				<th scope="col">Último</th>
+				<th scope="col">Nickname</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<th scope="row"></th>
+				<td></td>
+				<td></td>
+				<td></td>
+			  </tr>
+			</tbody>
+	</table>
+	
 	<!--Rodapé-->
 	<footer class="footer text-center ">
 		<p>--Rodapé--</p>
 	</footer>
 
 </body>
-
 </html>

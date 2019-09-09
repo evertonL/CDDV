@@ -62,24 +62,24 @@
             <!-- Campos : Cartão Do SUS, Nome da Mãe e Municipio De Nacimento -->
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="cartao_sus">Cartão do SUS:</label>
-                    <input class="form-control" 
-                        type="number"
-                        [(ngModel)]="populacao.cartao_sus" 
-                        id="cartao_sus"
-                        name="cartao_sus"
-                        maxlength="15"
-                        placeholder="Numero do cartâo">
+                    <label for="cartao_sus">Cartão do SUS:</label>                                       
+                    <input class="form-control"                                     
+                        type="text"                                    
+                        [(ngModel)]="populacao.cartao_sus"                                     
+                        id="cartao_sus"                                    
+                        name="cartao_sus"                                    
+                        maxlength={{SIZE_CARTAO_SUS}}                                   
+                        placeholder="Numero do cartâo">                                    
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="nome_da_mae">Nome da Mãe:</label>
+                    <label for="nome_da_mae">Nome Completo da Mãe:</label>
                     <input class="form-control"
                         type="text"
                         [(ngModel)]="populacao.nome_da_mae" 
                         id="nome_da_mae"
                         name="nome_da_mae"
-                        maxlength="60"
-                        placeholder="Nome da sua Mãe">
+                        maxlength={{SIZE_NOME_DA_MAE}}
+                        placeholder="Qual nome da sua Mãe?">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="municipio_de_nacimento">Municipio de Nacimento:</label>
@@ -88,8 +88,8 @@
                         [(ngModel)]="populacao.municipio_de_nacimento" 
                         id="municipio_de_nacimento"
                         name="municipio_de_nacimento"
-                        maxlength="30"
-                        placeholder="Municipio de Nacimento">
+                        maxlength={{SIZE_MUNICIPIO_DE_NACIMENTO}}
+                        placeholder="Onde voce nasceu?">
                 </div>
             </div>
 
@@ -103,8 +103,8 @@
                         [(ngModel)]="populacao.estado"
                         id="estado"
                         name="estado"
-                        maxlength="2" 
-                        placeholder="Digite seu Estado Ex: MG">
+                        maxlength={{SIZE_ESTADO}} 
+                        placeholder="Estado que vc nasceu! Ex: MG">
                 </div>
 
                 <div class="form-group col-md-3">
@@ -114,19 +114,19 @@
                         [(ngModel)]="populacao.endereco"
                         id="endereco"
                         name="endereco"
-                        maxlength="60"
+                        maxlength={{SIZE_ENDERECO}}
                         placeholder="Digite seu Endereço">
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label for="nome_da_pai">Nome do Pai:</label>
+                    <label for="nome_do_pai">Nome do Pai:</label>
                     <input class="form-control" 
                         type="text"
-                        [(ngModel)]="populacao.nome_da_pai"
-                        id="nome_da_pai"
-                        name="nome_da_pai"
-                        maxlength="60"
-                        placeholder="Nome do seu Pai">
+                        [(ngModel)]="populacao.nome_do_pai"
+                        id="nome_do_pai"
+                        name="nome_do_pai"
+                        maxlength={{SIZE_NOME_DO_PAI}}
+                        placeholder="Qual o nome do seu Pai?">
                 </div>
 
                 <div class="form-group col-md-3">
@@ -134,7 +134,7 @@
                     <legend class="col-form-label col-sm-2 pt-0">Sexo:</legend>
 
                     <div class="col-sm-10">
-                                              <!-- faltando arumar algumas coisas -->
+                        
                         <div class="form-check">
                             <input class="form-check-input"
                             type="radio"
@@ -164,24 +164,24 @@
             <div class="row">
 
                 <div class="form-group col-md-6">
-                    <label for="nome">Nome</label>
+                    <label for="nome">Nome Completo: </label>
                     <input class="form-control"
                         type="text"
                         [(ngModel)]="populacao.nome"
                         id="nome"
                         name="nome"
-                        maxlength="50" 
-                        placeholder="Digite seu Nome">
+                        maxlength={{SIZE_NOME}} 
+                        placeholder="Qual o seu Nome?">
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="data_nacimento">Data de Nacimento</label>
+                    <label for="data_nacimento">Data de Nacimento: </label>
                     <input class="form-control"
                         type="date"
                         [(ngModel)]="populacao.data_nacimento"
                         id="data_nacimento"
                         name="data_nacimento"
-                        placeholder="Digite sua Data de Nacimento">
+                        placeholder="Qual sua Data de Nacimento">
                 </div>
 
             </div>
@@ -190,24 +190,24 @@
             <div class="row">
                                 <!-- faltando arumar algumas coisas -->
                 <div class="form-group col-md-3">
-                    <label for="senha">Senha:</label>
+                    <label for="senha">Senha: </label>
                     <input class="form-control"
                     type="password" 
-                    [(ngModel)]="agente.senha" 
+                    [(ngModel)]="populacao.senha" 
                     id="senha"
                     name="senha" 
-                    maxlength="30" 
+                    maxlength = {{SIZE_SENHA}}
                     placeholder="Digite a Senha para sua conta">
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label for="senha">Confirmar Senha:</label>
+                    <label for="confirmaSenha">Confirmar Senha: </label>
                     <input class="form-control" 
                     type="password"
-                    [(ngModel)]="agente.senha"
-                    id="senha"
-                    name="senha"
-                    maxlength="30"
+                    [(ngModel)]="confirmaSenha"
+                    id="confirmaSenha"
+                    name="confirmaSenha"
+                    maxlength = {{SIZE_SENHA}}
                     placeholder="Confirme sua Senha">
                 </div>
             </div>
