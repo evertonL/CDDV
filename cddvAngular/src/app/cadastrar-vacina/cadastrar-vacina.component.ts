@@ -13,9 +13,9 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
 
  //TAMANHO DOS CAMPOS 
 
- public SIZE_NOME                  = 60 ;
+ public SIZE_NOME                  = 25 ;
  public SIZE_LOTE                  = 25 ;
- public SIZE_NOME_DA_UNIDADE       = 50 ;
+ public SIZE_NOME_DA_UNIDADE       = 30 ;
  public SIZE_PERIODO_DE_IMUNIZACAO = 2 ;
 
  private inscricao               = new Subscription;

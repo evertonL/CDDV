@@ -18,7 +18,7 @@ export class Agente{
      * @param {String } rg
      * @param {boolean} bloqueado
      */
-    constructor(cpf?: String, nome?: String, senha?: String, rg?: String ,bloqueado?: boolean, cnes?: String) {
+    constructor(cpf?: String, nome?: String, senha?: String, rg?: String ,bloqueado?: boolean, /*cnes?: String*/) {
   
       this.cpf       = cpf;
       this.nome      = nome;
@@ -112,6 +112,8 @@ export class Agente{
     //   this.bloqueado = bloquado;
     // }
 
+
+    //TENHO QUE TIRAR DEPOIS QUE TIVER LOGANDO
     public getCnes(): String {
       return this.cnes;
     }

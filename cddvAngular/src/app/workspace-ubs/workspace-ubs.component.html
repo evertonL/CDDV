@@ -68,12 +68,119 @@
 			</div>
 		</div>
 	</nav>
+	<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
+<div style="background-color:  rgb(91, 94, 94)">
 
-	<!--Rodapé-->
-	<footer class="footer text-center ">
-			<p>--Rodapé--</p>
-	</footer>
+	<div class="nomeSujeito">
+		<h2>Agentes Cadastrados</h2>
+	</div>
 
+
+	<!--Campo PESQUISA -->
+	<div class="form-group col-md-5">
+		<div class="input-group-append">
+
+			<input type = "text"
+				   id   = "pesquisarAgentePorUbs" 
+				   required 
+				   maxlength="50" 
+				   class="form-control" 
+				   autocomplete="off"
+				   [(ngModel)]="pesquisa"
+				   (keyup.enter)="getAgentePeloNome()"
+				   placeholder="Digite o Nome do Agente"              
+			>
+
+
+			<input type="button" 
+				   id="pesquisarAgentePorUbs"  
+				   (click)="getAgentePeloNome()"
+				   class="buttonPesquisa"
+			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+		</div>
+	</div>
+
+	<table class="table table-responsive table-hover table-dark" id="tabela">
+			<thead>
+				
+				<th scope="col">CPF</th>
+				<th scope="col">Agente</th>
+				<th scope="col">RG</th>
+				<th scope="col">Senha</th>
+				<th></th>
+
+			</thead>
+			<tbody>
+			  <tr *ngFor="let workspaceUbs of workspaceUbss">
+
+				<td>{{workspaceUbs.cpf}}</td>
+				<td>{{workspaceUbs.nome}}</td>
+				<td>{{workspaceUbs.senha}}</td>
+				<td>{{workspaceUbs.rg}}</td>
+				<td><input type="button" class="buttonBloquear" value="Bloquear Agente"></td>
+
+			  </tr>
+			</tbody>
+	</table>
+
+</div>
+
+<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
+<div style="background-color:  rgb(91, 94, 94)">
+
+	<div class="nomeSujeito">
+		<h2>Vacinas Cadastradas</h2>
+	</div>
+
+
+	<!--Campo PESQUISA -->
+	<div class="form-group col-md-5">
+		<div class="input-group-append">
+
+			<input type = "text"
+				   id   = "pesquisarAgentePorUbs" 
+				   required 
+				   maxlength="50" 
+				   class="form-control" 
+				   autocomplete="off"
+				   [(ngModel)]="pesquisa"
+				   (keyup.enter)="getAgentePeloNome()"
+				   placeholder="Digite o Nome do Agente"              
+			>
+
+			<!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
+			<input type="button" 
+				   id="pesquisarAgentePorUbs"  
+				   (click)="getAgentePeloNome()"
+				   class="buttonPesquisa"
+			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+		</div>
+	</div>
+
+	<table class="table table-responsive table-hover table-dark" id="tabela">
+			<thead>
+				
+				<th scope="col">CPF</th>
+				<th scope="col">Agente</th>
+				<th scope="col">RG</th>
+				<th scope="col">Senha</th>
+				<th></th>
+
+			</thead>
+			<tbody>
+			  <tr *ngFor="let workspaceUbs of workspaceUbss">
+
+				<td>{{workspaceUbs.cpf}}</td>
+				<td>{{workspaceUbs.nome}}</td>
+				<td>{{workspaceUbs.senha}}</td>
+				<td>{{workspaceUbs.rg}}</td>
+				<td><input type="button" class="buttonBloquear" value="Bloquear Agente"></td>
+
+			  </tr>
+			</tbody>
+	</table>
+
+</div>
 </body>
 
 </html>

@@ -17,12 +17,14 @@ button{
 ul{
     margin-inline-start: 5%;
 }
+/*rodape*/
 .footer{
     background-color: #1a2588;
     color: white;
     height: 40px;
     width:100%
 }
+
 img{
     position: center;   
 }

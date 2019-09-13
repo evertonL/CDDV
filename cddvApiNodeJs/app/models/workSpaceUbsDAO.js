@@ -39,7 +39,7 @@ class WorkSpaceUbsDAO {
                 +"  FROM                         "
                         +" agente_de_saude       "
                 +"  WHERE                        " 
-                        +" nome  = $1 "
+                        +" nome  = $1            "
 
                     
         let aValues = [ nome ];
