@@ -22,7 +22,7 @@ class CadastrarUbsDAO {
      */
     salvaCadastrarUbs(cadastrarUbs, response) {
 
-        let cSql = "INSERT INTO ubs("
+        let cSql = "INSERT INTO ubs(               "
             + "                 cnes            ,  "  //[01]
             + "                 nome_da_unidade ,  "  //[02]
             + "                 municipio       ,  "  //[03]   
@@ -31,8 +31,9 @@ class CadastrarUbsDAO {
             + "                 estado          ,  "  //[06]
             + "                 telefone        ,  "  //[07]
             + "                 cep             ,  "  //[08]
-            + "                 senha              "  //[09]
-            + "                )"
+            + "                 senha           ,  "  //[09]
+            + "                 bloqueado          "  //[10]
+            + "                )                   "
             + "        VALUES  ("
             + "                 $1 ,  "
             + "                 $2 ,  "
@@ -42,7 +43,8 @@ class CadastrarUbsDAO {
             + "                 $6 ,  "
             + "                 $7 ,  "
             + "                 $8 ,  "
-            + "                 $9    "
+            + "                 $9 ,  "
+            + "                 $10   "
             + "                )";
 
         let aValues = [
@@ -54,7 +56,8 @@ class CadastrarUbsDAO {
             cadastrarUbs.estado,
             cadastrarUbs.telefone,
             cadastrarUbs.cep,
-            cadastrarUbs.senha
+            cadastrarUbs.senha,
+            cadastrarUbs.bloqueado
         ];
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
     }
@@ -75,8 +78,9 @@ class CadastrarUbsDAO {
                     + " estado =          $5 , "
                     + " telefone =        $6 , "
                     + " cep =             $7 , "
-                    + " senha =           $8   "
-                    + " WHERE cnes =      $9   ";
+                    + " senha =           $8 , "
+                    + " bloqueado =       $9   "
+                    + " WHERE cnes =      $10  ";
 
         let aValues = [
             cnesUbs.nome_da_unidade,
@@ -87,6 +91,7 @@ class CadastrarUbsDAO {
             cnesUbs.telefone,
             cnesUbs.cep,
             cnesUbs.senha,
+            cnesUbs.bloqueado,
             cnesUbs.cnes
         ];
 
@@ -113,7 +118,7 @@ class CadastrarUbsDAO {
     */
     getAllCadastrarUbs(response) {
 
-        let cSql = "SELECT cnes,nome_da_unidade,municipio,bairro,endereco,estado,telefone,cep,senha FROM ubs"
+        let cSql = "SELECT cnes,nome_da_unidade,municipio,bairro,endereco,estado,telefone,cep,senha,bloqueado FROM ubs"
             + " ORDER BY cnes "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);

@@ -17,7 +17,7 @@ class WorkSpaceUbsDAO {
     */
     getAllAdsPorUbs(cnes ,response) {
 
-        let cSql = "SELECT cpf ,nome ,senha ,rg FROM agente_de_saude"
+        let cSql = "SELECT cpf ,nome ,senha ,rg ,bloqueado FROM agente_de_saude"
             + " WHERE cnes = $1"
 
         let aValues = [ cnes ];
@@ -27,22 +27,24 @@ class WorkSpaceUbsDAO {
 
      /**
      * @description Consulta o agente no banco de dados pelo nome 
-     * @param {String  } cartao_sus, descricao à ser pesquisada.
+     * @param {String  } nome, descricao à ser pesquisada.
+     * @param {number  } cnes, de queal Ubs o agente pertence
      * @param {response} response 
      */
-    getAgentePeloNome(nome ,response){
+    getAgentePeloNome(cnes,nome ,response){
 
-        let cSql = "SELECT cpf                 , "
-                        +" nome                , "
-                        +" senha               , "
-                        +" rg                    "
-                +"  FROM                         "
-                        +" agente_de_saude       "
-                +"  WHERE                        " 
-                        +" nome  = $1            "
+        let cSql = "SELECT cpf                  , "
+                        + " nome                , "
+                        + " senha               , "
+                        + " rg                  , "
+                        + " bloqueado             "
+                +"  FROM    "
+                        + " agente_de_saude       "
+                +"  WHERE   " 
+                        + "(cnes = $1)AND(nome  = $2)            "
 
                     
-        let aValues = [ nome ];
+        let aValues = [ cnes,nome ];
 
         topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
     }
@@ -54,13 +56,15 @@ class WorkSpaceUbsDAO {
      */
     getAgentePeloCpf(cpf ,response){
 
-        let cSql = "SELECT nome                , "
-                        +" senha               , "
-                        +" rg                    "
-                +"  FROM                         "
-                        +" agente_de_saude       "
-                +"  WHERE                        " 
-                        +" cpf  = $1 "
+        let cSql = "SELECT  cpf                 , "
+                        + " nome                , "
+                        + " senha               , "
+                        + " rg                  , "
+                        + " bloqueado             "
+                +"  FROM    "
+                        + " agente_de_saude       "
+                +"  WHERE   " 
+                        + " cpf  = $1             "
 
                     
         let aValues = [ cpf ];

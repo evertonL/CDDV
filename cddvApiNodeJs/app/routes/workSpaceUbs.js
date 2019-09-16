@@ -6,7 +6,7 @@ module.exports = function(application){
     });
 
     //arumar pois esta consulatando todos os agentes no BD e n so o da Ubs
-    application.get("/api/workSpaceUbsAgentePorNome/:nome", function(req, res){
+    application.get("/api/workSpaceUbsAgentePorNome/:cnes&nome", function(req, res){
 
         application.app.controllers.workSpaceUbs.getAgentePeloNome(application, req, res);
     });

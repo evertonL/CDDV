@@ -54,6 +54,7 @@ function getAgentePeloNome(application, request, response){
 
     // Validando informações 
 
+    erros_aux = validacao.isObjectEmpty({cnes:dados.cnes});
     erros_aux = validacao.isObjectEmpty({nome:dados.nome});
     if( erros_aux ){
 
@@ -71,8 +72,9 @@ function getAgentePeloNome(application, request, response){
         return; 
     }    
 
+
     modelWorkspaceUbs = new application.app.models.workSpaceUbsDAO();   //Instanciando model da workSpaceUbs
-    modelWorkspaceUbs.getAgentePeloNome(dados.nome, response);
+    modelWorkspaceUbs.getAgentePeloNome(dados.cnes, dados.nome, response);
 
 }
 

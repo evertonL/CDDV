@@ -1,4 +1,3 @@
-
 CREATE TABLE public.populacao (
                 cartao_sus BIGINT NOT NULL,
                 nome_da_mae VARCHAR(60) NOT NULL,
@@ -14,20 +13,6 @@ CREATE TABLE public.populacao (
 );
 
 
-CREATE SEQUENCE public.vacinas_id_vacina_seq;
-
-CREATE TABLE public.vacinas (
-                id_vacina INTEGER NOT NULL DEFAULT nextval('public.vacinas_id_vacina_seq'),
-                qtd_vacinas INTEGER NOT NULL,
-                nome VARCHAR(50) NOT NULL,
-                lote VARCHAR(25) NOT NULL,
-                nome_da_unidade VARCHAR(50) NOT NULL,
-                periodo_de_imunizacao VARCHAR(5) NOT NULL,
-                CONSTRAINT vacinas_pk PRIMARY KEY (id_vacina)
-);
-
-ALTER SEQUENCE public.vacinas_id_vacina_seq OWNED BY public.vacinas.id_vacina;
-
 CREATE TABLE public.ubs (
                 cnes INTEGER NOT NULL,
                 nome_da_unidade VARCHAR(60) NOT NULL,
@@ -38,10 +23,28 @@ CREATE TABLE public.ubs (
                 telefone VARCHAR(12) NOT NULL,
                 cep INTEGER NOT NULL,
                 senha VARCHAR(32) NOT NULL,
+                bloqueado BOOLEAN NOT NULL,
                 CONSTRAINT ubs_pk PRIMARY KEY (cnes)
 );
 COMMENT ON COLUMN public.ubs.senha IS 'Senha da Unidade Basica de Saude';
 
+
+CREATE SEQUENCE public.vacinas_id_vacina_seq;
+
+CREATE TABLE public.vacinas (
+                id_vacina INTEGER NOT NULL DEFAULT nextval('public.vacinas_id_vacina_seq'),
+                qtd_vacinas INTEGER NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                lote VARCHAR(25) NOT NULL,
+                nome_da_unidade VARCHAR(50) NOT NULL,
+                periodo_de_imunizacao VARCHAR(6) NOT NULL,
+                cnes INTEGER NOT NULL,
+                CONSTRAINT vacinas_pk PRIMARY KEY (id_vacina)
+);
+COMMENT ON COLUMN public.vacinas.qtd_vacinas IS 'ainda n sei quantas vacinas contem cada lote';
+
+
+ALTER SEQUENCE public.vacinas_id_vacina_seq OWNED BY public.vacinas.id_vacina;
 
 CREATE TABLE public.agente_de_saude (
                 cpf BIGINT NOT NULL,
@@ -49,6 +52,7 @@ CREATE TABLE public.agente_de_saude (
                 senha VARCHAR(32) NOT NULL,
                 rg VARCHAR(10) NOT NULL,
                 cnes INTEGER NOT NULL,
+                bloqueado BOOLEAN NOT NULL,
                 CONSTRAINT agente_de_saude_pk PRIMARY KEY (cpf)
 );
 COMMENT ON COLUMN public.agente_de_saude.senha IS 'colocar como 32 no banco';
@@ -76,16 +80,23 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.cartao ADD CONSTRAINT vacinas_cartao_fk
-FOREIGN KEY (id_vacina)
-REFERENCES public.vacinas (id_vacina)
+ALTER TABLE public.agente_de_saude ADD CONSTRAINT ubs_agente_de_saude_fk
+FOREIGN KEY (cnes)
+REFERENCES public.ubs (cnes)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.agente_de_saude ADD CONSTRAINT ubs_agente_de_saude_fk
+ALTER TABLE public.vacinas ADD CONSTRAINT ubs_vacinas_fk
 FOREIGN KEY (cnes)
 REFERENCES public.ubs (cnes)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.cartao ADD CONSTRAINT vacinas_cartao_fk
+FOREIGN KEY (id_vacina)
+REFERENCES public.vacinas (id_vacina)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;

@@ -22,19 +22,21 @@ class CadastrarUbsDAO {
      */
     salvaCadastrarAds(cadastrarAds, response) {
 
-        let cSql = "INSERT INTO agente_de_saude("
-            + "                 cpf         ,  "  //[01]
-            + "                 nome        ,  "  //[02]
-            + "                 senha       ,  "  //[03]   
-            + "                 rg          ,  "  //[04]
-            + "                 cnes           "  //[05]
-            + "                )"
-            + "        VALUES  ("
+        let cSql = "INSERT INTO agente_de_saude( "
+            + "                 cpf         ,    "  //[01]
+            + "                 nome        ,    "  //[02]
+            + "                 senha       ,    "  //[03]   
+            + "                 rg          ,    "  //[04]
+            + "                 cnes        ,    "  //[05]
+            + "                 bloqueado        "  //[06]
+            + "                )                 "
+            + "        VALUES  ( "
             + "                 $1 ,  "
             + "                 $2 ,  "
             + "                 $3 ,  "
             + "                 $4 ,  "
-            + "                 $5    "
+            + "                 $5 ,  "
+            + "                 $6    "
             + "                )";
 
         let aValues = [
@@ -43,31 +45,34 @@ class CadastrarUbsDAO {
             cadastrarAds.senha,
             cadastrarAds.rg,
             cadastrarAds.cnes,
+            cadastrarAds.bloqueado
         ];
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
     }
 
     /**
      * @description: Atualiza Ubs no banco de dados.
-     * @param {*} numeroCpf, cpf do agente_de_saude que deve ser alterado.
+     * @param {*} cpfAgente, cpf do agente_de_saude que deve ser alterado.
      * @param response, objeto de response da requisição.
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
-    atualizaCadastrarAds(numeroCpf, response) {
+    atualizaCadastrarAds(cpfAgente, response) {
     
         let cSql = "UPDATE agente_de_saude SET"
                     + " nome =           $1 , "
                     + " senha =          $2 , "
                     + " rg =             $3 , "
-                    + " cnes =           $4   "
-                    + " WHERE cpf =      $5   ";
+                    + " cnes =           $4 , "
+                    + " bloqueado =      $5   "
+                    + " WHERE cpf =      $6   ";
 
         let aValues = [
-            numeroCpf.nome,
-            numeroCpf.senha,
-            numeroCpf.rg,
-            numeroCpf.cnes,
-            numeroCpf.cpf
+            cpfAgente.nome,
+            cpfAgente.senha,
+            cpfAgente.rg,
+            cpfAgente.cnes,
+            cpfAgente.bloqueado,
+            cpfAgente.cpf
         ];
 
         topConnection.executaQuery(cSql, aValues, response, sucesso_atualizando, erro_atualizando);
@@ -93,7 +98,7 @@ class CadastrarUbsDAO {
     */
     getAllCadastrarAds(response) {
 
-        let cSql = "SELECT cpf ,nome ,senha ,rg ,cnes FROM agente_de_saude"
+        let cSql = "SELECT cpf ,nome ,senha ,rg ,cnes,bloqueado FROM agente_de_saude"
             + " ORDER BY cpf "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);
