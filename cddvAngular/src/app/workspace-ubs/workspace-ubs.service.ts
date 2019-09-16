@@ -42,7 +42,7 @@ export class WorkspaceUbsService {
   * @returns Observable
   */
  getAgentePeloNome(nome:String) : Observable<Agente[]>{
-  console.log("aqui2" +"-"+ nome);
+   
   return this.http.get<Agente[]>(this.WorkspaceUbsApi2 + "/" + nome )
                   .pipe(
                           catchError(

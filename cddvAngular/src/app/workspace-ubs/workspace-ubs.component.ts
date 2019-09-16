@@ -13,8 +13,7 @@ export class WorkspaceUbsComponent implements OnInit {
   private inscricao              = new Subscription;
   private resultadoApi           = null;
   private errosApi               = null;
-  private workspaceUbss: Agente[] = [];
-  private paginaAtual   = 1;   
+  private workspaceUbsAgentes: Agente[] = [];
   private pesquisa: String       = "";
   private cnesPesquisa           = "9999999";
 
@@ -49,14 +48,14 @@ export class WorkspaceUbsComponent implements OnInit {
 
        result => {
                    this.resultadoApi = result;
-                   this.workspaceUbss  = this.resultadoApi.registros;        
+                   this.workspaceUbsAgentes  = this.resultadoApi.registros;
+                      
                  },
        error => {
                    this.setErrosApi(error);
                 }
-
    );
-   console.log("test" + this.workspaceUbss)
+   console.log("test" + this.workspaceUbsAgentes)
  }
 
  
@@ -67,7 +66,6 @@ export class WorkspaceUbsComponent implements OnInit {
  getAgentePeloNome(){
 
    if(this.pesquisa.trim() == ""){
-     console.log("aqui1");
        this.getAllAdsPorUbs();
 
    }else{
@@ -76,13 +74,13 @@ export class WorkspaceUbsComponent implements OnInit {
 
                result => {
                            this.resultadoApi = result;
-                           this.workspaceUbss  = this.resultadoApi.registros;        
+                           this.workspaceUbsAgentes  = this.resultadoApi.registros; 
                          },
                error => {
                            this.setErrosApi(error);
                         }
        );
-       console.log("aqui3" + this.workspaceUbsService);
+       
    }
  }
 

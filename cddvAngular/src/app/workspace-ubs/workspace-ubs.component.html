@@ -78,6 +78,7 @@
 
 	<!--Campo PESQUISA -->
 	<div class="form-group col-md-5">
+
 		<div class="input-group-append">
 
 			<input type = "text"
@@ -95,9 +96,10 @@
 			<input type="button" 
 				   id="pesquisarAgentePorUbs"  
 				   (click)="getAgentePeloNome()"
-				   class="buttonPesquisa"
+				   class="btn btn-light buttonPesquisa"
 			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
 		</div>
+
 	</div>
 
 	<table class="table table-responsive table-hover table-dark" id="tabela">
@@ -105,21 +107,23 @@
 				
 				<th scope="col">CPF</th>
 				<th scope="col">Agente</th>
-				<th scope="col">RG</th>
 				<th scope="col">Senha</th>
+				<th scope="col">RG</th>
 				<th></th>
 
 			</thead>
 			<tbody>
-			  <tr *ngFor="let workspaceUbs of workspaceUbss">
+
+			  <tr *ngFor="let workspaceUbs of workspaceUbsAgentes">
 
 				<td>{{workspaceUbs.cpf}}</td>
 				<td>{{workspaceUbs.nome}}</td>
 				<td>{{workspaceUbs.senha}}</td>
 				<td>{{workspaceUbs.rg}}</td>
-				<td><input type="button" class="buttonBloquear" value="Bloquear Agente"></td>
+				<td><input type="button" class="btn btn-secondary buttonBloquear" value="Bloquear Agente"></td>
 
 			  </tr>
+
 			</tbody>
 	</table>
 
@@ -138,46 +142,49 @@
 		<div class="input-group-append">
 
 			<input type = "text"
-				   id   = "pesquisarAgentePorUbs" 
+				   id   = "pesquisarVacinas" 
 				   required 
 				   maxlength="50" 
 				   class="form-control" 
 				   autocomplete="off"
-				   [(ngModel)]="pesquisa"
+				   [(ngModel)]="pesquisaVacina"
 				   (keyup.enter)="getAgentePeloNome()"
 				   placeholder="Digite o Nome do Agente"              
 			>
 
 			<!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
 			<input type="button" 
-				   id="pesquisarAgentePorUbs"  
+				   id="pesquisarVacinas"  
 				   (click)="getAgentePeloNome()"
-				   class="buttonPesquisa"
+				   class="buttonPesquisavacina"
 			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
 		</div>
 	</div>
 
 	<table class="table table-responsive table-hover table-dark" id="tabela">
+
 			<thead>
 				
-				<th scope="col">CPF</th>
-				<th scope="col">Agente</th>
-				<th scope="col">RG</th>
-				<th scope="col">Senha</th>
+				<th scope="col">...</th>
+				<th scope="col">...</th>
+				<th scope="col">...</th>
+				<th scope="col">...</th>
 				<th></th>
 
 			</thead>
+
 			<tbody>
 			  <tr *ngFor="let workspaceUbs of workspaceUbss">
 
-				<td>{{workspaceUbs.cpf}}</td>
-				<td>{{workspaceUbs.nome}}</td>
-				<td>{{workspaceUbs.senha}}</td>
-				<td>{{workspaceUbs.rg}}</td>
-				<td><input type="button" class="buttonBloquear" value="Bloquear Agente"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="button" class="btn btn-danger buttonBloquear" value="Bloquear Agente"></td>
 
 			  </tr>
 			</tbody>
+
 	</table>
 
 </div>
