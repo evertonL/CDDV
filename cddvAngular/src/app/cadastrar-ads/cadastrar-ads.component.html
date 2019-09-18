@@ -56,21 +56,21 @@
     <!-- Campos De Cadastramento -->
     <div id="main" class="container-fluid">
 
-        <h3 class="page-header">Cadastro de Agente De Saude</h3>
+        <h3 class="page-header">Digite os dados do Novo Agente de Saude:</h3>
 
         <form>
             <!-- Campos : CPF e Nome do Agente -->
             <div class="row">
 
                 <div class="form-group col-md-4">
-                    <label for="cpf">CPF do Agente:</label>
+                    <label for="cpf">Numero do CPF:</label>
                     <input class="form-control"
                         type="text"
                         [(ngModel)]="agente.cpf"
                         id="cpf"
                         name="cpf" 
                         maxlength = {{SIZE_CPF}}
-                        placeholder="Numero do CPF">
+                        placeholder="Numero do CPF do Agente">
                 </div>
 
                 <div class="form-group col-md-4">
@@ -112,32 +112,30 @@
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label for="rg">RG do agente:</label>
+                    <label for="rg" >Numero do RG:</label>
                     <input class="form-control"
                     type="text"
                     [(ngModel)]="agente.rg"
                     id="rg"
                     name="rg"
                     maxlength = {{SIZE_RG}}
-                    placeholder="Digite o numero do RG">
+                    placeholder="Numero do RG do Agente">
                 </div>
 
-                <!-- BLOQUEADO
                 <div class="form-group espaco">
-                    <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+                    <label for="inputBloqueado">Bloqueado</label>
 
                     <select id   = "inputBloqueado" 
                             name = "inputBloqueado" 
                             required 
-                            [(ngModel)]="usuario.bloqueado" 
-                            [class.is-invalid] = "camposObrigatorios"
+                            [(ngModel)]="agente.bloqueado" 
                             class="form-control"
                     >
 
                         <option value=false>Não</option>
                         <option value=true>Sim</option>
                     </select>
-                </div> -->
+                </div>
 
             </div>
 
@@ -155,10 +153,10 @@
         </div>
     </div>
 
-    <!--Rodapé-->
+    <!-- Rodapé
     <footer class="footer text-center">
         <p>--Rodapé--</p>
-    </footer>
+    </footer> -->
 
 </body>
 

@@ -64,18 +64,18 @@
 			<input type = "text"
 				   id   = "inputPesquisaRegistroUsuario" 
 				   required 
-				   maxlength="8" 
+				   maxlength="11" 
 				   class="form-control" 
 				   autocomplete="off"
 				   [(ngModel)]="pesquisa"
-				   (keyup.enter)="getUsuariosPorNome()"
+				   (keyup.enter)="getCartaoDaPopulacao()"
 				   placeholder="Numero do Cartao do SUS ou Nome"              
 			>
 
 			<!-- Botao do campo de pesquisa -->
 			<input type="button" 
 				   id="inputPesquisaRegistroUsuario"  
-				   (click)="getUsuariosPorNome()"
+				   (click)="getCartaoDaPopulacao()"
 				   class="buttonPesquisa"
 			       value="Pesquisar">
 		</div>
@@ -85,23 +85,26 @@
 			<thead>
 			  <tr>
 				<th scope="col">Vacina</th>
+				<th scope="col">Lote</th>
 				<th scope="col">Status</th>
 				<th scope="col">Resposavel</th>
-				<th scope="col">UBS-Responsavel</th>
+				<th scope="col">UBS</th>
 				<th scope="col">Aplicada</th>
 				<th scope="col">Validade</th>
 				<th ></th>
 			  </tr>
 			</thead>
 			<tbody>
-			  <tr>
-				<th scope="row"></th>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<button class="btn btn-outline-success">Aplicar/Agendar</button>
+			  <tr *ngFor="let workspaceAds of workspaceAdss">
+				  
+				<td>{{workspaceAds.nomeDaVacina}}</td>
+				<td>{{workspaceAds.lote}}</td>
+				<td>{{workspaceAds.statusVacina}}</td>
+				<td>{{workspaceAds.nomeDoAgente}}</td>
+				<td>{{workspaceAds.nomeDaUbs}}</td>
+				<td>{{workspaceAds.dataDeAplicacao}}</td>
+				<td>{{workspaceAds.dataDeValidade}}</td>
+				<button class="btn btn-outline-success">Atulizar Vacina</button>
 				
 			  </tr>
 			</tbody>

@@ -8,7 +8,7 @@ const {erro_api}  = require("./../libs/msgsErroSucessoApi");
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function getAllAdsPorUbs(application, request, response){
+function getAdssPorUbs(application, request, response){
 
     let dados             = request.params;
     let modelWorkspaceUbs = null;
@@ -35,7 +35,44 @@ function getAllAdsPorUbs(application, request, response){
     }    
 
     modelWorkspaceUbs = new application.app.models.workSpaceUbsDAO();   //Instanciando model da workSpaceUbs
-    modelWorkspaceUbs.getAllAdsPorUbs(dados.cnes, response);       
+    modelWorkspaceUbs.getAdssPorUbs(dados.cnes, response);       
+
+}
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getVacinasPorUbs(application, request, response){
+
+    let dados             = request.params;
+    let modelWorkspaceUbs = null;
+    let erros_aux         = null;
+    let erros             = [];
+
+    // Validando informações 
+
+    erros_aux = validacao.isObjectEmpty({cnes:dados.cnes});
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: erro_api,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }    
+
+    modelWorkspaceUbs = new application.app.models.workSpaceUbsDAO();   //Instanciando model da workSpaceUbs
+    modelWorkspaceUbs.getVacinasPorUbs(dados.cnes, response);       
 
 }
 
@@ -78,43 +115,44 @@ function getAgentePeloNome(application, request, response){
 
 }
 
-function getAgentePeloCpf(application, request, response){
+// function getAgentePeloCpf(application, request, response){
 
-    let dados             = request.params;
-    let modelWorkspaceUbs = null;
-    let erros_aux         = null;
-    let erros             = [];
+//     let dados             = request.params;
+//     let modelWorkspaceUbs = null;
+//     let erros_aux         = null;
+//     let erros             = [];
 
-    // Validando informações 
+//     // Validando informações 
 
-    erros_aux = validacao.isObjectEmpty({cpf:dados.cpf});
-    if( erros_aux ){
+//     erros_aux = validacao.isObjectEmpty({cpf:dados.cpf});
+//     if( erros_aux ){
 
-        erros.push(erros_aux);
-        erros_aux = null;
-    }
+//         erros.push(erros_aux);
+//         erros_aux = null;
+//     }
 
-    if (erros.length > 0){
+//     if (erros.length > 0){
 
-        response.status(422).json({ 
-                                    status:3, 
-                                    mensagem: erro_api,
-                                    campos_invalidos: erros
-                                 });
-        return; 
-    }    
+//         response.status(422).json({ 
+//                                     status:3, 
+//                                     mensagem: erro_api,
+//                                     campos_invalidos: erros
+//                                  });
+//         return; 
+//     }    
 
-    modelWorkspaceUbs = new application.app.models.workSpaceUbsDAO();   //Instanciando model da workSpaceUbs
-    modelWorkspaceUbs.getAgentePeloCpf(dados.cpf, response);
+//     modelWorkspaceUbs = new application.app.models.workSpaceUbsDAO();   //Instanciando model da workSpaceUbs
+//     modelWorkspaceUbs.getAgentePeloCpf(dados.cpf, response);
 
-}
+// }
 
 
 /**
  * Exportando funções 
  */
 module.exports = {
-    getAllAdsPorUbs,
-    getAgentePeloNome,
-    getAgentePeloCpf,
+    getAdssPorUbs,
+    getVacinasPorUbs,
+    // getAgentePeloNome,
+    // getAgentePeloCpf,
 }

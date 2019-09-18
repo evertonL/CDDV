@@ -7,8 +7,8 @@ export class Agente{
     private nome           :   String;
     private senha          :   String;
     private rg             :   String;
-    // private bloqueado      :   boolean;   imprementar no api e BD
-    private cnes  : String = '9999999';
+    private bloqueado      :   boolean;
+    private cnes  : String = '11111111'; // quando tiver logando tirar daquio valor
   
     /**
      * @constructor
@@ -24,7 +24,7 @@ export class Agente{
       this.nome      = nome;
       this.senha     = senha;
       this.rg        = rg;
-      // this.bloqueado = bloqueado;
+      this.bloqueado = bloqueado;
       // this.cnes = cnes;
     }
 
@@ -62,13 +62,13 @@ export class Agente{
       return this.rg;
     }
 
-    // /**
-    //  * @description: Retorna o se ta bloquado ou nao o agente.
-    //  * @return {boolean} ( bloqueado ) - código identificador.
-    //  */
-    // public getBloqueado(): boolean {
-    //   return this.bloqueado;
-    // }
+    /**
+     * @description: Retorna o se ta bloquado ou nao o agente.
+     * @return {boolean} ( bloqueado ) - código identificador.
+     */
+    public getBloqueado(): boolean {
+      return this.bloqueado;
+    }
   
   //---------------SET------------------
 
@@ -104,13 +104,13 @@ export class Agente{
       this.rg = rg;
     }
 
-    // /**
-    //  * @description Seta código identicador.
-    //  * @param bloquado - Código identicador.
-    //  */
-    // public setBloqueado(bloquado: boolean): void {
-    //   this.bloqueado = bloquado;
-    // }
+    /**
+     * @description Seta código identicador.
+     * @param bloquado - Código identicador.
+     */
+    public setBloqueado(bloquado: boolean): void {
+      this.bloqueado = bloquado;
+    }
 
 
     //TENHO QUE TIRAR DEPOIS QUE TIVER LOGANDO

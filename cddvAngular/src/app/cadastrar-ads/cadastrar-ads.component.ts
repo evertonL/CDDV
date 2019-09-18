@@ -126,7 +126,7 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
            this.getCadastrarAds().getNameAgente() == undefined  ||
            this.getCadastrarAds().getSenha()      == undefined  ||  
            this.getCadastrarAds().getRgAgente()   == undefined  ||
-          // this.getCadastrarAds().getBloqueado()  == undefined  ||
+           this.getCadastrarAds().getBloqueado()  == undefined  ||
            this.confirmaSenha                     == undefined  ||
            this.getCadastrarAds().getCpfAgente()  == ''         ||            
            this.getCadastrarAds().getNameAgente() == ''         || 
@@ -137,7 +137,7 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
            this.getCadastrarAds().getNameAgente() == null       ||  
            this.getCadastrarAds().getSenha()      == null       ||  
            this.getCadastrarAds().getRgAgente()   == null       ||
-           //this.getCadastrarAds().getBloqueado()  == null       ||
+           this.getCadastrarAds().getBloqueado()  == null       ||
            this.confirmaSenha                     == null  
             ? true : false;
   }

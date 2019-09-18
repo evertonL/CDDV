@@ -102,11 +102,11 @@
 
 	</div>
 
-	<table class="table table-responsive table-hover table-dark" id="tabela">
+	<table class="table table-responsive table-hover table-dark" id="tabelaAgente">
 			<thead>
 				
 				<th scope="col">CPF</th>
-				<th scope="col">Agente</th>
+				<th scope="col">Nome do Agente</th>
 				<th scope="col">Senha</th>
 				<th scope="col">RG</th>
 				<th></th>
@@ -129,7 +129,7 @@
 
 </div>
 
-<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
+<!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
 <div style="background-color:  rgb(91, 94, 94)">
 
 	<div class="nomeSujeito">
@@ -149,7 +149,7 @@
 				   autocomplete="off"
 				   [(ngModel)]="pesquisaVacina"
 				   (keyup.enter)="getAgentePeloNome()"
-				   placeholder="Digite o Nome do Agente"              
+				   placeholder="Digite o Nome da Vacina"              
 			>
 
 			<!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
@@ -161,26 +161,29 @@
 		</div>
 	</div>
 
-	<table class="table table-responsive table-hover table-dark" id="tabela">
+	<table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
 
 			<thead>
 				
-				<th scope="col">...</th>
-				<th scope="col">...</th>
-				<th scope="col">...</th>
-				<th scope="col">...</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Lote</th>
+				<th scope="col">Status</th>
+				<th scope="col">UBS</th>
+				<th scope="col">Tempo de Imunização</th>
+				<th scope="col">Quantidade de Vacinas</th>
 				<th></th>
 
 			</thead>
 
 			<tbody>
-			  <tr *ngFor="let workspaceUbs of workspaceUbss">
+			  <tr *ngFor="let workspaceUbs of workspaceUbsVacinas">
 
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type="button" class="btn btn-danger buttonBloquear" value="Bloquear Agente"></td>
+				<td>{{workspaceUbs.nome}}</td>
+				<td>{{workspaceUbs.lote}}</td>
+				<td>{{workspaceUbs.nome_da_unidade}}</td>
+				<td>{{workspaceUbs.periodo_de_imunizacao}}</td>
+				<td>{{workspaceUbs.qtd_vacinas}}</td>
+				<td><input type="button" class="btn btn-danger buttonBloquear" value="Atualizar Vacina"></td>
 
 			  </tr>
 			</tbody>

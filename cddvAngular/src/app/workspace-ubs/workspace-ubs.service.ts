@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 
 import { Agente } from '../cadastrar-ads/agente';
+import { Vacina } from '../cadastrar-vacina/vacina';
 
 
 const httpOption = {
@@ -17,7 +18,7 @@ const httpOption = {
 export class WorkspaceUbsService {
 
   private WorkspaceUbsApi1: String = "http://localhost:3000/api/workSpaceUbsAllAgentes"
-  private WorkspaceUbsApi2: string = "http://localhost:3000/api/workSpaceUbsAgentePorNome"
+  private WorkspaceUbsApi2: string = "http://localhost:3000/api/workSpaceUbsAllVacinas"
 
   constructor(private http: HttpClient) { }
 
@@ -36,20 +37,35 @@ export class WorkspaceUbsService {
                         
 }
 
-   /**
-  * @description envia solicitação para API consultar o agente pelo nome.
-  * @param nome, nome do agente a sere localizado. 
-  * @returns Observable
+ /**
+  * @description envia solicitação para API consultar todas as vacinas cadastrados na base de dados.
   */
- getAgentePeloNome(nome:String) : Observable<Agente[]>{
-   
-  return this.http.get<Agente[]>(this.WorkspaceUbsApi2 + "/" + nome )
-                  .pipe(
-                          catchError(
-                                      this.errorHandler
-                                    )
-                        );
+ getAllVacinasPorUbs(cnes:String) : Observable<Vacina[]>{
+  console.log("passou aqui" + cnes);
+ return this.http.get<Vacina[]>(this.WorkspaceUbsApi2 + "/" + cnes )
+                 .pipe(
+                         catchError(
+                                     this.errorHandler
+                                   )
+                       );
+                       
 }
+
+//    /**
+//   * @description envia solicitação para API consultar o agente pelo nome.
+//   * @param nome, nome do agente a sere localizado. 
+//   * @returns Observable
+//   */
+//  getAgentePeloNome(nome:String, cnes:string) : Observable<Agente[]>{
+   
+//   return this.http.get<Agente[]>(this.WorkspaceUbsApi2 + "/" + cnes +","+ nome )
+//                   .pipe(
+//                           catchError(
+//                                       this.errorHandler
+//                                     )
+//                         );
+// }
+
 
   /**
    * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.

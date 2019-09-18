@@ -15,7 +15,7 @@ class WorkSpaceUbsDAO {
     * @description Consulta todos os agente_de_saudes cadastradas no banco de dados pelo numero da UBS
     * @param {response} response 
     */
-    getAllAdsPorUbs(cnes ,response) {
+    getAdssPorUbs(cnes ,response) {
 
         let cSql = "SELECT cpf ,nome ,senha ,rg ,bloqueado FROM agente_de_saude"
             + " WHERE cnes = $1"
@@ -25,52 +25,66 @@ class WorkSpaceUbsDAO {
         topConnection.executaQuery(cSql, aValues, response, sucesso_consultando, erro_consultando);
     }
 
-     /**
-     * @description Consulta o agente no banco de dados pelo nome 
-     * @param {String  } nome, descricao à ser pesquisada.
-     * @param {number  } cnes, de queal Ubs o agente pertence
-     * @param {response} response 
-     */
-    getAgentePeloNome(cnes,nome ,response){
+    /**
+    * @description Consulta todas as vacinas cadastradas no banco de dados pelo numero da UBS
+    * @param {response} response 
+    */
+   getVacinasPorUbs(cnes ,response) {
 
-        let cSql = "SELECT cpf                  , "
-                        + " nome                , "
-                        + " senha               , "
-                        + " rg                  , "
-                        + " bloqueado             "
-                +"  FROM    "
-                        + " agente_de_saude       "
-                +"  WHERE   " 
-                        + "(cnes = $1)AND(nome  = $2)            "
+    let cSql = "SELECT  nome ,lote ,nome_da_unidade, periodo_de_imunizacao, qtd_vacinas FROM vacinas"
+        + " WHERE cnes = $1"
 
-                    
-        let aValues = [ cnes,nome ];
+    let aValues = [ cnes ];
 
-        topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
-    }
+    topConnection.executaQuery(cSql, aValues, response, sucesso_consultando, erro_consultando);
+}
 
-     /**
-     * @description Consulta o agente no banco de dados pelo numero do cpf
-     * @param {String  } cartao_sus, descricao à ser pesquisada.
-     * @param {response} response 
-     */
-    getAgentePeloCpf(cpf ,response){
+    //  /**
+    //  * @description Consulta o agente no banco de dados pelo nome 
+    //  * @param {String  } nome, descricao à ser pesquisada.
+    //  * @param {number  } cnes, de queal Ubs o agente pertence
+    //  * @param {response} response 
+    //  */
+    // getAgentePeloNome(cnes,nome ,response){
 
-        let cSql = "SELECT  cpf                 , "
-                        + " nome                , "
-                        + " senha               , "
-                        + " rg                  , "
-                        + " bloqueado             "
-                +"  FROM    "
-                        + " agente_de_saude       "
-                +"  WHERE   " 
-                        + " cpf  = $1             "
+    //     let cSql = "SELECT cpf                  , "
+    //                     + " nome                , "
+    //                     + " senha               , "
+    //                     + " rg                  , "
+    //                     + " bloqueado             "
+    //             +"  FROM    "
+    //                     + " agente_de_saude       "
+    //             +"  WHERE   " 
+    //                     + "(cnes = $1)AND(nome  = $2)            "
 
                     
-        let aValues = [ cpf ];
+    //     let aValues = [ cnes,nome ];
 
-        topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
-    }
+    //     topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
+    // }
+
+    //  /**
+    //  * @description Consulta o agente no banco de dados pelo numero do cpf
+    //  * @param {String  } cartao_sus, descricao à ser pesquisada.
+    //  * @param {response} response 
+    //  */
+    // getAgentePeloCpf(cpf ,response){
+
+    //     let cSql = "SELECT  cpf                 , "
+    //                     + " nome                , "
+    //                     + " senha               , "
+    //                     + " rg                  , "
+    //                     + " bloqueado             "
+    //             +"  FROM    "
+    //                     + " agente_de_saude       "
+    //             +"  WHERE   " 
+    //                     + " cpf  = $1             "
+
+                    
+    //     let aValues = [ cpf ];
+
+    //     topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
+    // }
 
     /**
      * @description Consulta a Ubs no banco de dados pelo cnes e senha.

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription      } from 'rxjs';
 import { Agente } from '../cadastrar-ads/agente';
 import { WorkspaceUbsService } from './workspace-ubs.service';
+import { Vacina } from '../cadastrar-vacina/vacina';
 
 @Component({
   selector: 'app-workspace-ubs',
@@ -14,14 +15,17 @@ export class WorkspaceUbsComponent implements OnInit {
   private resultadoApi           = null;
   private errosApi               = null;
   private workspaceUbsAgentes: Agente[] = [];
-  private pesquisa: String       = "";
-  private cnesPesquisa           = "9999999";
+  private workspaceUbsVacinas: Vacina[] = [];
+  private pesquisaAgente: String       = "";
+  private pesquisaVacina: String       = "";
+  private cnesLogado           = "11111111";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
   constructor( private workspaceUbsService: WorkspaceUbsService ) {
 
     this.getAllAdsPorUbs();
+    this.getAllVacinasPorUbs();
 
  }
 
@@ -44,7 +48,7 @@ export class WorkspaceUbsComponent implements OnInit {
   */
  getAllAdsPorUbs(){
   
-   this.inscricao = this.workspaceUbsService.getAllAdsPorUbs(this.cnesPesquisa).subscribe(
+   this.inscricao = this.workspaceUbsService.getAllAdsPorUbs(this.cnesLogado).subscribe(
 
        result => {
                    this.resultadoApi = result;
@@ -58,31 +62,51 @@ export class WorkspaceUbsComponent implements OnInit {
    console.log("test" + this.workspaceUbsAgentes)
  }
 
- 
  /**
-  * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências 
-  *               pela descricao na base de dados.
-  */  
- getAgentePeloNome(){
+  * @description: Se inscreve no serviço que envia solicitação para API resgatar todos as vacinas na base de dados.
+  */
+ getAllVacinasPorUbs(){
+  
+  this.inscricao = this.workspaceUbsService.getAllVacinasPorUbs(this.cnesLogado).subscribe(
 
-   if(this.pesquisa.trim() == ""){
-       this.getAllAdsPorUbs();
+      result => {
+                  this.resultadoApi = result;
+                  this.workspaceUbsVacinas  = this.resultadoApi.registros;
+                     
+                },
+      error => {
+                  this.setErrosApi(error);
+               }
+  );
+  console.log("test" + this.workspaceUbsVacinas)
+}
 
-   }else{
+ 
+//  /**
+//   * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências 
+//   *               pela descricao na base de dados.
+//   */  
+//  getAgentePeloNome(){
 
-       this.workspaceUbsService.getAgentePeloNome(this.pesquisa).subscribe(
+//    if(this.pesquisa.trim() == ""){
+//        this.getAllAdsPorUbs();
 
-               result => {
-                           this.resultadoApi = result;
-                           this.workspaceUbsAgentes  = this.resultadoApi.registros; 
-                         },
-               error => {
-                           this.setErrosApi(error);
-                        }
-       );
+//    }else{
+
+//        this.workspaceUbsService.getAgentePeloNome(this.pesquisa,this.cnesLogado).subscribe(
+
+//                result => {
+//                            this.resultadoApi = result;
+//                            this.workspaceUbsAgentes  = this.resultadoApi.registros; 
+//                          },
+//                error => {
+//                            this.setErrosApi(error);
+//                         }
+//        );
        
-   }
- }
+//    }
+//  }
+
 
  /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]

@@ -8,6 +8,7 @@ export class Vacina {
     private lote: string;
     private nome_da_unidade: string;
     private periodo_de_imunizacao: string;
+    private cnes  : String = '11111111'; //retirar quando tiver logando
 
     /**
      * @constructor
