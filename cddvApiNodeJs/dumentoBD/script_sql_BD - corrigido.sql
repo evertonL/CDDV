@@ -1,3 +1,4 @@
+
 CREATE TABLE public.populacao (
                 cartao_sus BIGINT NOT NULL,
                 nome_da_mae VARCHAR(60) NOT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE public.vacinas (
                 nome VARCHAR(50) NOT NULL,
                 lote VARCHAR(25) NOT NULL,
                 nome_da_unidade VARCHAR(50) NOT NULL,
-                periodo_de_imunizacao VARCHAR(6) NOT NULL,
+                periodo_de_imunizacao VARCHAR(5) NOT NULL,
                 cnes INTEGER NOT NULL,
                 CONSTRAINT vacinas_pk PRIMARY KEY (id_vacina)
 );
@@ -60,12 +61,12 @@ COMMENT ON COLUMN public.agente_de_saude.senha IS 'colocar como 32 no banco';
 
 CREATE TABLE public.cartao (
                 cartao_sus BIGINT NOT NULL,
-                id_vacina INTEGER NOT NULL,
+                vacinas_id INTEGER NOT NULL,
                 data_aplicacao DATE NOT NULL,
                 aplicada BOOLEAN DEFAULT false NOT NULL,
                 cpf_agente BIGINT NOT NULL,
                 data_validade DATE NOT NULL,
-                CONSTRAINT cartao_pk PRIMARY KEY (cartao_sus)
+                CONSTRAINT cartao_pk PRIMARY KEY (cartao_sus, vacinas_id)
 );
 COMMENT ON COLUMN public.cartao.aplicada IS 'mostra se a vacina foi aplicada ou nao.
 true=aplicada
@@ -94,8 +95,8 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.cartao ADD CONSTRAINT vacinas_cartao_fk
-FOREIGN KEY (id_vacina)
+ALTER TABLE public.cartao ADD CONSTRAINT vacinas_cartao_fk1
+FOREIGN KEY (vacinas_id)
 REFERENCES public.vacinas (id_vacina)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION

@@ -16,7 +16,7 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
  public SIZE_NOME                  = 25 ;
  public SIZE_LOTE                  = 25 ;
  public SIZE_NOME_DA_UNIDADE       = 30 ;
- public SIZE_PERIODO_DE_IMUNIZACAO = 6 ;
+ public SIZE_PERIODO_DE_IMUNIZACAO = 2  ;
 
  private inscricao               = new Subscription;
  private vacina: Vacina          = null;
@@ -27,12 +27,12 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
  static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
 
- constructor(private router: Router,
-   private vacinaService: VacinaService,
-   private route: ActivatedRoute) {
+  constructor(private router: Router,
+              private vacinaService: VacinaService,
+              private route: ActivatedRoute) {
 
-   this.vacina = new Vacina();
- }
+              this.vacina = new Vacina();
+  }
 
 
  // ngOnInit() {
@@ -126,15 +126,18 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
           this.getCadastrarVacina().getNomeDaUnidade()               == undefined ||
           this.getCadastrarVacina().getQtdVacina()                   == undefined ||
           this.getCadastrarVacina().getPeriodoDeImunizacao()         == undefined ||
+          this.getCadastrarVacina().getSelectImunizacao()            == undefined ||
           this.getCadastrarVacina().getNome().trim()                 == ''        ||
           this.getCadastrarVacina().getLote().trim()                 == ''        ||
           this.getCadastrarVacina().getNomeDaUnidade().trim()        == ''        ||
           this.getCadastrarVacina().getPeriodoDeImunizacao().trim()  == ''        ||
+          this.getCadastrarVacina().getSelectImunizacao().trim()     == ''        ||
           this.getCadastrarVacina().getNome()                        == null      ||  
           this.getCadastrarVacina().getLote()                        == null      ||  
           this.getCadastrarVacina().getNomeDaUnidade()               == null      ||
           this.getCadastrarVacina().getQtdVacina()                   == null      ||
-          this.getCadastrarVacina().getPeriodoDeImunizacao()         == null          
+          this.getCadastrarVacina().getPeriodoDeImunizacao()         == null      ||
+          this.getCadastrarVacina().getSelectImunizacao()            == null    
            ? true : false;
  }
 

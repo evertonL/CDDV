@@ -23,12 +23,13 @@ class CadastrarVacinasDAO {
     salvaCadastrarVacina(cadastrarVacina, response) {
 
         let cSql = "INSERT INTO vacinas("
-            + "                 qtd_vacinas           , "  //[01]
-            + "                 nome                  , "  //[02]   
-            + "                 lote                  , "  //[03]
-            + "                 nome_da_unidade       , "  //[04]
-            + "                 periodo_de_imunizacao , "  //[05]
-            + "                 cnes                    "  //[06]
+            + "                 qtd_vacinas             , "  //[01]
+            + "                 nome                    , "  //[02]   
+            + "                 lote                    , "  //[03]
+            + "                 nome_da_unidade         , "  //[04]
+            + "                 cnes                    , "  //[05]
+            + "                 select_tempo_imunizacao , "  //[06]
+            + "                 periodo_de_imunizacao     "  //[07]
             + "                )"
             + "        VALUES  ("
             + "                 $1 ,  "
@@ -36,7 +37,8 @@ class CadastrarVacinasDAO {
             + "                 $3 ,  "
             + "                 $4 ,  "
             + "                 $5 ,  "
-            + "                 $6    "
+            + "                 $6 ,  "
+            + "                 $7    "
             + "                )";
 
         let aValues = [
@@ -44,8 +46,9 @@ class CadastrarVacinasDAO {
             cadastrarVacina.nome,
             cadastrarVacina.lote,
             cadastrarVacina.nome_da_unidade,
-            cadastrarVacina.periodo_de_imunizacao,
-            cadastrarVacina.cnes
+            cadastrarVacina.cnes,
+            cadastrarVacina.select_tempo_imunizacao,
+            cadastrarVacina.periodo_de_imunizacao
         ];
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
     }
@@ -59,21 +62,23 @@ class CadastrarVacinasDAO {
     atualizaCadastrarVacina(vacinaId, response) {
     
         let cSql = "UPDATE vacinas SET"
-                    + " qtd_vacinas =           $1 , "
-                    + " nome =                  $2 , "
-                    + " lote =                  $3 , "
-                    + " nome_da_unidade =       $4 , "
-                    + " periodo_de_imunizacao = $5 , "
-                    + " cnes =                  $6   "
-                    + " WHERE id_vacina =       $7   ";
+                    + " qtd_vacinas =             $1 , "
+                    + " nome =                    $2 , "
+                    + " lote =                    $3 , "
+                    + " nome_da_unidade =         $4 , "
+                    + " cnes =                    $5 , "
+                    + " select_tempo_imunizacao = $6 , "
+                    + " periodo_de_imunizacao =   $7   "
+                    + " WHERE id_vacina =         $8   ";
 
         let aValues = [
             vacinaId.qtd_vacinas,
             vacinaId.nome,
             vacinaId.lote,
             vacinaId.nome_da_unidade,
-            vacinaId.periodo_de_imunizacao,
             vacinaId.cnes,
+            vacinaId.select_tempo_imunizacao,
+            vacinaId.periodo_de_imunizacao,
             vacinaId.id_vacina
         ];
 
@@ -100,7 +105,7 @@ class CadastrarVacinasDAO {
     */
     getAllCadastrarVacina(response) {
 
-        let cSql = "SELECT id_vacina ,qtd_vacinas ,nome ,lote ,nome_da_unidade,periodo_de_imunizacao,cnes FROM vacinas"
+        let cSql = "SELECT id_vacina ,qtd_vacinas ,nome ,lote ,nome_da_unidade,periodo_de_imunizacao,select_tempo_imunizacao, cnes FROM vacinas"
             + " ORDER BY id_vacina "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);

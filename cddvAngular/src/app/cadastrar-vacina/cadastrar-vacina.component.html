@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <!-- Campos : Quantidade de Vacinas e Tempo de Imunização -->
+            <!-- Campos : Quantidade de Vacinas, Tempo de Imunização -->
             <div class="row">
                 <div class="form-group col-md-3">
                     <label for="qtd_vacinas">Quantidade de Vacinas:</label><!--falta arumar no objeto vacina.ts-->
@@ -109,7 +109,7 @@
                     >
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="">Tempo de Imunização:</label>
+                    <label for="periodo_de_imunizacao">Tempo de Imunização:</label>
                     <input class="form-control"
                         type="text"
                         [(ngModel)]="vacina.periodo_de_imunizacao"
@@ -118,6 +118,20 @@
                         maxlength={{SIZE_PERIODO_DE_IMUNIZACAO}}
                         placeholder="Digite o Tempo"
                     >
+                </div>
+
+                <div class="form-group ">
+                    <label for="inputEscolha" >Selecione:</label>
+                    <select class="form-control"
+                            id   = "inputEscolha" 
+                            name = "inputEscolha"
+                            [(ngModel)]="vacina.select_tempo_imunizacao"
+                    >
+                        <option value="D">Dia  </option>
+                        <option value="M">Mês  </option>
+                        <option value="A">Ano  </option>
+                        <option value="U">Única</option>
+                    </select>
                 </div>
             </div>
         </form>
@@ -133,11 +147,6 @@
             </button>
     </div>
 
-    <!--Rodapé-->
-   <!--Rodapé-->
-   <footer class="footer text-center">
-        <p>--Rodapé--</p>
-    </footer>
 </body>
 
 </html>

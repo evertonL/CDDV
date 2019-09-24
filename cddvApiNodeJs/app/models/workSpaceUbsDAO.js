@@ -47,7 +47,7 @@ class WorkSpaceUbsDAO {
     //  */
     // getAgentePeloNome(cnes,nome ,response){
 
-    //     let cSql = "SELECT cpf                  , "
+    //     let cSql = "SELECT  cpf                  , "
     //                     + " nome                , "
     //                     + " senha               , "
     //                     + " rg                  , "

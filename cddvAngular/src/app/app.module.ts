@@ -25,6 +25,7 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { RelatorioUbsComponent } from './relatorio-ubs/relatorio-ubs.component';
 
 import { rotas            } from './rotas';
+import { AplicarVacinaCartaoComponent } from './aplicar-vacina-cartao/aplicar-vacina-cartao.component';
 
 const appRoutes = rotas
 
@@ -39,6 +40,7 @@ const appRoutes = rotas
     WorkspaceAdsComponent,
     AdministradorComponent,
     RelatorioUbsComponent,
+    AplicarVacinaCartaoComponent,
   ],
   imports: [
     BrowserModule,

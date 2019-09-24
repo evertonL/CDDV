@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription      } from 'rxjs';
 import { workspaceAds } from './workspaceAds';
 import { WorkspaceAdsService } from './workspaceAdsService';
+import { Populacao } from '../cadastrar-populacao/populacao';
 
 @Component({
   selector: 'app-workspace-ads',
@@ -14,13 +15,18 @@ export class WorkspaceAdsComponent implements OnInit {
   private inscricao                    = new Subscription;
   private resultadoApi                 = null;
   private errosApi                     = null;
-  private workspaceAdss: workspaceAds[] = [];
+  private workspaceAdsVacinas: workspaceAds[] = [];
+  private workspaceChecarPopulacao : Populacao[] = [];
   private pesquisa: String             = "";
+  private nomeAgente : String          = "nomeAgente quando Logar"
   
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
-  constructor( private workspaceAdsService: WorkspaceAdsService ) {}
+  constructor( private workspaceAdsService: WorkspaceAdsService ) {
+
+
+  }
 
 
  ngOnInit() { }
@@ -42,25 +48,60 @@ export class WorkspaceAdsComponent implements OnInit {
   */  
  getCartaoDaPopulacao(){
 
-   if(this.pesquisa.trim() == ""){
-
-       alert("Usuario não Encontrado! Verifique o numero digitado.")
-
-   }else{
-
        this.workspaceAdsService.getCartaoDaPopulacao(this.pesquisa).subscribe(
 
                result => {
                            this.resultadoApi = result;
-                           this.workspaceAdss  = this.resultadoApi.registros; 
+                           this.workspaceAdsVacinas  = this.resultadoApi.registros;
+              
+                           if(this.workspaceAdsVacinas.length == 0){
+
+                             alert("Não a Vacinas para o cartao pesquisado! ");
+
+                           }
+                           
                          },
                error => {
                            this.setErrosApi(error);
                         }
        );
-       
-   }
+       console.log(this.workspaceAdsVacinas);
  }
+
+ /**
+  * @description: Se inscreve no serviço que envia solicitação para API resgatar o individo do banco de dados
+  * de acordo com o o numero do cartao do sus pesquisado.
+  */  
+getChecarPopulacao(){
+
+  if(this.pesquisa.trim() == ""){
+       
+    alert("Usuario não Encontrado! Verifique o numero digitado.")
+
+  }else{
+      this.workspaceAdsService.getChecarPopulacao(this.pesquisa).subscribe(
+
+              result => {
+                          this.resultadoApi = result;
+                          this.workspaceChecarPopulacao  = this.resultadoApi.registros;
+                          
+                          if(this.workspaceChecarPopulacao.length == 0){
+
+                            alert("O Cartão Pesquisado não está Cadastrado!")
+
+                          }else(
+
+                            this.getCartaoDaPopulacao()
+
+                          );
+                        },
+              error => {
+                          this.setErrosApi(error);
+                       }
+      );
+    }
+      console.log(this.workspaceAdsVacinas);
+}
 
  /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]

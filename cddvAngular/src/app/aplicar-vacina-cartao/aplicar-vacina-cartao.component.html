@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Cadastro de Agente</title>
+
+</head>
+
+<body>
+
+    <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
+    <nav class="navbar navbar-fixed-top navbar-light navbar-expand-sm">
+
+        <!-- LOGO -->
+        <a class="navbar-brand">
+
+            <img src="assets/logoxx.png" 
+                width="50" 
+                height="50"
+                class="d-inline-block align-top" alt="">
+
+        </a>
+
+        <!-- BOTÃO PARA RESPONSIVIDADE -->
+        <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- BOTOES DA NAVBAR -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+
+                    <button class="voltar btn btn-outline-success"
+                        type="button"
+                        routerLink="nova-vacina">
+                        VOLTAR
+                    </button>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+ <!-- Campos De Cadastramento -->
+<div id="main" class="container-fluid">
+
+    <h3 class="page-header">Entre com os dados: </h3>
+
+    <form>
+
+        <!-- Campos : Cartao do SUS, Id da Vacina e Data de Aplicação -->
+        <div class="row">
+
+            <!--cartao do sus tem que vir do individuo ja cadastrado no banco de dados-->
+            <div class="form-group col-md-4">
+                    <label for="cartao_sus">Cartao do SUS:</label>
+                    <input class="form-control"
+                       type="text"
+                       [(ngModel)]="aplicarVacina.cartao_sus"
+                       id="cartao_sus"
+                       name="cartao_sus"
+                       maxlength={{SIZE_CARTAO_SUS}}
+                       >
+            </div>
+    
+            <!--O id vem da Vacina ja cadastrada No banco de dados-->
+            <div class="form-group col-md-4">
+                <label for="vacinas_id">Id da Vacina:</label>
+                <input class="form-control"
+                   type="text"
+                   maxlength={{SIZE_ID_VACINA}}
+                   [(ngModel)]="aplicarVacina.vacinas_id"
+                   id="vacinas_id"
+                   name="vacinas_id"
+                   >
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="data_aplicacao">Data de Aplicação:</label>
+                <input class="form-control"
+                   type="date"
+                   [(ngModel)]="aplicarVacina.data_aplicacao"
+                   id="data_aplicacao"
+                   name="data_aplicacao"
+                   >
+            </div>
+        </div>
+
+        <!-- Campos : tipo da vacina : apicada ou agendada e é do tipo boolean -->
+        <div class="row">
+
+            <div class="form-group col-md-3">
+
+                <legend class="col-form-label col-sm-2 pt-0">status:</legend>
+    
+                <div class="col-sm-10">
+                            
+                    <div class="form-check">
+                        <input class="form-check-input"
+                        type="radio"
+                        [(ngModel)]="aplicarVacina.aplicada"
+                        name="aplicada"
+                        id="aplicada"
+                        value="true"
+                        >
+                        <label class="form-check-label" for="aplicada"> Aplicada </label>
+                    </div>
+    
+                    <div class="form-check">
+                        <input class="form-check-input"
+                        type="radio" 
+                        [(ngModel)]="aplicarVacina.aplicada"
+                        name="aplicada"
+                        id="aplicada"
+                        value="false">
+                        <label class="form-check-label" for="aplicada"> Agendada </label>
+                    </div>
+    
+                </div>
+            </div>
+
+            <!--quando a vacina for do tipo aplicada este campo e abilitado. se for do tipo 
+                agendada ele e desabiltado-->
+            <div class="form-group col-md-3">
+                <label for="cpf_agente">Responsavel:</label>
+                <input class="form-control"
+                    type="text"
+                    maxlength={{SIZE_CPF_AGENTE}}
+                    [(ngModel)]="aplicarVacina.cpf_agente"
+                    id="cpf_agente"
+                    name="cpf_agente"
+                >
+            </div>
+
+            <div class="form-group col-md-4">
+                    <label for="data_aplicacao">Data de Validade:</label>
+                    <input class="form-control"
+                       type="date"
+                       [(ngModel)]="aplicarVacina.data_validade"
+                       id="data_validade"
+                       name="data_validade"
+                    >
+            </div>
+        </div>
+    </form>
+
+    <!-- Botao de Registrar -->
+    <div class="row">
+        <div class="form-group col-md-3">
+            <button type="button" id="idRegistrar"
+                class="btn btn-outline-success"
+                (click)="registrarVacina()"
+                >
+                Registrar
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

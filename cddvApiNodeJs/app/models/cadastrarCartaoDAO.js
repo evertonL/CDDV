@@ -24,7 +24,7 @@ class CadastrarCartaoDAO {
 
         let cSql = "INSERT INTO cartao("
             + "                 cartao_sus         , "  //[01]
-            + "                 id_vacina          , "  //[02]
+            + "                 vacinas_id         , "  //[02]
             + "                 data_aplicacao     , "  //[03]   
             + "                 aplicada           , "  //[04]
             + "                 cpf_agente         , "  //[05]
@@ -41,7 +41,7 @@ class CadastrarCartaoDAO {
 
         let aValues = [
             cadastrarCartao.cartao_sus,
-            cadastrarCartao.id_vacina,
+            cadastrarCartao.vacinas_id,
             cadastrarCartao.data_aplicacao,
             cadastrarCartao.aplicada,
             cadastrarCartao.cpf_agente,
@@ -59,7 +59,7 @@ class CadastrarCartaoDAO {
     atualizaCadastrarCartao(numeroCartao_sus, response) {
     
         let cSql = "UPDATE cartao SET" 
-                    +" id_vacina =         $1 ,"    
+                    +" vacinas_id =        $1 ,"    
                     +" data_aplicacao =    $2 ,"
                     +" aplicada =          $3 ,"      
                     +" cpf_agente =        $4 ,"    
@@ -67,7 +67,7 @@ class CadastrarCartaoDAO {
                     +" WHERE cartao_sus =  $6  "       
 
         let aValues = [
-            numeroCartao_sus.id_vacina,
+            numeroCartao_sus.vacinas_id,
             numeroCartao_sus.data_aplicacao,
             numeroCartao_sus.aplicada,
             numeroCartao_sus.cpf_agente,
@@ -98,7 +98,7 @@ class CadastrarCartaoDAO {
     */
     getAllCadastrarCartao(response) {
 
-        let cSql = "SELECT cartao_sus,id_vacina ,data_aplicacao ,aplicada ,cpf_agente ,data_validade FROM cartao"
+        let cSql = "SELECT cartao_sus,vacina_id ,data_aplicacao ,aplicada ,cpf_agente ,data_validade FROM cartao"
             + " ORDER BY cartao_sus "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);

@@ -14,29 +14,32 @@ import { RelatorioUbsComponent                } from "./relatorio-ubs/relatorio-
 import { TelaInicialComponent                 } from "./tela-inicial/tela-inicial.component";
 import { WorkspaceUbsComponent                } from "./workspace-ubs/workspace-ubs.component";
 import { WorkspaceAdsComponent                } from "./workspace-ads/workspace-ads.component";
+import { AplicarVacinaCartaoComponent         } from './aplicar-vacina-cartao/aplicar-vacina-cartao.component';
 
 export const rotas : Routes = [
     
-    { path: 'home'                                                  , component  : TelaInicialComponent                },
-    { path: "home/login-ubs"                                        , component  : LoginUbsComponent                   },
-    { path: "home/login-ads"                                        , component  : LoginAdsComponent                   },
-    { path: "home/cadastrar-populacao"                              , component  : CadastrarPopulacaoComponent         },
-    { path: "home/login-populacao"                                  , component  : LoginPopulacaoComponent             },
-    { path: "workspace-ubs"                                         , component  : WorkspaceUbsComponent               },
-    { path: "workspace-ubs/cadastrar-ads"                           , component  : CadastrarAdsComponent               },
-    { path: "workspace-ubs/cadastrar-vacina"                        , component  : CadastrarVacinaComponent            },
-    { path: "workspace-ubs/relatorio"                               , component  : RelatorioUbsComponent               },
-    { path: "workspace-ads"                                         , component  : WorkspaceAdsComponent               },
-    { path: "workspace-ads/cadastrar-populacao"                     , component  : CadastrarPopulacaoComponent         },
-    { path: "cartao-populacao"                                      , component  : CartaoPopulacaoComponent            },
-    { path: "administrador"                                         , component  : AdministradorComponent              },
-    { path: "administrador/cadastrar-ubs"                           , component  : CadastrarUbsComponent               },
-    { path: 'workspace-ubs/cadastrar-ads/workspace-ubs'             , redirectTo : 'workspace-ubs'                    },
-    { path: 'workspace-ubs/cadastrar-vacina/workspace-ubs'          , redirectTo : 'workspace-ubs'                    },
-    { path: 'workspace-ubs/relatorio/workspace-ubs'                 , redirectTo : 'workspace-ubs'                    },
-    { path: 'workspace-ads/cadastrar-populacao/cadastrar-populacao' , redirectTo : 'workspace-ads'                    },
-    { path: 'home/cadastrar-populacao/cadastrar-populacao'          , redirectTo : 'home'                             },
-    { path: 'administrador/cadastrar-ubs/administrador'             , redirectTo : 'administrador'                             },
+    { path: 'home'                                                  , component  : TelaInicialComponent        },
+    { path: "home/login-ubs"                                        , component  : LoginUbsComponent           },
+    { path: "home/login-ads"                                        , component  : LoginAdsComponent           },
+    { path: "home/cadastrar-populacao"                              , component  : CadastrarPopulacaoComponent },
+    { path: "home/login-populacao"                                  , component  : LoginPopulacaoComponent     },
+    { path: "workspace-ubs"                                         , component  : WorkspaceUbsComponent       },
+    { path: "workspace-ubs/cadastrar-ads"                           , component  : CadastrarAdsComponent       },
+    { path: "workspace-ubs/cadastrar-vacina"                        , component  : CadastrarVacinaComponent    },
+    { path: "workspace-ubs/relatorio"                               , component  : RelatorioUbsComponent       },
+    { path: "workspace-ads"                                         , component  : WorkspaceAdsComponent       },
+    { path: "workspace-ads/nova-vacina"                             , component  : AplicarVacinaCartaoComponent},
+    { path: "workspace-ads/cadastrar-populacao"                     , component  : CadastrarPopulacaoComponent },
+    { path: "cartao-populacao"                                      , component  : CartaoPopulacaoComponent    },
+    { path: "administrador"                                         , component  : AdministradorComponent      },
+    { path: "administrador/cadastrar-ubs"                           , component  : CadastrarUbsComponent       },
+    { path: 'workspace-ubs/cadastrar-ads/workspace-ubs'             , redirectTo : 'workspace-ubs'             },
+    { path: 'workspace-ubs/cadastrar-vacina/workspace-ubs'          , redirectTo : 'workspace-ubs'             },
+    { path: 'workspace-ubs/relatorio/workspace-ubs'                 , redirectTo : 'workspace-ubs'             },
+    { path: 'workspace-ads/cadastrar-populacao/cadastrar-populacao' , redirectTo : 'workspace-ads'             },
+    { path: 'workspace-ads/nova-vacina/nova-vacina'                 , redirectTo : 'workspace-ads'             },
+    { path: 'home/cadastrar-populacao/cadastrar-populacao'          , redirectTo : 'home'                      },
+    { path: 'administrador/cadastrar-ubs/administrador'             , redirectTo : 'administrador'             },
     { path: ''                                                      , redirectTo : 'home'        , pathMatch: 'full' }
 
 ];  
