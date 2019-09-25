@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription      } from 'rxjs';
-import { Agente } from '../cadastrar-ads/agente';
 import { WorkspaceUbsService } from './workspace-ubs.service';
 import { Vacina } from '../cadastrar-vacina/vacina';
+import { Agente } from '../cadastrar-ads/agente';
 
 @Component({
   selector: 'app-workspace-ubs',

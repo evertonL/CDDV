@@ -123,6 +123,17 @@ class CadastrarUbsDAO {
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);
     } 
+
+    getUbsCnes(cnes , response){
+
+        let cSql    =  "SELECT cnes,nome_da_unidade,municipio,bairro,endereco,estado,telefone,cep,senha,bloqueado FROM ubs "
+                    +  " WHERE cnes = $1 "
+                    +  " ORDER BY cnes   "
+                    
+        let aValues = [ cnes ];
+
+        topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
+    } 
 }
 
 

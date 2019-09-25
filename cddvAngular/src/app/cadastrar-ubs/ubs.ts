@@ -12,7 +12,7 @@ export class Ubs {
     private telefone           : string;
     private cep                : string;
     private senha              : string;
-    //private bloqueado          : boolean;
+    private bloqueado          : boolean = false;
 
 
     /**
@@ -42,7 +42,7 @@ export class Ubs {
         this.telefone = telefone;
         this.cep = cep;
         this.senha = senha;
-        //this.bloqueado = bloqueado;
+        // this.bloqueado = bloqueado;
     }
 
     // -----------------GET----------------
@@ -119,13 +119,13 @@ export class Ubs {
         return this.senha;
     }
 
-    // /**
-    // * @description: Retorna o senha
-    // * @return {string} ( senha ) - código identificador.
-    // */
-    // public getBloqueado(): boolean {
-    //     return this.bloqueado;
-    // }
+    /**
+    * @description: Retorna o senha
+    * @return {string} ( senha ) - código identificador.
+    */
+    public getBloqueado(): boolean {
+        return this.bloqueado;
+    }
     
 
     //-----------------SET-----------------------
@@ -202,12 +202,12 @@ export class Ubs {
         this.senha = senha;
     }
 
-    // /**
-    // * @description Seta código identicador.
-    // * @param bloqueado - Código identicador.
-    // */
-    // public setBloqueado(bloqueado: boolean): void {
-    //     this.bloqueado = bloqueado;
-    // }
+    /**
+    * @description Seta código identicador.
+    * @param bloqueado - Código identicador.
+    */
+    public setBloqueado(bloqueado: boolean): void {
+        this.bloqueado = bloqueado;
+    }
 
 }

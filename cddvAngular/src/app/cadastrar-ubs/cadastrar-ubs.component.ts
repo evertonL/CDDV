@@ -14,7 +14,7 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
 
   //TAMANHO DOS CAMPOS 
 
-  public SIZE_CNES            = 7  ;
+  public SIZE_CNES            = 8  ;
   public SIZE_NOME_DA_UNIDADE = 60 ;
   public SIZE_MUNICIPIO       = 30 ;
   public SIZE_BAIRRO          = 30 ;

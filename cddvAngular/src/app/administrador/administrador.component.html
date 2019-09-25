@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="container">
                     <ul class="navbar-nav mr-auto">
-    
+
                         <button type="button"
                             class="btn btn-outline-success"
                             routerLink="cadastrar-ubs"
@@ -56,5 +56,76 @@
             </div>
         </nav>
 
+        			<!-- TABELA DE VACINAS -->
+							  
+<!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
+<div style="background-color:  rgb(91, 94, 94)">
+
+	<div class="nomeSujeito">
+		<h2>Unidades basicas de saude Cadastradas:</h2>
+	</div>
+
+
+	<!--Campo PESQUISA -->
+	<div class="form-group col-md-5">
+		<div class="input-group-append">
+
+			<input type = "text"
+				   id   = "pesquisaAdmUbs" 
+				   required 
+				   maxlength="8" 
+				   class="form-control" 
+				   autocomplete="off"
+				   [(ngModel)]="pesquisaAdmUbs"
+				   (keyup.enter)="getUbsCnes()"
+				   placeholder="Digite o Nome da UBS"              
+			>
+
+			<!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
+			<input type="button" 
+				   id="pesquisaAdmUbs"  
+				   (click)="getUbsCnes()"
+				   class="buttonPesquisaUbs"
+			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+		</div>
+	</div>
+
+	<table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
+
+			<thead>
+				
+				<th scope="col">CNES</th>
+				<th scope="col">UBS</th>
+				<th scope="col">Municipio</th>
+				<th scope="col">Estado</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">CEP</th>
+                <th scope="col">Status</th>
+				<th></th>
+
+			</thead>
+
+			<tbody>
+
+			  <tr *ngFor="let ubs of administradorUbs">
+
+				<td>{{ubs.cnes}}</td>
+				<td>{{ubs.nome_da_unidade}}</td>
+				<td>{{ubs.municipio}}</td>
+				<td>{{ubs.estado}}</td>
+                <td>{{ubs.telefone}}</td>
+                <td>{{ubs.cep}}</td>
+                <td *ngIf="ubs.bloqueado">Bloqueado</td>
+				<td *ngIf="!ubs.bloqueado">Ativo</td>
+                <td><input type="button" class="btn btn-danger buttonBloquear" value="Bloquear"></td>
+                <td><input type="button" class="btn btn-success" value="entrar"></td>
+
+              </tr>
+              
+			</tbody>
+
+	</table>
+
+</div>
 </body>
 </html>

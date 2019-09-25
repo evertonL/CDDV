@@ -24,4 +24,10 @@ module.exports = function(application){
 
     });
 
+    application.get("/api/cadastrarUbs/:cnes", function(req, res){
+
+        application.app.controllers.cadastrarUbs.getUbsCnes(application, req, res);
+
+    });
+
 }
