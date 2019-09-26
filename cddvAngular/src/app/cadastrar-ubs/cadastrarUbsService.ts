@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Ubs } from './ubs';
+import { AuthService } from '../login-ubs/auth.service';
 
 
 const httpOption = {
@@ -17,10 +18,31 @@ const httpOption = {
 
 export class UbsService {
 
-  private UbsApi: string = "http://localhost:3000/api/cadastrarUbs"
+  private UbsApi     : string      = "http://localhost:3000/api/cadastrarUbs"
+  private autenticar : AuthService =  null;
 
   constructor(private http: HttpClient) { }
 
+
+/**
+   * @description Retorna a classe de autenticação do usuário.
+   * @returns {AuthService} instância do AuthService do usuario da Ubs em questão
+   */
+  public getAuth():AuthService{
+
+    if(this.autenticar == null){
+      this.autenticar = new AuthService(this.http);
+    }
+    return this.autenticar;
+  }
+
+
+/**
+   * @description retorna usuário logado de acordo com informações do token
+   */
+  public getUsuarioUbs(){
+    return this.getAuth().decodificaToken();
+  }
 
   /**
    * @description envia solicitação para API salvar Ubs na base de dados.

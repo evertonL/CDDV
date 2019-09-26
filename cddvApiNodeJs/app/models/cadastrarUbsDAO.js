@@ -1,9 +1,10 @@
 //Bibliotecas
 const topConnection = require("./processosPG");
-const { erro_inserindo, sucesso_inserindo } = require("./../libs/msgsErroSucessoApi");
-const { erro_atualizando, sucesso_atualizando } = require("./../libs/msgsErroSucessoApi");
-const { erro_deletando, sucesso_deletando } = require("./../libs/msgsErroSucessoApi");
-const { erro_consultando, sucesso_consultando } = require("./../libs/msgsErroSucessoApi");
+const crypto        = require("crypto");
+const { erro_inserindo   , sucesso_inserindo   } = require("./../libs/msgsErroSucessoApi");
+const { erro_atualizando , sucesso_atualizando } = require("./../libs/msgsErroSucessoApi");
+const { erro_deletando   , sucesso_deletando   } = require("./../libs/msgsErroSucessoApi");
+const { erro_consultando , sucesso_consultando } = require("./../libs/msgsErroSucessoApi");
 
 class CadastrarUbsDAO {
 
@@ -56,7 +57,7 @@ class CadastrarUbsDAO {
             cadastrarUbs.estado,
             cadastrarUbs.telefone,
             cadastrarUbs.cep,
-            cadastrarUbs.senha,
+            cadastrarUbs.senha = crypto.createHash('MD5').update(cadastrarUbs.senha).digest('hex'), //criptogafando a senha
             cadastrarUbs.bloqueado
         ];
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
@@ -90,7 +91,7 @@ class CadastrarUbsDAO {
             cnesUbs.estado,
             cnesUbs.telefone,
             cnesUbs.cep,
-            cnesUbs.senha,
+            cnesUbs.senha = crypto.createHash('MD5').update(cnesUbs.senha).digest('hex'), //criptogafando a senha
             cnesUbs.bloqueado,
             cnesUbs.cnes
         ];

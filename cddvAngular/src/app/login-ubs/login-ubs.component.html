@@ -57,16 +57,16 @@
 		<div class="login-box">
 			<form method="post" autocomplete="off">
 				<!-- CPF LOGIN -->
-				<label for="CnesLogin">CNES</label>
-				<input type="number"
-					placeholder="Entre com numero do CNPJ"
-					maxlength=14
+				<label for="cnesLogin">CNES</label>
+				<input type="text"
+					placeholder="Entre com numero do CNES"
+					maxlength=8
 					required
-					[(ngModel)]="user"
-					(keydown)="formataCpf(inputCpf.value)"
-					id="CnesLogin"
-					name="CnesLogin"
-					#inputCpf
+					[(ngModel)]="userUbs"
+					(keydown)="formataCnes(inputCnes.value)"
+					id="cnesLogin"
+					name="cnesLogin"
+					#inputCnes	
 				>
 
 				<!-- SENHA -->
@@ -81,20 +81,24 @@
 				>
 
 				<!-- BOTÃO ENTRAR -->
-				<input type="submit" value="Entrar" id="buttonLogin">
+				<input type = "submit" 
+				       value = "Entrar" 
+				       id = "buttonLogin"
+				       (click) = "loginUbs()"
+		        >
 				
 			</form>
 		</div>
 	</div>
 
-	<!--Rodapé-->
+	<!-- Rodapé
 	<footer class="footer sticky-row text-center container-fluid">
 		<div class="container">
 			<div>
 				<p>--Rodapé--</p>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 
 </body>
 
