@@ -3,6 +3,7 @@ import { Agente } from './agente';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AgenteService } from './cadastrarAdsService';
 import { Subscription } from 'rxjs';
+import { UbsService } from '../cadastrar-ubs/cadastrarUbsService';
 
 @Component({
   selector: 'app-cadastrar-ads',
@@ -29,7 +30,8 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
 
   constructor(private router: Router,
     private agenteService: AgenteService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private ubsUsuario: UbsService) {
 
     this.agente = new Agente();
   }
@@ -69,15 +71,18 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
 
     if( this.validarCampus() ){
 
-      this.camposObrigatorios = true;
+      // this.camposObrigatorios = true;
       alert("prencha todos os Campos");
       return;
 
     }else if(this.getCadastrarAds().getSenha() != this.confirmaSenha){
       alert("As senhas não são iguais");
     }else{
-      this.camposObrigatorios = false;
+
+      // this.camposObrigatorios = false;
+      this.getCadastrarAds().setCnes(this.ubsUsuario.getAuth().decodificaToken().cnes); // pego o cnes da ubs que esta logada
       this.salvaAgente()
+      
     }
   }
 
@@ -85,7 +90,9 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
    * @description Se inscreve no serviço que envia solicitação para API salvar frequência na base de dados.
    */
   private salvaAgente(){
+
    console.log(this.getCadastrarAds());
+   
     this.agenteService.salvaAgente(this.getCadastrarAds())
                           .subscribe( 
                                         result =>{ 

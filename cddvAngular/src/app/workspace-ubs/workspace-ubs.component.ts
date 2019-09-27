@@ -3,6 +3,8 @@ import { Subscription      } from 'rxjs';
 import { WorkspaceUbsService } from './workspace-ubs.service';
 import { Vacina } from '../cadastrar-vacina/vacina';
 import { Agente } from '../cadastrar-ads/agente';
+import { UbsService } from '../cadastrar-ubs/cadastrarUbsService';
+import { Router            } from '@angular/router';
 
 @Component({
   selector: 'app-workspace-ubs',
@@ -11,18 +13,19 @@ import { Agente } from '../cadastrar-ads/agente';
 })
 export class WorkspaceUbsComponent implements OnInit {
 
-  private inscricao              = new Subscription;
-  private resultadoApi           = null;
-  private errosApi               = null;
+  private inscricao                     = new Subscription;
+  private resultadoApi                  = null;
+  private errosApi                      = null;
   private workspaceUbsAgentes: Agente[] = [];
   private workspaceUbsVacinas: Vacina[] = [];
-  private pesquisaAgente: String       = "";
-  private pesquisaVacina: String       = "";
-  private cnesLogado           = "11111111";
+  private pesquisaAgente: String        = "";
+  private pesquisaVacina: String        = "";
+  private cnesLogado                    = this.usuario.getAuth().decodificaToken().cnes; //pego o cnes do token da ubs que efetuo o login 
+  private atualizandoVacina: boolean    = true; //tenho que arrumar 
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
-  constructor( private workspaceUbsService: WorkspaceUbsService ) {
+  constructor( private workspaceUbsService: WorkspaceUbsService ,private usuario: UbsService, private router: Router) {
 
     this.getAllAdsPorUbs();
     this.getAllVacinasPorUbs();
@@ -49,11 +52,11 @@ export class WorkspaceUbsComponent implements OnInit {
  getAllAdsPorUbs(){
   
    this.inscricao = this.workspaceUbsService.getAllAdsPorUbs(this.cnesLogado).subscribe(
-
+     
        result => {
                    this.resultadoApi = result;
                    this.workspaceUbsAgentes  = this.resultadoApi.registros;
-                      
+                   console.log('ads',this.cnesLogado)
                  },
        error => {
                    this.setErrosApi(error);
@@ -107,6 +110,13 @@ export class WorkspaceUbsComponent implements OnInit {
 //    }
 //  }
 
+ /**
+  * @description: Funcão que exclui a chave do Local Storage e chama a home.
+  */
+ sair(){
+   this.usuario.getAuth().logout();
+   this.router.navigate(['home']);
+}
 
  /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]

@@ -8,7 +8,7 @@ export class Agente{
     private senha          :   String;
     private rg             :   String;
     private bloqueado      :   boolean;
-    private cnes  : String = '11111111'; // quando tiver logando tirar daquio valor
+    private cnes           :   String; // quando tiver logando tirar daquio valor
   
     /**
      * @constructor

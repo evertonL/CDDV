@@ -7,9 +7,7 @@ class WorkSpaceUbsDAO {
     /**
      * @constructor
      */
-    constructor() {
-
-    }
+    constructor() {}
 
     /**
     * @description Consulta todos os agente_de_saudes cadastradas no banco de dados pelo numero da UBS
@@ -31,7 +29,7 @@ class WorkSpaceUbsDAO {
     */
    getVacinasPorUbs(cnes ,response) {
 
-    let cSql = "SELECT  nome ,lote ,nome_da_unidade, periodo_de_imunizacao, qtd_vacinas FROM vacinas"
+    let cSql = "SELECT  id_vacina ,nome ,lote ,nome_da_unidade, select_tempo_imunizacao, periodo_de_imunizacao, qtd_vacinas,cnes FROM vacinas"
         + " WHERE cnes = $1"
 
     let aValues = [ cnes ];
@@ -94,17 +92,18 @@ class WorkSpaceUbsDAO {
     async ProcuraUbsParaLogin(cnes , senha){
 
         let cSql    =  "SELECT cnes, "
-                    +  "       senha " 
+                    +  "       nome_da_unidade " 
                     +  " FROM ubs "
-                    +  " WHERE cnes   = TRIM( $1 ) "
-                    +  "   AND senha  = TRIM( $2 ) "
+                    +  " WHERE cnes   = $1  "
+                    +  "   AND senha  = $2  "
                     +  "   AND bloqueado = false  ";
                     
         let aValues = [ 
                         cnes  ,
                         senha
                       ];
-
+                      console.log('senha',senha);
+                      console.log('cnes',cnes);
        //Executa a query e ja retorna a Ubs              
        return topConnection.executaQueryAsync(cSql, aValues, sucesso_consultando, erro_consultando);            
     }   

@@ -3,11 +3,12 @@
  */
 export class Vacina {
 
+    private id_vacina                : String;
     private qtd_vacinas              : number;
     private nome                     : String;
     private lote                     : String;
-    private cnes                     : String = '11111111'; //retirar quando tiver logando
     private nome_da_unidade          : String;
+    private cnes                     : String;
     private select_tempo_imunizacao  : String;
     private periodo_de_imunizacao    : String;
    
@@ -135,4 +136,18 @@ export class Vacina {
         this.select_tempo_imunizacao = select_tempo_imunizacao;
     }
 
+    /**
+    * @description Seta código identicador.
+    * @param cnes - Código identicador.
+    */
+   public setCnes(cnes: String): void {
+    this.cnes = cnes;
+   }
+    /**
+    * @description Seta código identicador.
+    * @param id_vacina - Código identicador.
+    */
+   public setIdVacina(id_vacina: String): void {
+    this.id_vacina = id_vacina;
+   }
 }

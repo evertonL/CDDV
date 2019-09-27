@@ -48,7 +48,6 @@ export class LoginUbsComponent implements OnInit {
    */
   private loginUbs(){
 
-    let cnes:String;
     let resultApi = null;
 
     // //retira os caracteres especiais
@@ -57,21 +56,22 @@ export class LoginUbsComponent implements OnInit {
     //     + this.userUbs.substring(8,11) 
     //     + this.userUbs.substring(12,14);
 
-    this.usuarioUbs.getAuth().loginUbs(cnes, this.senha)
+    this.usuarioUbs.getAuth().loginUbs(this.userUbs, this.senha)
                           .subscribe(
                                         result =>{ 
                                                     this.erro = null;
                                                     resultApi = result;
-
+                                                    console.log('token',resultApi)
                                                     if(resultApi.auth){
 
-                                                      console.log(" usuario UBS " + cnes + " logado ");
+                                                      console.log(" usuario UBS " + this.userUbs + " logado ");
                                                       this.usuarioUbs.getAuth().salvaToken(resultApi.token);
-                                                      this.router.navigate(['/']);
+                                                      this.router.navigate(['workspace-ubs']);
                                                     }
                                                   },
                                         erros => { 
                                                     this.erro = erros;
+                                                    console.log('test',erros)
                                                   }
                                       );
     

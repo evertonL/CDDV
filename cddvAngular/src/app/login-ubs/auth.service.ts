@@ -37,7 +37,8 @@ export class AuthService {
    * @param senha senha do usuário que está tentando efetuar o login
    */
   public loginUbs(cnes:String, senha:String) : Observable<Ubs>{
-
+    console.log('cnes',cnes)
+    console.log('senha',senha)
     return this.http.post<Ubs>(this.loginUbsApi, {cnes, senha} , httpOption)
                     .pipe(
                             catchError(

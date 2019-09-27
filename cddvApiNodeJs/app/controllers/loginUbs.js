@@ -29,6 +29,7 @@ function loginUbs(application, request, response){
     // Validando informações 
     //-----------------------------------------------------
     erros_aux = validacao.isObjectEmpty({"cnes":dados.cnes, "senha":dados.senha});
+    console.log("passou aqui")
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -55,7 +56,7 @@ function loginUbs(application, request, response){
                         .digest('hex');
 
     //Instanciando model do usuario
-    modelWorkSpaceUbsDAO = new application.app.models.WorkSpaceUbsDAO();
+    modelWorkSpaceUbsDAO = new application.app.models.workSpaceUbsDAO();
     
     (async() => {
 
@@ -68,7 +69,7 @@ function loginUbs(application, request, response){
         if(usuarioUbs.length > 0 ){
             
             //monta payload
-            let cnes   = usuarioUbs[0].cpf;
+            let cnes   = usuarioUbs[0].cnes;
             let nome_da_unidade   = usuarioUbs[0].nome_da_unidade;
             
             let token = jwt.sign({ cnes, nome_da_unidade }, process.env.SECRET, {

@@ -3,6 +3,7 @@ import { Vacina } from './vacina';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VacinaService } from './cadastrar-vacina.service';
 import { Subscription } from 'rxjs'; // precisa instalar
+import { UbsService } from '../cadastrar-ubs/cadastrarUbsService';
 
 @Component({
   selector: 'app-cadastrar-vacina',
@@ -23,40 +24,44 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
  private camposObrigatorios      = false;
  private mensagemAviso           = null;
  private errosApi                = null;
+ private status                  = false;
 
  static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
 
   constructor(private router: Router,
               private vacinaService: VacinaService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,private ubsUsuario: UbsService) {
 
               this.vacina = new Vacina();
   }
 
 
- // ngOnInit() {
+ ngOnInit() {
 
- //   //Recupera o conteudo dos parametros e inicializa campos.
- //   //Também resgata a instancia da inscrição.
- //   this.inscricao = this.route.queryParams.sVacinacribe(
- //     (queryParams: any) => {
+   //Recupera o conteudo dos parametros e inicializa campos.
+   //Também resgata a instancia da inscrição.
+   this.inscricao = this.route.queryParams.subscribe(
+     (queryParams: any) => {
 
- //       this.getCadastrarVacina().setCnes(queryParams['cnes']);
- //       this.getCadastrarVacina().setNomeDaUnidade( queryParams['nome_da_unidade']);
- //       this.getCadastrarVacina().setMunicipio(queryParams['municipio']);
- //       this.getCadastrarVacina().setBairro(queryParams['bairro']);
- //       this.getCadastrarVacina().setEndereco(queryParams['endereco'])             
- //       this.getCadastrarVacina().setEstado(queryParams['estado']);
- //       this.getCadastrarVacina().setTelefone(queryParams['telefone']);
- //       this.getCadastrarVacina().setCep(queryParams['cep']); 
- //       this.getCadastrarVacina().setSenha(queryParams['senha']);
- //       // this.getCadastrarVacina().setBloqueado(queryParams['bloqueado']);
+       this.getCadastrarVacina().setIdVacina(queryParams['id_vacina'])
+       this.getCadastrarVacina().setNome(queryParams['nome']);
+       this.getCadastrarVacina().setNomeDaUnidade( queryParams['nome_da_unidade']);
+       this.getCadastrarVacina().setLote(queryParams['lote']);
+       this.getCadastrarVacina().setQtdVacina(queryParams['qtd_vacinas']);
+       this.getCadastrarVacina().setPeriodoDeImunizacao(queryParams['periodo_de_imunizacao']);           
+       this.getCadastrarVacina().setSelectImunizacao(queryParams['select_tempo_imunizacao']);
+       this.getCadastrarVacina().setCnes(this.ubsUsuario.getAuth().decodificaToken().cnes);
 
- //     }
- //   );
+       //verifico se esta atualizando ou cadastrando
+       this.setStatus(queryParams['verificacao']);
 
- // }
+       console.log('deu certo',this.setStatus(queryParams['verificacao']));
+       console.log(this.ubsUsuario.getAuth().decodificaToken());
+     }
+   );
+
+ }
 
  /**
 * Destruo o registro ao finalizar
@@ -77,17 +82,26 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
      alert("Prencha todos os Campos");
      return;
 
-   }else{
+   }else if(this.getStatus() == undefined){
 
+    console.log("salva",this.status)
      this.camposObrigatorios = false;
+     alert("entro no salvar");
      this.salvaVacina()
+
+   }else{
+    
+    console.log("atulizar",this.status)
+    this.camposObrigatorios = false;
+    this.status = false;
+    this.atualizarVacina()
 
    }
  }
 
  /**
-  * @description Se inscreve no serviço que envia solicitação para API salvar a vacinas na base de dados.
-  */
+ * @description Se inscreve no serviço que envia solicitação para API salvar a vacinas na base de dados.
+ */
  private salvaVacina(){
   
    this.vacinaService.salvaVacina(this.vacina)
@@ -99,6 +113,24 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
                                     );
 
    
+ }
+
+ /**
+ * @description Se inscreve no serviço que envia solicitação para API atualizar a vacinas na base de dados.
+ */
+ private atualizarVacina(){
+
+  //Envia solicitação para atualizar formulário
+  this.vacinaService.atualizarVacina(this.vacina)
+  .subscribe( 
+              result =>{ 
+                          alert("Vacina Atualizada com Sucesso");
+                          this.router.navigate(['workspace-ubs']);
+                        },
+              erros => { 
+                          this.setErrosApi(erros);
+                        }
+            );
  }
 
  /**
@@ -141,4 +173,22 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
            ? true : false;
  }
 
+  /**
+  * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
+  *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
+  * @param error error ocasionado na aplicação. 
+  */
+  setErrosApi(error){
+
+    this.errosApi = error + " /countErros: " + CadastrarVacinaComponent.countErros++  ;
+    console.log(this.errosApi);
+  }
+
+  public getStatus(){
+    return this.status;
+  }
+
+  public setStatus(status: boolean): void {
+    this.status = status;
+  }
 }

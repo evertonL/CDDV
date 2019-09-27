@@ -61,6 +61,7 @@
 
 					<button type="button"
 						class="btn btn-outline-success"
+						(click)="sair()"
 						>Sair
 					</button>
 
@@ -72,18 +73,20 @@
 					<!-- TABELA DE AGENTES -->
 					   
 	<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
-<div style="background-color:  rgb(91, 94, 94)">
+<div style="background-color: rgb(91, 94, 94)">
 
-	<div class="nomeSujeito">
-		<h2>Agentes Cadastrados</h2>
-	</div>
-
+	
 
 	<!--Campo PESQUISA -->
 	<div class="form-group col-md-5">
 
+			<h2>Agentes Cadastrados</h2>	
+
 		<div class="input-group-append">
 
+				
+						
+					
 			<input type = "text"
 				   id   = "pesquisarAgentePorUbs" 
 				   required 
@@ -123,6 +126,8 @@
 				<td>{{workspaceUbs.nome}}</td>
 				<td>{{workspaceUbs.senha}}</td>
 				<td>{{workspaceUbs.rg}}</td>
+				<td *ngIf="workspaceUbs.bloqueado">Bloqueado</td>
+				<td *ngIf="!workspaceUbs.bloqueado">Ativo</td>
 				<td><input type="button" class="btn btn-secondary buttonBloquear" value="Bloquear Agente"></td>
 
 			  </tr>
@@ -187,7 +192,22 @@
 				<td>{{workspaceUbs.nome_da_unidade}}</td>
 				<td>{{workspaceUbs.periodo_de_imunizacao}}</td>
 				<td>{{workspaceUbs.qtd_vacinas}}</td>
-				<td><input type="button" class="btn btn-danger buttonBloquear" value="Atualizar Vacina"></td>
+				<td><input  type="button"
+							class="btn btn-danger buttonBloquear"
+							value="Atualizar Vacina"
+							routerLink="cadastrar-vacina/"
+							[queryParams]="{
+								nome:workspaceUbs.nome,
+								lote:workspaceUbs.lote,
+								nome_da_unidade:workspaceUbs.nome_da_unidade,
+								qtd_vacinas:workspaceUbs.qtd_vacinas,
+								periodo_de_imunizacao:workspaceUbs.periodo_de_imunizacao,
+								select_tempo_imunizacao:workspaceUbs.select_tempo_imunizacao,
+								id_vacina:workspaceUbs.id_vacina,
+								verificacao:true
+							  }"
+							>
+				</td>
 
 			  </tr>
 			</tbody>
@@ -195,6 +215,7 @@
 	</table>
 
 </div>
+
 </body>
 
 </html>

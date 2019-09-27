@@ -37,6 +37,22 @@ export class VacinaService {
   }
 
   /**
+   * @description envia solicitação para API atualizar a Vacina na base de dados.
+   * @param Vacina objeto de Vacina que deve ser atualizado.
+   * @returns Observable 
+   */
+  atualizarVacina(Vacina: Vacina): Observable<Vacina> {
+
+    return this.http.put<Vacina>(this.VacinaApi, Vacina, httpOption)
+      .pipe(
+        catchError(
+          this.errorHandler
+        )
+      );
+  }
+
+
+  /**
    * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
    * @param error erros gerados ao fazer solicitações à API
    * @returns retorna uma string contendo o erro que acontenceu. 
