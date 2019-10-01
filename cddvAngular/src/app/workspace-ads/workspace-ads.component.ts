@@ -21,7 +21,7 @@ export class WorkspaceAdsComponent implements OnInit {
   private workspaceChecarPopulacao : Populacao[]    = [];
   private pesquisa                 : String         = "";
   private nomeAdsLogado                             = this.usuarioAds.getAuth().decodificaToken().nome; //pego o nome do token do agente de saude que efetuo o login 
-
+  private dataAtual : Date = new Date();
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -30,7 +30,12 @@ export class WorkspaceAdsComponent implements OnInit {
               private router: Router) { }
 
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+    this.dataAtual.getDate() + "/" + this.dataAtual.getMonth() + "/" + this.dataAtual.getFullYear();
+    console.log("data",this.dataAtual);
+    console.log("data",this.workspaceAdsVacinas)
+  }
 
 
   /**
@@ -130,6 +135,18 @@ export class WorkspaceAdsComponent implements OnInit {
     this.errosApi = error + " /countErros: " + WorkspaceAdsComponent.countErros++;
     console.log(this.errosApi);
 
+  }
+
+  compararData(dataValidade){
+
+    var partesData = dataValidade.split("/");
+    var data = new Date(partesData[2], partesData[1] - 1, partesData[0]);
+    console.log(">",data);
+     if(data > new Date()){
+       return true;
+     }else{
+       return false;
+     }
   }
 
 }

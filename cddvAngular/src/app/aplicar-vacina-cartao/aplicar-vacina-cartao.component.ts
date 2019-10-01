@@ -26,6 +26,7 @@ export class AplicarVacinaCartaoComponent {
   private camposObrigatorios                          = false;
   private mensagemAviso                               = null;
   private errosApi                                    = null;
+  private tipoDaVacina        : String                = null;
   
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -46,8 +47,14 @@ export class AplicarVacinaCartaoComponent {
     //Também resgata a instancia da inscrição.
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {
- 
+        
+        let dataHoje = new Date();
+
+        this.getAplicadaVacinaCartao().setCartaoSus(queryParams['cartao_sus']);
+        this.getAplicadaVacinaCartao().setVacinasId(queryParams['vacina_id']);
         this.getAplicadaVacinaCartao().setCpf_agente(this.adsUsuario.getAuth().decodificaToken().cpf);
+        this.getAplicadaVacinaCartao().setDataAplicacao( dataHoje.toISOString().substring(0,10) );
+        // this.tipoDaVacina = queryParams['']
       }
     );
   }
@@ -66,6 +73,7 @@ export class AplicarVacinaCartaoComponent {
    */
   private registrarVacina(){
 
+    // this.getAplicadaVacinaCartao().setDataValidade(if())
     if( this.validarCampus() ){
 
       this.camposObrigatorios = true;

@@ -125,7 +125,22 @@
 				<td>{{workspaceAds.data_validade | date:'dd/MM/yyyy'}}</td>
 				<td *ngIf="workspaceAds.aplicada">Aplicada</td>
 				<td *ngIf="!workspaceAds.aplicada">Agendada</td>
-				<td><button class="btn btn-light buttonAtualizarVacina">Atualizar Vacina</button></td>
+				<td *ngIf="compararData(workspaceAds.data_validade) == false">
+						<input  type="button"
+					    class="btn btn-danger buttonBloquear"
+					    value="Atualizar Vacina"
+					    routerLink="nova-vacina/"
+					    [queryParams]="{
+						                cartao_sus:pesquisa,
+						                vacina_id:workspaceAds.id_vacina,
+						                tempo:workspaceAds.select_tempo_imunizacao,
+						                periodo_status:workspaceAds.periodo_de_imunizacao,
+										status:workspaceAds.aplicada,
+										validade:workspaceAds.data_validade
+					    }"
+					>
+				</td>
+				<td *ngIf="!compararData(workspaceAds.data_validade) == true"></td>
 				
 			  </tr>
 			</tbody>

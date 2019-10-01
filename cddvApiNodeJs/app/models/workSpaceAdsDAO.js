@@ -18,7 +18,9 @@ class WorkSpaceAdsDAO {
 
         let cSql = "SELECT populacao.nome                        , "
                         + " vacinas.id_vacina                    , "
-                        + " vacinas.nome vacina_nome             , "
+                        + " vacinas.nome AS vacina_nome          , "
+                        + " vacinas.select_tempo_imunizacao      , "
+                        + " vacinas.periodo_de_imunizacao        , "
                         + " vacinas.lote                         , "
                         + " cartao.aplicada                      , "
                         + " agente_de_saude.nome AS nome_agente  , "
