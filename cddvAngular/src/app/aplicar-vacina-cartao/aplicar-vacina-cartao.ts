@@ -118,7 +118,7 @@ export class AplicadaVacinaCartao {
     * @description Seta código identicador.
     * @param cpf_agente - Código identicador.
     */
-    public setcpf_agente(cpf_agente: String): void {
+    public setCpf_agente(cpf_agente: String): void {
         this.cpf_agente = cpf_agente;
     }
 

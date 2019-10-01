@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription      } from 'rxjs';
-import { WorkspaceUbsService } from './workspace-ubs.service';
-import { Vacina } from '../cadastrar-vacina/vacina';
-import { Agente } from '../cadastrar-ads/agente';
-import { UbsService } from '../cadastrar-ubs/cadastrarUbsService';
-import { Router            } from '@angular/router';
+import { Component, OnInit     } from '@angular/core';
+import { Subscription          } from 'rxjs';
+import { WorkspaceUbsService   } from './workspace-ubs.service';
+import { Vacina                } from '../cadastrar-vacina/vacina';
+import { Agente                } from '../cadastrar-ads/agente';
+import { UbsService            } from '../cadastrar-ubs/cadastrarUbsService';
+import { Router                } from '@angular/router';
 
 @Component({
   selector: 'app-workspace-ubs',
@@ -18,14 +18,16 @@ export class WorkspaceUbsComponent implements OnInit {
   private errosApi                      = null;
   private workspaceUbsAgentes: Agente[] = [];
   private workspaceUbsVacinas: Vacina[] = [];
-  private pesquisaAgente: String        = "";
-  private pesquisaVacina: String        = "";
+  private pesquisaAgente     : String   = "";
+  private pesquisaVacina     : String   = "";
   private cnesLogado                    = this.usuario.getAuth().decodificaToken().cnes; //pego o cnes do token da ubs que efetuo o login 
-  private atualizandoVacina: boolean    = true; //tenho que arrumar 
+  private atualizandoVacina  : boolean  = true; //tenho que arrumar esta vindo como indefinido
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
-  constructor( private workspaceUbsService: WorkspaceUbsService ,private usuario: UbsService, private router: Router) {
+  constructor( private workspaceUbsService: WorkspaceUbsService ,
+               private usuario: UbsService, 
+               private router: Router) {
 
     this.getAllAdsPorUbs();
     this.getAllVacinasPorUbs();

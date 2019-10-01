@@ -75,8 +75,6 @@
 	<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
 <div style="background-color: rgb(91, 94, 94)">
 
-	
-
 	<!--Campo PESQUISA -->
 	<div class="form-group col-md-5">
 
@@ -84,9 +82,6 @@
 
 		<div class="input-group-append">
 
-				
-						
-					
 			<input type = "text"
 				   id   = "pesquisarAgentePorUbs" 
 				   required 
@@ -113,8 +108,8 @@
 				
 				<th scope="col">CPF</th>
 				<th scope="col">Nome do Agente</th>
-				<th scope="col">Senha</th>
 				<th scope="col">RG</th>
+				<th>Status</th>
 				<th></th>
 
 			</thead>
@@ -124,7 +119,6 @@
 
 				<td>{{workspaceUbs.cpf}}</td>
 				<td>{{workspaceUbs.nome}}</td>
-				<td>{{workspaceUbs.senha}}</td>
 				<td>{{workspaceUbs.rg}}</td>
 				<td *ngIf="workspaceUbs.bloqueado">Bloqueado</td>
 				<td *ngIf="!workspaceUbs.bloqueado">Ativo</td>
@@ -190,7 +184,13 @@
 				<td>{{workspaceUbs.nome}}</td>
 				<td>{{workspaceUbs.lote}}</td>
 				<td>{{workspaceUbs.nome_da_unidade}}</td>
-				<td>{{workspaceUbs.periodo_de_imunizacao}}</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'D' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Dia</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'D' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Dias</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'M' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Mês</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'M' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Meses</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'A' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Ano</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'A' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Anos</td>
+				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'U'">{{workspaceUbs.periodo_de_imunizacao}}-Unica</td>
 				<td>{{workspaceUbs.qtd_vacinas}}</td>
 				<td><input  type="button"
 							class="btn btn-danger buttonBloquear"

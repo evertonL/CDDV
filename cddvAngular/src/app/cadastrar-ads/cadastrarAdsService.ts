@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Agente } from './agente';
+import { AuthAdsService } from '../login-ads/authAds.service';
 
 
 const httpOption = {
@@ -17,9 +18,22 @@ const httpOption = {
 export class AgenteService {
 
   private AgenteApi: string = "http://localhost:3000/api/cadastrarAds"
+  private autenticar : AuthAdsService =  null;
 
   constructor(private http: HttpClient) { }
 
+
+  /**
+   * @description Retorna a classe de autenticação do usuário.
+   * @returns {AuthAdsService} instância do AuthAdsService do usuario do agente em saude em questão
+   */
+  public getAuth():AuthAdsService{
+
+    if(this.autenticar == null){
+      this.autenticar = new AuthAdsService(this.http);
+    }
+    return this.autenticar;
+  }
 
   /**
    * @description envia solicitação para API salvar Agente na base de dados.

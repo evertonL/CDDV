@@ -1,5 +1,6 @@
 //Bibliotecas
 const topConnection = require("./processosPG");
+const crypto        = require("crypto");
 const { erro_inserindo, sucesso_inserindo } = require("./../libs/msgsErroSucessoApi");
 const { erro_atualizando, sucesso_atualizando } = require("./../libs/msgsErroSucessoApi");
 const { erro_deletando, sucesso_deletando } = require("./../libs/msgsErroSucessoApi");
@@ -42,7 +43,7 @@ class CadastrarUbsDAO {
         let aValues = [
             cadastrarAds.cpf,
             cadastrarAds.nome,
-            cadastrarAds.senha,
+            cadastrarAds.senha = crypto.createHash('MD5').update(cadastrarAds.senha).digest('hex'), //criptogafando a senha
             cadastrarAds.rg,
             cadastrarAds.cnes,
             cadastrarAds.bloqueado
@@ -68,7 +69,7 @@ class CadastrarUbsDAO {
 
         let aValues = [
             cpfAgente.nome,
-            cpfAgente.senha,
+            cpfAgente.senha = crypto.createHash('MD5').update(cadastrarAds.senha).digest('hex'), //criptogafando a senha
             cpfAgente.rg,
             cpfAgente.cnes,
             cpfAgente.bloqueado,

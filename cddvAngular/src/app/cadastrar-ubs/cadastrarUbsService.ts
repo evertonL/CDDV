@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+
 // MÓDULOS PERSONALIZADOS
 import { Ubs } from './ubs';
 import { AuthService } from '../login-ubs/auth.service';
@@ -24,7 +25,7 @@ export class UbsService {
   constructor(private http: HttpClient) { }
 
 
-/**
+  /**
    * @description Retorna a classe de autenticação do usuário.
    * @returns {AuthService} instância do AuthService do usuario da Ubs em questão
    */
@@ -37,18 +38,18 @@ export class UbsService {
   }
 
 
-/**
-   * @description retorna usuário logado de acordo com informações do token
-   */
+  /**
+  * @description retorna usuário logado de acordo com informações do token
+  */
   public getUsuarioUbs(){
     return this.getAuth().decodificaToken();
   }
 
   /**
-   * @description envia solicitação para API salvar Ubs na base de dados.
-   * @param Ubs objeto de Ubs que deve ser salvo.
-   * @returns Observable 
-   */
+  * @description envia solicitação para API salvar Ubs na base de dados.
+  * @param Ubs objeto de Ubs que deve ser salvo.
+  * @returns Observable 
+  */
   salvaUbs(Ubs: Ubs): Observable<Ubs> {
 
     return this.http.post<Ubs>(this.UbsApi, Ubs, httpOption)
@@ -60,11 +61,11 @@ export class UbsService {
   }
 
   
- /**
+  /**
   * @description envia solicitação para API consultar todas as UBS cadastradas 
   *              na base de dados.
   */
- getAllUbs() : Observable<Ubs[]>{
+  getAllUbs() : Observable<Ubs[]>{
 
   return this.http.get<Ubs[]>(this.UbsApi)
                   .pipe(
@@ -72,14 +73,14 @@ export class UbsService {
                                       this.errorHandler
                                     )
                         );
-}
+  }
 
 
   /**
-   * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
-   * @param error erros gerados ao fazer solicitações à API
-   * @returns retorna uma string contendo o erro que acontenceu. 
-   */
+  * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
+  * @param error erros gerados ao fazer solicitações à API
+  * @returns retorna uma string contendo o erro que acontenceu. 
+  */
   errorHandler(error: HttpErrorResponse) {
 
     return throwError(error.error.mensagem || "Servidor com Erro! " + error.message);

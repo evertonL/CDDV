@@ -4,7 +4,7 @@
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-	<title>Login-UBS</title>
+	<title>Login-ADS</title>
 </head>
 
 <body>
@@ -57,14 +57,16 @@
 		<div class="login-box">
 			<form method="post" autocomplete="off">
 				<!-- CPF LOGIN -->
-				<label for="inputCpfLogin">CPF</label>
-				<input type="number"
+				<label for="cpfLogin">CPF</label>
+				<input type="text"
 					placeholder="Entre com numero do CPF"
-					maxlength=20 
+					maxlength=11 
 					required
-					[(ngModel)]="user"
-					id="inputCpfLogin"
-					name="inputCpfLogin"
+					[(ngModel)]="userAds"
+					(keydown)="formataCpf(inputCpf.value)"
+					id="cpfLogin"
+					name="cpfLogin"
+					#inputCpf
 				>
 
 				<!-- SENHA -->
@@ -79,7 +81,11 @@
 				>
 
 				<!-- BOTÃO ENTRAR -->
-				<input type="submit" value="Entrar" id="buttonLogin">
+				<input type = "submit" 
+				       value = "Entrar" 
+				       id = "buttonLogin"
+				       (click) = "loginAds()"
+		        >
 			</form>
 		</div>
 

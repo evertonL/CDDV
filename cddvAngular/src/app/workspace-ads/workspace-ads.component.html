@@ -41,8 +41,6 @@
 			<div class="container">
 				<ul class="navbar-nav mr-auto">
 
-						<h5>{{nomeAgente}}</h5>
-
 					<button type="button"
 					    routerLink="cadastrar-populacao" 
 						class="btn btn-outline-success"
@@ -50,6 +48,7 @@
 					</button> 
 					<button type="button"
 						class="btn btn-outline-success"
+						(click)="sair()"
 						>Sair
 					</button>
 
@@ -64,6 +63,7 @@
 		<div class="input-group-append">
 
 			<!--colocar o nome do agente -->
+			<h3>Agente de Saude - {{nomeAdsLogado}}</h3>
 			<!-- Botao para cadastrar nova vacina para o peessoa em questao -->
 			<input type="button" 
 				   id="inputAplicarNovaVacina"  
@@ -77,7 +77,7 @@
 	<!--Campo PESQUISA -->
 	<div class="form-group col-md-5">
 		<div class="input-group-append">
-
+		
 			<input type = "text"
 				   id   = "inputPesquisaCartao" 
 				   required 
@@ -102,27 +102,29 @@
 	<table class="table table-responsive table-hover table-dark" id="tabela">
 			<thead>
 			  <tr>
+				<th scope="col">Usuario</th>
 				<th scope="col">Vacina</th>
 				<th scope="col">Lote</th>
-				<th scope="col">Status</th>
 				<th scope="col">Resposavel</th>
 				<th scope="col">UBS</th>
 				<th scope="col">Aplicada</th>
 				<th scope="col">Validade</th>
+				<th scope="col">Status</th>
 				<th ></th>
 			  </tr>
 			</thead>
 			<tbody>
 			  <tr *ngFor="let workspaceAds of workspaceAdsVacinas">
 				
-				<td>{{workspaceAds.id_vacina}}</td>
+				<td>{{workspaceAds.nome}}</td>
+				<td>{{workspaceAds.vacina_nome}}</td>
 				<td>{{workspaceAds.lote}}</td>
-				<td *ngIf="workspaceAds.aplicada">Aplicada</td>
-				<td *ngIf="!workspaceAds.aplicada">Agendada</td>
 				<td>{{workspaceAds.nome_agente}}</td>
 				<td>{{workspaceAds.nome_da_unidade}}</td>
 				<td>{{workspaceAds.data_aplicacao | date:'dd/MM/yyyy'}}</td>
 				<td>{{workspaceAds.data_validade | date:'dd/MM/yyyy'}}</td>
+				<td *ngIf="workspaceAds.aplicada">Aplicada</td>
+				<td *ngIf="!workspaceAds.aplicada">Agendada</td>
 				<td><button class="btn btn-light buttonAtualizarVacina">Atualizar Vacina</button></td>
 				
 			  </tr>

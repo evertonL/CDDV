@@ -125,6 +125,10 @@ class CadastrarUbsDAO {
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);
     } 
 
+    /**
+    * @description Consulta Ubs de acordo com cnes que esta cadastradas no banco de dados
+    * @param {response} response 
+    */
     getUbsCnes(cnes , response){
 
         let cSql    =  "SELECT cnes,nome_da_unidade,municipio,bairro,endereco,estado,telefone,cep,senha,bloqueado FROM ubs "

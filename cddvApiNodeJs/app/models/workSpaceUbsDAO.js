@@ -7,7 +7,7 @@ class WorkSpaceUbsDAO {
     /**
      * @constructor
      */
-    constructor() {}
+    constructor() { }
 
     /**
     * @description Consulta todos os agente_de_saudes cadastradas no banco de dados pelo numero da UBS

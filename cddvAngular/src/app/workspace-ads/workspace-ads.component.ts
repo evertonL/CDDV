@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription      } from 'rxjs';
-import { workspaceAds } from './workspaceAds';
+import { Component, OnInit   } from '@angular/core';
+import { Subscription        } from 'rxjs';
+import { workspaceAds        } from './workspaceAds';
 import { WorkspaceAdsService } from './workspaceAdsService';
-import { Populacao } from '../cadastrar-populacao/populacao';
+import { Populacao           } from '../cadastrar-populacao/populacao';
+import { Router              } from '@angular/router';
+import { AgenteService       } from '../cadastrar-ads/cadastrarAdsService';
 
 @Component({
   selector: 'app-workspace-ads',
@@ -11,107 +13,123 @@ import { Populacao } from '../cadastrar-populacao/populacao';
 })
 export class WorkspaceAdsComponent implements OnInit {
 
-  
-  private inscricao                    = new Subscription;
-  private resultadoApi                 = null;
-  private errosApi                     = null;
-  private workspaceAdsVacinas: workspaceAds[] = [];
-  private workspaceChecarPopulacao : Populacao[] = [];
-  private pesquisa: String             = "";
-  private nomeAgente : String          = "nomeAgente quando Logar"
-  
+
+  private inscricao                                 = new Subscription;
+  private resultadoApi                              = null;
+  private errosApi                                  = null;
+  private workspaceAdsVacinas      : workspaceAds[] = [];
+  private workspaceChecarPopulacao : Populacao[]    = [];
+  private pesquisa                 : String         = "";
+  private nomeAdsLogado                             = this.usuarioAds.getAuth().decodificaToken().nome; //pego o nome do token do agente de saude que efetuo o login 
+
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
-  constructor( private workspaceAdsService: WorkspaceAdsService ) {
+  constructor(private workspaceAdsService: WorkspaceAdsService, 
+              private usuarioAds: AgenteService, 
+              private router: Router) { }
 
 
-  }
+  ngOnInit() { }
 
 
- ngOnInit() { }
-
-
- /**
+  /**
   * destruo a inscrição ao fechar.
   */
- ngOnDestroy(){
-   
-   this.inscricao.unsubscribe();
+  ngOnDestroy() {
 
- }
+    this.inscricao.unsubscribe();
+
+  }
 
 
   /**
   * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências 
   *               pela descricao na base de dados.
-  */  
- getCartaoDaPopulacao(){
+  */
+  getCartaoDaPopulacao() {
 
-       this.workspaceAdsService.getCartaoDaPopulacao(this.pesquisa).subscribe(
+    this.workspaceAdsService.getCartaoDaPopulacao(this.pesquisa).subscribe(
 
-               result => {
-                           this.resultadoApi = result;
-                           this.workspaceAdsVacinas  = this.resultadoApi.registros;
-              
-                           if(this.workspaceAdsVacinas.length == 0){
+      result => {
 
-                             alert("Não a Vacinas para o cartao pesquisado! ");
+        this.resultadoApi = result;
+        this.workspaceAdsVacinas = this.resultadoApi.registros;
 
-                           }
-                           
-                         },
-               error => {
-                           this.setErrosApi(error);
-                        }
-       );
-       console.log(this.workspaceAdsVacinas);
- }
+        if (this.workspaceAdsVacinas.length == 0) {
 
- /**
+          alert("Não a Vacinas para o cartao pesquisado! ");
+
+        }
+
+      },
+      error => {
+
+        this.setErrosApi(error);
+
+      }
+    );
+    console.log(this.workspaceAdsVacinas);
+  }
+
+  /**
   * @description: Se inscreve no serviço que envia solicitação para API resgatar o individo do banco de dados
   * de acordo com o o numero do cartao do sus pesquisado.
-  */  
-getChecarPopulacao(){
+  */
+  getChecarPopulacao() {
 
-  if(this.pesquisa.trim() == ""){
-       
-    alert("Usuario não Encontrado! Verifique o numero digitado.")
+    if (this.pesquisa.trim() == "") {
 
-  }else{
+      alert("Usuario não Encontrado! Verifique o numero digitado.")
+
+    } else {
+
       this.workspaceAdsService.getChecarPopulacao(this.pesquisa).subscribe(
 
-              result => {
-                          this.resultadoApi = result;
-                          this.workspaceChecarPopulacao  = this.resultadoApi.registros;
-                          
-                          if(this.workspaceChecarPopulacao.length == 0){
+        result => {
+          this.resultadoApi = result;
+          this.workspaceChecarPopulacao = this.resultadoApi.registros;
 
-                            alert("O Cartão Pesquisado não está Cadastrado!")
+          if (this.workspaceChecarPopulacao.length == 0) {
 
-                          }else(
+            alert("O Cartão Pesquisado não está Cadastrado!")
 
-                            this.getCartaoDaPopulacao()
+          } else (
 
-                          );
-                        },
-              error => {
-                          this.setErrosApi(error);
-                       }
+            this.getCartaoDaPopulacao()
+
+          );
+        },
+        error => {
+
+          this.setErrosApi(error);
+
+        }
       );
     }
-      console.log(this.workspaceAdsVacinas);
-}
+    console.log(this.workspaceAdsVacinas);
+  }
 
- /**
-   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
-   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
-   * @param error error ocasionado na aplicação. 
+  /**
+   * @description: Funcão que exclui a chave do Local Storage e chama a home.
    */
-  setErrosApi(error){
+  sair() {
 
-    this.errosApi = error + " /countErros: " + WorkspaceAdsComponent.countErros++  ;
+    this.usuarioAds.getAuth().logout();
+    this.router.navigate(['home']);
+
+  }
+
+  /**
+    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
+    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
+    * @param error error ocasionado na aplicação. 
+    */
+  setErrosApi(error) {
+
+    this.errosApi = error + " /countErros: " + WorkspaceAdsComponent.countErros++;
     console.log(this.errosApi);
+
   }
 
 }

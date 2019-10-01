@@ -41,7 +41,7 @@ export class WorkspaceUbsService {
   * @description envia solicitação para API consultar todas as vacinas cadastrados na base de dados.
   */
  getAllVacinasPorUbs(cnes:String) : Observable<Vacina[]>{
-  console.log("passou aqui" + cnes);
+  console.log("passou aquiT", cnes);
  return this.http.get<Vacina[]>(this.WorkspaceUbsApi2 + "/" + cnes )
                  .pipe(
                          catchError(

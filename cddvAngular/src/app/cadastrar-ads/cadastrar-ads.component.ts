@@ -36,26 +36,6 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
     this.agente = new Agente();
   }
 
-
-  // ngOnInit() {
-
-  //   //Recupera o conteudo dos parametros e inicializa campos.
-  //   //Também resgata a instancia da inscrição.
-  //   this.inscricao = this.route.queryParams.subscribe(
-  //     (queryParams: any) => {
-
-  //       this.getCadastrarAds().setCpfAgente(queryParams['cpf']);
-  //       this.getCadastrarAds().setNameAgente(queryParams['nome']);
-  //       this.getCadastrarAds().setSenha(queryParams['senha']);
-  //       this.getCadastrarAds().setRgAgente(queryParams['rg']);
-  //       //this.getCadastrarAds().setCnes(queryParams['cnes']);
-  //       // this.getCadastrarAds().setBloqueado(queryParams['bloqueado']);
-
-  //     }
-  //   );
-
-  // }
-
   /**
  * Destruo o registro ao finalizar
  */

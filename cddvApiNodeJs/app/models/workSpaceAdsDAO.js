@@ -7,9 +7,7 @@ class WorkSpaceAdsDAO {
     /**
      * @constructor
      */
-    constructor() {
-
-    }
+    constructor() { }
 
     /**
      * @description Consulta o cartao da populacao no banco de dados pelo numero do cartao do sus
@@ -20,6 +18,7 @@ class WorkSpaceAdsDAO {
 
         let cSql = "SELECT populacao.nome                        , "
                         + " vacinas.id_vacina                    , "
+                        + " vacinas.nome vacina_nome             , "
                         + " vacinas.lote                         , "
                         + " cartao.aplicada                      , "
                         + " agente_de_saude.nome AS nome_agente  , "
@@ -66,14 +65,39 @@ class WorkSpaceAdsDAO {
         let aValues = [ cartao_sus ];
 
         topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
-    }    
+    }
+    
+    /**
+    * @description Consulta o agente de saude no banco de dados pelo cpf e senha.
+    * @param {String  } cpf, cpf do agente de Saude
+    * @param {String  } senha, senha do agente de Saude
+    */
+    async ProcuraAdsParaLogin(cpf , senha){
+
+        let cSql    =  "SELECT cpf             ,  "
+                    +  " nome                  ,  "
+                    +  " cnes                     "
+                    +  " FROM agente_de_saude     "
+                    +  " WHERE cpf    = $1        "
+                    +  "   AND senha  = $2        "
+                    +  "   AND bloqueado = false  ";
+                    
+        let aValues = [ 
+                        cpf  ,
+                        senha
+                      ];
+                      console.log('senha',senha);
+                      console.log('cnes',cpf);
+       //Executa a query e ja retorna a Ubs              
+       return topConnection.executaQueryAsync(cSql, aValues, sucesso_consultando, erro_consultando);            
+    } 
     
 }
 
 
 /**
- * Exportando instancia da classe
- */
+* Exportando instancia da classe
+*/
 module.exports = function () {
     return WorkSpaceAdsDAO;
 }

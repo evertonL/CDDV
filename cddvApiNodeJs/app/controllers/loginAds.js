@@ -16,11 +16,11 @@ require("dotenv-safe").config();
  * @Obs   : Esse controller foi implementado de forma diferente dos demais controllers da aplicação,
  *          nele foi usado o await para poder tratar a forma assincrona do  JavaScript e poder responder as requisições pelo controller.
  */
-function loginUbs(application, request, response){
+function loginAds(application, request, response){
 
     let dados                = request.body
-    let modelWorkSpaceUbsDAO = null;
-    let usuarioUbs           = null;
+    let modelWorkSpaceAdsDAO = null;
+    let usuarioAds           = null;
     let erros_aux            = null;
     let erros                = [];
     
@@ -28,7 +28,7 @@ function loginUbs(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validacao.isObjectEmpty({"cnes":dados.cnes, "senha":dados.senha});
+    erros_aux = validacao.isObjectEmpty({"cpf":dados.cpf, "senha":dados.senha});
     console.log("passou aqui")
     if( erros_aux ){
 
@@ -56,23 +56,24 @@ function loginUbs(application, request, response){
                         .digest('hex');
 
     //Instanciando model do usuario
-    modelWorkSpaceUbsDAO = new application.app.models.workSpaceUbsDAO();
+    modelWorkSpaceAdsDAO = new application.app.models.workSpaceAdsDAO();
     
     (async() => {
 
         //Recupera o usuario do banco se ele existir e a senha for válida e ele não estiver bloqueado.
-        usuarioUbs =  await modelWorkSpaceUbsDAO.ProcuraUbsParaLogin(dados.cnes, dados.senha) ;   
+        usuarioAds =  await modelWorkSpaceAdsDAO.ProcuraAdsParaLogin(dados.cpf, dados.senha) ;   
         
-        console.log("usuario autenticado - " , usuarioUbs);
+        console.log("usuario autenticado - " , usuarioAds);
 
         //Caso o usuário exista e a senha estiver Ok
-        if(usuarioUbs.length > 0 ){
+        if(usuarioAds.length > 0 ){
             
             //monta payload
-            let cnes   = usuarioUbs[0].cnes;
-            let nome_da_unidade   = usuarioUbs[0].nome_da_unidade;
+            let cpf   = usuarioAds[0].cpf;
+            let nome  = usuarioAds[0].nome;
+            let cnes  = usuarioAds[0].cnes
             
-            let token = jwt.sign({ cnes, nome_da_unidade }, process.env.SECRET, {
+            let token = jwt.sign({ cpf, nome, cnes}, process.env.SECRET, {
                 expiresIn: "2h" // expires in 4h horas
             });
             response.status(200).json({ auth: true, token: token });
@@ -110,7 +111,7 @@ function verifyJWT(request, response, next){
         if (err) return response.status(500).json({ auth: false, mensagem: 'Falha ao autenticar o token. Faça login novamente!' });
         
         // Se tudo estiver ok, salva no request para uso posterior
-        request.cnes = decoded.cnes;
+        request.cpf = decoded.cpf;
         next();
     });
 }
@@ -120,6 +121,6 @@ function verifyJWT(request, response, next){
 * Exportando funções 
 */
 module.exports = {
-    loginUbs ,
+    loginAds ,
     verifyJWT
 }

@@ -78,14 +78,15 @@
     
             <!--O id vem da Vacina ja cadastrada No banco de dados-->
             <div class="form-group col-md-4">
-                <label for="vacinas_id">Id da Vacina:</label>
-                <input class="form-control"
-                   type="text"
-                   maxlength={{SIZE_ID_VACINA}}
-                   [(ngModel)]="aplicarVacina.vacinas_id"
-                   id="vacinas_id"
-                   name="vacinas_id"
-                   >
+                    <label for="vacinas_id" >Vacina:</label>
+                    <select class="form-control"
+                            id   = "vacinas_id" 
+                            name = "vacinas_id"
+                            [(ngModel)]="aplicarVacina.vacinas_id"
+                    >
+                        <option *ngFor="let vacinaAplicar of workspaceUbsVacinas" value={{vacinaAplicar.id_vacina}}>{{vacinaAplicar.nome}}</option>
+    
+                    </select>
             </div>
 
             <div class="form-group col-md-4">

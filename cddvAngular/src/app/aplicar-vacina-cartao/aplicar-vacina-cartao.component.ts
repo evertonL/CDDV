@@ -3,6 +3,9 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { AplicarVacinaService } from './aplicar-vacina.service';
 import { AplicadaVacinaCartao } from './aplicar-vacina-cartao';
 import { Subscription } from 'rxjs';
+import { Vacina } from '../cadastrar-vacina/vacina';
+import { WorkspaceUbsService } from '../workspace-ubs/workspace-ubs.service';
+import { AgenteService } from '../cadastrar-ads/cadastrarAdsService';
 
 @Component({
   selector: 'app-aplicar-vacina-cartao',
@@ -16,20 +19,37 @@ export class AplicarVacinaCartaoComponent {
   public SIZE_ID_VACINA              = 2;
   public SIZE_CPF_AGENTE             = 11;
 
-  private inscricao = new Subscription;
-  private aplicarVacina: AplicadaVacinaCartao = null;
-  private camposObrigatorios      = false;
-  private mensagemAviso           = null;
-  private errosApi                = null;
-
+  private inscricao                                   = new Subscription;
+  private resultadoApi                                = null;
+  private aplicarVacina        : AplicadaVacinaCartao = null;
+  private workspaceUbsVacinas  : Vacina[]             = [];
+  private camposObrigatorios                          = false;
+  private mensagemAviso                               = null;
+  private errosApi                                    = null;
+  
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
 
   constructor(private router: Router,
-    private aplicarVacinaService: AplicarVacinaService,
-    private route: ActivatedRoute) {
+              private aplicarVacinaService: AplicarVacinaService,
+              private workspaceUbsService: WorkspaceUbsService,
+              private adsUsuario: AgenteService,
+              private route: ActivatedRoute) {
 
-    this.aplicarVacina = new AplicadaVacinaCartao();
+    // this.aplicarVacina = new AplicadaVacinaCartao();
+    this.getAllVacinasPorUbs();
+  }
+
+  ngOnInit() {
+
+    //Recupera o conteudo dos parametros e inicializa campos.
+    //Também resgata a instancia da inscrição.
+    this.inscricao = this.route.queryParams.subscribe(
+      (queryParams: any) => {
+ 
+        this.getAplicadaVacinaCartao().setCpf_agente(this.adsUsuario.getAuth().decodificaToken().cpf);
+      }
+    );
   }
 
   /**
@@ -38,6 +58,7 @@ export class AplicarVacinaCartaoComponent {
   ngOnDestroy() {
 
     this.inscricao.unsubscribe();
+
   }
 
     /**
@@ -68,6 +89,7 @@ export class AplicarVacinaCartaoComponent {
                                         result =>{ 
                                                     alert("Registrado com Sucesso");
                                                     this.aplicarVacina = new AplicadaVacinaCartao();
+                                                    this.router.navigate(['workspace-ads']);
                                                  }
                                      );
 
@@ -110,6 +132,36 @@ export class AplicarVacinaCartaoComponent {
           this.getAplicadaVacinaCartao().getCpfAgente()         == null      ||
           this.getAplicadaVacinaCartao().getDataValidade()      == null      
           ? true : false;
+  }
+
+
+   /**
+  * @description: Se inscreve no serviço que envia solicitação para API resgatar todos as vacinas na base de dados.
+  */
+ getAllVacinasPorUbs(){
+  console.log("CNES",this.adsUsuario.getAuth().decodificaToken().cnes)
+  this.inscricao = this.workspaceUbsService.getAllVacinasPorUbs(this.adsUsuario.getAuth().decodificaToken().cnes).subscribe(
+
+      result => {
+                  this.resultadoApi = result;
+                  this.workspaceUbsVacinas  = this.resultadoApi.registros;
+                  console.log("X",this.workspaceUbsVacinas)
+                },
+      error => {
+                  this.setErrosApi(error);
+               }
+  );
+}
+
+  /**
+   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
+   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
+   * @param error error ocasionado na aplicação. 
+   */
+  setErrosApi(error){
+
+    this.errosApi = error + " /countErros: " + AplicarVacinaCartaoComponent.countErros++  ;
+    console.log(this.errosApi);
   }
 
 }
