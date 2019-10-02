@@ -30,12 +30,7 @@ export class WorkspaceAdsComponent implements OnInit {
               private router: Router) { }
 
 
-  ngOnInit() { 
-    
-    this.dataAtual.getDate() + "/" + this.dataAtual.getMonth() + "/" + this.dataAtual.getFullYear();
-    console.log("data",this.dataAtual);
-    console.log("data",this.workspaceAdsVacinas)
-  }
+  ngOnInit() { }
 
 
   /**
@@ -138,15 +133,19 @@ export class WorkspaceAdsComponent implements OnInit {
   }
 
   compararData(dataValidade){
+    
+    let dia = dataValidade.substr(8,2);
+    let mes = dataValidade.substr(6,1);
+    let ano = dataValidade.substr(0,4);
 
-    var partesData = dataValidade.split("/");
-    var data = new Date(partesData[2], partesData[1] - 1, partesData[0]);
-    console.log(">",data);
-     if(data > new Date()){
-       return true;
-     }else{
-       return false;
-     }
+    let hoje = new Date();
+
+    dataValidade = new Date(ano,mes,dia);
+
+    console.log("DataV > ",dataValidade);
+   
+    
+      return hoje>= dataValidade ? true:false
   }
 
 }
