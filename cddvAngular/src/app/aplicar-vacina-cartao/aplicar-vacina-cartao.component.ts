@@ -53,23 +53,24 @@ export class AplicarVacinaCartaoComponent {
       (queryParams: any) => {
         
         let dataHoje = new Date();
-        console.log("dataHOje1",dataHoje)
+
         this.getAplicadaVacinaCartao().setCartaoSus(queryParams['cartao_sus']);
         this.getAplicadaVacinaCartao().setVacinasId(queryParams['vacina_id']);
         this.getAplicadaVacinaCartao().setCpf_agente(this.adsUsuario.getAuth().decodificaToken().cpf);
         this.getAplicadaVacinaCartao().setDataAplicacao( dataHoje.toISOString().substr(0,10));
-        console.log("dataHOje2",dataHoje)
+  
         //verifico se esta atualizando ou cadastrando
         this.setStatus(queryParams['verificacao']);
 
         this.tipoDaVacina = queryParams['select']; // tipo da vacina A=ano,M=mes,D=dia,U=unica
-        this.tempoVacina = queryParams['periodo']; //numero de tempo que vale a vacina 
-        console.log("dataHOje3",dataHoje)
+        this.tempoVacina = queryParams['periodo']; //numero de tempo que vale a vacina
+        
         let dataValidade = null;
-        dataValidade = this.gerarDataValidade(dataHoje);
+
+        dataValidade = this.gerarDataValidade();
         this.getAplicadaVacinaCartao().setDataValidade(dataValidade);
 
-        console.log("tipoDaVacina",this.gerarDataValidade(dataHoje));
+        console.log("tipoDaVacina",dataValidade);
         
       }
     );
@@ -217,61 +218,27 @@ export class AplicarVacinaCartaoComponent {
    /**
    * @description função que gera a data de valide de acordo com o tempo de imunizacao da vacina
    */
-  gerarDataValidade(dataHoje){
+  gerarDataValidade(){
    if(this.tipoDaVacina == 'A'){
-     
-     
-    let dia = dataHoje.toISOString(8,2);
-    let mes = dataHoje.toISOString(6,1);
-    let ano = dataHoje.setFullYear(dataHoje.getFullYear() + this.tempoVacina);
-    console.log('Ano',ano);
-
-    let data = new Date(ano,mes,dia);
-
+    var data = new Date();
+    for(let i = 0 ; i < this.tempoVacina ; i++){ data.setFullYear(data.getFullYear() + 1) }
     return data;
-
    }
 
    if(this.tipoDaVacina == 'M'){
-
-    let dia = dataHoje.toISOString().substr(8,2);
-    let mes = dataHoje.setMonth(dataHoje.getMonth() + this.tempoVacina);
-    let ano = dataHoje.toISOString().substr(0,4);
-    console.log('Mes',mes);
-
-    let data = new Date(ano,mes,dia);
-    console.log("dataOk",data)
-    console.log("dataQestaVindo",dataHoje)
+    var data = new Date();
+    for(let i = 0 ; i < this.tempoVacina ; i++){ data.setMonth(data.getMonth() + 1) }
     return data;
    }
 
    if(this.tipoDaVacina == 'D'){
-    console.log('Dia1>',dataHoje);
-
-    // let convert = this.tempoVacina.toISOString()
-    // let dataNova = new Date(dataHoje);
-    // let dia = dataNova.getDate().toString();
-    // let mes = dataNova.getMonth().toString() + convert.substr(8,2);
-    // let ano = dataNova.getFullYear();
-
-    // dataNova = new Date(ano,mes,dia)
-
     var data = new Date();
-
-    data.setDate(data.getDate() + this.tempoVacina);
-
-    console.log("tempoVacina",this.tempoVacina)
-
-    console.log('Dia2>',data,' Tempo>',this.tempoVacina,'Dia');
-
-    return dataHoje;
+    for(let i = 0 ; i < this.tempoVacina ; i++){ data.setDate(data.getDate() + 1) }
+    return data;
    }
 
    if(this.tipoDaVacina == 'U'){
-    console.log('Unico');
-
-    let data = new Date();
-
+    var data = new Date();
     return data;
    }
   }
