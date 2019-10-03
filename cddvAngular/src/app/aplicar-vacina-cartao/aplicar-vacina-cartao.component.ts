@@ -28,7 +28,7 @@ export class AplicarVacinaCartaoComponent {
   private mensagemAviso                               = null;
   private errosApi                                    = null;
   private tipoDaVacina        : String                = null;
-  private tempoVacina         : Date                = null;
+  private tempoVacina         : number                = null;
   private data: String;
   private status                  = false;
   
@@ -53,18 +53,18 @@ export class AplicarVacinaCartaoComponent {
       (queryParams: any) => {
         
         let dataHoje = new Date();
-
+        console.log("dataHOje1",dataHoje)
         this.getAplicadaVacinaCartao().setCartaoSus(queryParams['cartao_sus']);
         this.getAplicadaVacinaCartao().setVacinasId(queryParams['vacina_id']);
         this.getAplicadaVacinaCartao().setCpf_agente(this.adsUsuario.getAuth().decodificaToken().cpf);
         this.getAplicadaVacinaCartao().setDataAplicacao( dataHoje.toISOString().substr(0,10));
-
+        console.log("dataHOje2",dataHoje)
         //verifico se esta atualizando ou cadastrando
         this.setStatus(queryParams['verificacao']);
 
         this.tipoDaVacina = queryParams['select']; // tipo da vacina A=ano,M=mes,D=dia,U=unica
         this.tempoVacina = queryParams['periodo']; //numero de tempo que vale a vacina 
-        console.log("dataHOje",dataHoje)
+        console.log("dataHOje3",dataHoje)
         let dataValidade = null;
         dataValidade = this.gerarDataValidade(dataHoje);
         this.getAplicadaVacinaCartao().setDataValidade(dataValidade);
@@ -246,10 +246,23 @@ export class AplicarVacinaCartaoComponent {
    }
 
    if(this.tipoDaVacina == 'D'){
-    
-    dataHoje.setDate(dataHoje.getDate() + this.tempoVacina);
+    console.log('Dia1>',dataHoje);
 
-    console.log('Dia>',dataHoje,' Tempo>',this.tempoVacina);
+    // let convert = this.tempoVacina.toISOString()
+    // let dataNova = new Date(dataHoje);
+    // let dia = dataNova.getDate().toString();
+    // let mes = dataNova.getMonth().toString() + convert.substr(8,2);
+    // let ano = dataNova.getFullYear();
+
+    // dataNova = new Date(ano,mes,dia)
+
+    var data = new Date();
+
+    data.setDate(data.getDate() + this.tempoVacina);
+
+    console.log("tempoVacina",this.tempoVacina)
+
+    console.log('Dia2>',data,' Tempo>',this.tempoVacina,'Dia');
 
     return dataHoje;
    }
