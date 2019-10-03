@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Vacina } from '../cadastrar-vacina/vacina';
 import { WorkspaceUbsService } from '../workspace-ubs/workspace-ubs.service';
 import { AgenteService } from '../cadastrar-ads/cadastrarAdsService';
+import { parseDate } from 'tough-cookie';
 
 @Component({
   selector: 'app-aplicar-vacina-cartao',
@@ -27,6 +28,9 @@ export class AplicarVacinaCartaoComponent {
   private mensagemAviso                               = null;
   private errosApi                                    = null;
   private tipoDaVacina        : String                = null;
+  private tempoVacina         : Date                = null;
+  private data: String;
+  private status                  = false;
   
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -53,8 +57,20 @@ export class AplicarVacinaCartaoComponent {
         this.getAplicadaVacinaCartao().setCartaoSus(queryParams['cartao_sus']);
         this.getAplicadaVacinaCartao().setVacinasId(queryParams['vacina_id']);
         this.getAplicadaVacinaCartao().setCpf_agente(this.adsUsuario.getAuth().decodificaToken().cpf);
-        this.getAplicadaVacinaCartao().setDataAplicacao( dataHoje.toISOString().substring(0,10) );
-        // this.tipoDaVacina = queryParams['']
+        this.getAplicadaVacinaCartao().setDataAplicacao( dataHoje.toISOString().substr(0,10));
+
+        //verifico se esta atualizando ou cadastrando
+        this.setStatus(queryParams['verificacao']);
+
+        this.tipoDaVacina = queryParams['select']; // tipo da vacina A=ano,M=mes,D=dia,U=unica
+        this.tempoVacina = queryParams['periodo']; //numero de tempo que vale a vacina 
+        console.log("dataHOje",dataHoje)
+        let dataValidade = null;
+        dataValidade = this.gerarDataValidade(dataHoje);
+        this.getAplicadaVacinaCartao().setDataValidade(dataValidade);
+
+        console.log("tipoDaVacina",this.gerarDataValidade(dataHoje));
+        
       }
     );
   }
@@ -68,24 +84,32 @@ export class AplicarVacinaCartaoComponent {
 
   }
 
-    /**
-   * @description Função valida se as informações estão corretas do estão corretas. 
-   */
-  private registrarVacina(){
+   /**
+  * @description Função valida se informações do formulário estão corretas. 
+  */
+ private registrarVacina(){
 
-    // this.getAplicadaVacinaCartao().setDataValidade(if())
-    if( this.validarCampus() ){
+  if( this.validarCampus() ){
 
-      this.camposObrigatorios = true;
-      console.log(this);
-      alert("prencha todos os Campos");
-      return;
+    this.camposObrigatorios = true;
+    alert("Prencha todos os Campos");
+    return;
 
-    }else{
-      this.camposObrigatorios = false;
-      this.salvaAplicarVacina()
-    }
+  }else if(this.getStatus() == undefined){
+
+    console.log("salva",this.status)
+    this.camposObrigatorios = false;
+    this.salvaAplicarVacina()
+
+  }else{
+   
+   console.log("atulizar",this.status)
+   this.camposObrigatorios = false;
+   this.status = false;
+   this.atualizarAplicarVacina()
+
   }
+}
 
   /**
    * @description Se inscreve no serviço que envia solicitação para API salvar frequência na base de dados.
@@ -103,6 +127,24 @@ export class AplicarVacinaCartaoComponent {
 
     
   }
+
+   /**
+ * @description Se inscreve no serviço que envia solicitação para API atualizar a vacinas na base de dados.
+ */
+ private atualizarAplicarVacina(){
+
+  //Envia solicitação para atualizar formulário
+  this.aplicarVacinaService.atualizarAplicarVacina(this.aplicarVacina).subscribe(
+
+              result =>{ 
+                          alert("Vacina Atualizada com Sucesso");
+                          this.router.navigate(['workspace-ads']);
+                        },
+              erros => { 
+                          this.setErrosApi(erros);
+                        }
+            );
+ }
 
   /**
    * @description Retorna instancia de CadastroPopulacao alocado.
@@ -170,6 +212,63 @@ export class AplicarVacinaCartaoComponent {
 
     this.errosApi = error + " /countErros: " + AplicarVacinaCartaoComponent.countErros++  ;
     console.log(this.errosApi);
+  }
+
+   /**
+   * @description função que gera a data de valide de acordo com o tempo de imunizacao da vacina
+   */
+  gerarDataValidade(dataHoje){
+   if(this.tipoDaVacina == 'A'){
+     
+     
+    let dia = dataHoje.toISOString(8,2);
+    let mes = dataHoje.toISOString(6,1);
+    let ano = dataHoje.setFullYear(dataHoje.getFullYear() + this.tempoVacina);
+    console.log('Ano',ano);
+
+    let data = new Date(ano,mes,dia);
+
+    return data;
+
+   }
+
+   if(this.tipoDaVacina == 'M'){
+
+    let dia = dataHoje.toISOString().substr(8,2);
+    let mes = dataHoje.setMonth(dataHoje.getMonth() + this.tempoVacina);
+    let ano = dataHoje.toISOString().substr(0,4);
+    console.log('Mes',mes);
+
+    let data = new Date(ano,mes,dia);
+    console.log("dataOk",data)
+    console.log("dataQestaVindo",dataHoje)
+    return data;
+   }
+
+   if(this.tipoDaVacina == 'D'){
+    
+    dataHoje.setDate(dataHoje.getDate() + this.tempoVacina);
+
+    console.log('Dia>',dataHoje,' Tempo>',this.tempoVacina);
+
+    return dataHoje;
+   }
+
+   if(this.tipoDaVacina == 'U'){
+    console.log('Unico');
+
+    let data = new Date();
+
+    return data;
+   }
+  }
+
+  public getStatus(){
+    return this.status;
+  }
+
+  public setStatus(status: boolean): void {
+    this.status = status;
   }
 
 }

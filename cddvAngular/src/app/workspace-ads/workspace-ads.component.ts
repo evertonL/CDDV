@@ -141,11 +141,10 @@ export class WorkspaceAdsComponent implements OnInit {
     let hoje = new Date();
 
     dataValidade = new Date(ano,mes,dia);
-
-    console.log("DataV > ",dataValidade);
-   
     
       return hoje>= dataValidade ? true:false
   }
+
+
 
 }

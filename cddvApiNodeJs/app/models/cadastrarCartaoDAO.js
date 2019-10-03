@@ -59,20 +59,19 @@ class CadastrarCartaoDAO {
     atualizaCadastrarCartao(numeroCartao_sus, response) {
     
         let cSql = "UPDATE cartao SET" 
-                    +" vacinas_id =        $1 ,"    
-                    +" data_aplicacao =    $2 ,"
-                    +" aplicada =          $3 ,"      
-                    +" cpf_agente =        $4 ,"    
-                    +" data_validade =     $5  "
-                    +" WHERE cartao_sus =  $6  "       
+                    +" data_aplicacao =    $1 ,"
+                    +" aplicada =          $2 ,"      
+                    +" cpf_agente =        $3 ,"    
+                    +" data_validade =     $4  "
+                    +" WHERE cartao_sus =  $5 AND vacinas_id = $6 "       
 
         let aValues = [
-            numeroCartao_sus.vacinas_id,
             numeroCartao_sus.data_aplicacao,
             numeroCartao_sus.aplicada,
             numeroCartao_sus.cpf_agente,
             numeroCartao_sus.data_validade,
-            numeroCartao_sus.cartao_sus
+            numeroCartao_sus.cartao_sus,
+            numeroCartao_sus.vacinas_id
         ];
 
         topConnection.executaQuery(cSql, aValues, response, sucesso_atualizando, erro_atualizando);

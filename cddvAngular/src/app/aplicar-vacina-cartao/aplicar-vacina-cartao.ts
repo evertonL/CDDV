@@ -8,7 +8,7 @@ export class AplicadaVacinaCartao {
     private data_aplicacao            : String    ;
     private aplicada                  : Boolean ;
     private cpf_agente                : String  ;
-    private data_validade             : Date    ;
+    private data_validade             : String    ;
 
     /**
      * @constructor
@@ -20,7 +20,7 @@ export class AplicadaVacinaCartao {
      * @param {String } data_validade                            
      */
     constructor(cartao_sus?: String, vacinas_id?: String, data_aplicacao?: String,
-        aplicada?: Boolean, cpf_agente?: String, data_validade?: Date) {
+        aplicada?: Boolean, cpf_agente?: String, data_validade?: String) {
 
         this.cartao_sus = cartao_sus;
         this.vacinas_id = vacinas_id;
@@ -76,7 +76,7 @@ export class AplicadaVacinaCartao {
      * @description: Retorna o data_validade
      * @return {String} ( data_validade ) - código identificador.
      */
-    public getDataValidade(): Date {
+    public getDataValidade(): String {
         return this.data_validade;
     }
 
@@ -126,7 +126,7 @@ export class AplicadaVacinaCartao {
     * @description Seta código identicador.
     * @param data_validade - Código identicador.
     */
-    public setDataValidade(data_validade: Date): void {
+    public setDataValidade(data_validade: String): void {
         this.data_validade = data_validade;
     }
 
