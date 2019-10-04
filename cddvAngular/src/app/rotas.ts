@@ -33,6 +33,7 @@ export const rotas : Routes = [
     { path: "cartao-populacao"                                      , component  : CartaoPopulacaoComponent    },
     { path: "administrador"                                         , component  : AdministradorComponent      },
     { path: "administrador/cadastrar-ubs"                           , component  : CadastrarUbsComponent       },
+    { path: "administrador/workspace-ubs"                           , component  : WorkspaceUbsComponent       },
     { path: 'workspace-ubs/cadastrar-ads/workspace-ubs'             , redirectTo : 'workspace-ubs'             },
     { path: 'workspace-ubs/cadastrar-vacina/workspace-ubs'          , redirectTo : 'workspace-ubs'             },
     { path: 'workspace-ubs/relatorio/workspace-ubs'                 , redirectTo : 'workspace-ubs'             },

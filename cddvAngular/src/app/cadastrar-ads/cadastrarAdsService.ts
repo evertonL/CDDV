@@ -36,10 +36,10 @@ export class AgenteService {
   }
 
   /**
-   * @description envia solicitação para API salvar Agente na base de dados.
-   * @param Agente objeto de Agente que deve ser salvo.
-   * @returns Observable 
-   */
+  * @description envia solicitação para API salvar Agente na base de dados.
+  * @param Agente objeto de Agente que deve ser salvo.
+  * @returns Observable 
+  */
   salvaAgente(Agente: Agente): Observable<Agente> {
 
     return this.http.post<Agente>(this.AgenteApi, Agente, httpOption)
@@ -48,6 +48,21 @@ export class AgenteService {
           this.errorHandler
         )
       );
+  }
+
+  /**
+  * @description envia solicitação para API atualizar usuario na base de dados.
+  * @param usuario objeto da usuario que deve ser atualizada.
+  * @returns Observable
+  */
+  public atualizarAgente(Agente : Agente): Observable<Agente>{
+  
+    return this.http.put<Agente>(this.AgenteApi, Agente, httpOption)
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          );    
   }
 
   /**

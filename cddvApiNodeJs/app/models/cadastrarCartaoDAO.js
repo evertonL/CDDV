@@ -8,18 +8,18 @@ const { erro_consultando, sucesso_consultando } = require("./../libs/msgsErroSuc
 class CadastrarCartaoDAO {
 
     /**
-     * @constructor
-     */
+    * @constructor
+    */
     constructor() {
 
     }
 
     /**
-     * @description : Salva novo cartao no banco de dados.
-     * @param cadastrarCartao, objeto contendo informações da novo Cartao que deverá ser salvo.
-     * @param response, objeto de response da requisição.
-     * @obs o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
-     */
+    * @description : Salva novo cartao no banco de dados.
+    * @param cadastrarCartao, objeto contendo informações da novo Cartao que deverá ser salvo.
+    * @param response, objeto de response da requisição.
+    * @obs o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+    */
     salvaCadastrarCartao(cadastrarCartao, response) {
 
         let cSql = "INSERT INTO cartao("
@@ -51,11 +51,11 @@ class CadastrarCartaoDAO {
     }
 
     /**
-     * @description: Atualiza o catao no banco de dados.
-     * @param {*} numeroCartao_sus, numero do cartao da populacao que deve ser alterado.
-     * @param response, objeto de response da requisição.
-     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
-     */
+    * @description: Atualiza o catao no banco de dados.
+    * @param {*} numeroCartao_sus, numero do cartao da populacao que deve ser alterado.
+    * @param response, objeto de response da requisição.
+    * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+    */
     atualizaCadastrarCartao(numeroCartao_sus, response) {
     
         let cSql = "UPDATE cartao SET" 
@@ -101,7 +101,41 @@ class CadastrarCartaoDAO {
             + " ORDER BY cartao_sus "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);
-    } 
+    }
+
+
+    /**
+    * @description Consulta o cartao da populacao no banco de dados pelo numero do cartao do sus
+    * @param {String  } cartao_sus, descricao à ser pesquisada.
+    * @param {response} response 
+    */
+    getCartaoDaPopulacao(cartao_sus , response){
+
+        let cSql = "SELECT populacao.nome                        , "
+                        + " vacinas.id_vacina                    , "
+                        + " vacinas.nome AS vacina_nome          , "
+                        + " vacinas.select_tempo_imunizacao      , "
+                        + " vacinas.periodo_de_imunizacao        , "
+                        + " vacinas.lote                         , "
+                        + " cartao.aplicada                      , "
+                        + " agente_de_saude.nome AS nome_agente  , "
+                        + " ubs.nome_da_unidade                  , "
+                        + " cartao.data_aplicacao                , " 
+                        + " cartao.data_validade                   "
+                +"  FROM    "
+                        + " populacao                                                              "
+                        + " INNER JOIN cartao ON(cartao.cartao_sus = populacao.cartao_sus)         "
+                        + " INNER JOIN vacinas ON(vacinas.id_vacina = cartao.vacinas_id )           "
+                        + " INNER JOIN agente_de_saude ON(agente_de_saude.cpf = cartao.cpf_agente) "
+                        + " INNER JOIN ubs ON(ubs.cnes = agente_de_saude.cnes)                     "
+                +"  WHERE   " 
+                        + " populacao.cartao_sus  = $1                                             "
+
+                    
+        let aValues = [ cartao_sus ];
+
+        topConnection.executaQuery(cSql, aValues,  response, sucesso_consultando, erro_consultando);      
+    }
 }
 
 

@@ -125,7 +125,7 @@
 				<td>{{workspaceAds.data_validade | date:'dd/MM/yyyy'}}</td>
 				<td *ngIf="workspaceAds.aplicada">Aplicada</td>
 				<td *ngIf="!workspaceAds.aplicada">Agendada</td>
-				<td *ngIf="!compararData(workspaceAds.data_validade)">
+				<td *ngIf="compararData(workspaceAds.data_validade)">
 						<input  type="button"
 					    class="btn btn-danger buttonBloquear"
 					    value="Atualizar Vacina"

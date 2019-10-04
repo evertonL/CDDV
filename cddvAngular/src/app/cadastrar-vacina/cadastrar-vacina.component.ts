@@ -162,7 +162,7 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
           this.getCadastrarVacina().getNome().trim()                 == ''        ||
           this.getCadastrarVacina().getLote().trim()                 == ''        ||
           this.getCadastrarVacina().getNomeDaUnidade().trim()        == ''        ||
-          this.getCadastrarVacina().getPeriodoDeImunizacao().trim()  == ''        ||
+          // this.getCadastrarVacina().getPeriodoDeImunizacao().trim()  == ''        || 
           this.getCadastrarVacina().getSelectImunizacao().trim()     == ''        ||
           this.getCadastrarVacina().getNome()                        == null      ||  
           this.getCadastrarVacina().getLote()                        == null      ||  

@@ -1,5 +1,6 @@
 //Bibliotecas
 const topConnection = require("./processosPG");
+const crypto        = require("crypto");
 const { erro_inserindo, sucesso_inserindo } = require("./../libs/msgsErroSucessoApi");
 const { erro_atualizando, sucesso_atualizando } = require("./../libs/msgsErroSucessoApi");
 const { erro_deletando, sucesso_deletando } = require("./../libs/msgsErroSucessoApi");
@@ -8,18 +9,18 @@ const { erro_consultando, sucesso_consultando } = require("./../libs/msgsErroSuc
 class CadastrarPopulacaoDAO {
 
     /**
-     * @constructor
-     */
+    * @constructor
+    */
     constructor() {
 
     }
 
     /**
-     * @description : Salva o Cadastror da Populacao no banco de dados.
-     * @param cadastrarPopulacao, objeto contendo informações da novo cadastrarPopulacao que deverá ser salvo.
-     * @param response, objeto de response da requisição.
-     * @obs o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
-     */
+    * @description : Salva o Cadastror da Populacao no banco de dados.
+    * @param cadastrarPopulacao, objeto contendo informações da novo cadastrarPopulacao que deverá ser salvo.
+    * @param response, objeto de response da requisição.
+    * @obs o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+    */
     salvaCadastrarPopulacao(cadastrarPopulacao, response) {
 
         let cSql = "INSERT INTO populacao("
@@ -48,27 +49,27 @@ class CadastrarPopulacaoDAO {
             + "                )";
 
         let aValues = [
-                cadastrarPopulacao.cartao_sus            ,
-                cadastrarPopulacao.nome_da_mae           ,
-                cadastrarPopulacao.municipio_de_nacimento,
-                cadastrarPopulacao.estado                ,
-                cadastrarPopulacao.endereco              ,
-                cadastrarPopulacao.nome_do_pai           ,
-                cadastrarPopulacao.sexo                  ,
-                cadastrarPopulacao.nome                  ,
-                cadastrarPopulacao.data_nacimento        ,
-                cadastrarPopulacao.senha                 
+            cadastrarPopulacao.cartao_sus            ,
+            cadastrarPopulacao.nome_da_mae           ,
+            cadastrarPopulacao.municipio_de_nacimento,
+            cadastrarPopulacao.estado                ,
+            cadastrarPopulacao.endereco              ,
+            cadastrarPopulacao.nome_do_pai           ,
+            cadastrarPopulacao.sexo                  ,
+            cadastrarPopulacao.nome                  ,
+            cadastrarPopulacao.data_nacimento        ,
+            cadastrarPopulacao.senha = crypto.createHash('MD5').update(cadastrarPopulacao.senha).digest('hex') //criptogafando a senha                 
         ];
 
         topConnection.executaQuery(cSql, aValues, response, sucesso_inserindo, erro_inserindo);
     }
 
     /**
-     * @description: Atualiza a informacao da Passoa em questao no banco de dados.
-     * @param {*} numeroCartao_sus, cpf do agente_de_saude que deve ser alterado.
-     * @param response, objeto de response da requisição.
-     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
-     */
+    * @description: Atualiza a informacao da Passoa em questao no banco de dados.
+    * @param {*} numeroCartao_sus, cpf do agente_de_saude que deve ser alterado.
+    * @param response, objeto de response da requisição.
+    * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+    */
     atualizaCadastrarPopulacao(numeroCartao_sus, response) {
     
         let cSql = "UPDATE populacao SET"
@@ -83,7 +84,7 @@ class CadastrarPopulacaoDAO {
         + "                 senha =                  $9   "
         + "                 WHERE cartao_sus =       $10  "
 
-    let aValues = [
+        let aValues = [
             numeroCartao_sus.nome_da_mae           ,
             numeroCartao_sus.municipio_de_nacimento,
             numeroCartao_sus.estado                ,
@@ -92,9 +93,9 @@ class CadastrarPopulacaoDAO {
             numeroCartao_sus.sexo                  ,
             numeroCartao_sus.nome                  ,
             numeroCartao_sus.data_nacimento        ,
-            numeroCartao_sus.senha                 ,
+            numeroCartao_sus.senha = crypto.createHash('MD5').update(numeroCartao_sus.senha).digest('hex'), //criptogafando a senha
             numeroCartao_sus.cartao_sus            ,
-    ];
+        ];
 
         topConnection.executaQuery(cSql, aValues, response, sucesso_atualizando, erro_atualizando);
     }
@@ -117,7 +118,7 @@ class CadastrarPopulacaoDAO {
     * @description Consulta todos os agente_de_saudes cadastradas no banco de dados
     * @param {response} response 
     */
-   getAllCadastrarPopulacao(response) {
+    getAllCadastrarPopulacao(response) {
 
         let cSql = "SELECT cartao_sus             , "
                         +" nome_da_mae            , "
@@ -133,7 +134,31 @@ class CadastrarPopulacaoDAO {
                         +" ORDER BY cartao_sus      "
 
         topConnection.executaQuery(cSql, [], response, sucesso_consultando, erro_consultando);
-    } 
+    }
+
+    /**
+    * @description Consulta a Ubs no banco de dados pelo cartao_sus e senha.
+    * @param {String  } cartao_sus, cnes da Unidade Basica de Saude
+    * @param {String  } senha, senha da Unidade Basica de Saude
+    */
+    async ProcuraPopulcaoParaLogin(cartao_sus , senha){
+
+        let cSql    =  "SELECT cartao_sus, "
+                +  " nome                  " 
+                +  " FROM populacao "
+                +  " WHERE cartao_sus   = $1  "
+                +  "   AND senha        = $2  "
+                
+        let aValues = [ 
+                    cartao_sus  ,
+                    senha
+        ];
+                  console.log('senha',senha);
+                  console.log('cartao_sus',cartao_sus);
+
+   //Executa a query e ja retorna a pessoa              
+   return topConnection.executaQueryAsync(cSql, aValues, sucesso_consultando, erro_consultando);            
+   }   
 }
 
 

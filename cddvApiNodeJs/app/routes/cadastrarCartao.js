@@ -19,6 +19,11 @@ module.exports = function(application){
 
     });
 
+    application.get("/api/cadastrarCartao/:cartao_sus", function(req, res){
+
+        application.app.controllers.cadastrarCartao.getCartaoDaPopulacao(application, req, res);
+    });
+
     application.get("/api/cadastrarCartao", function(req, res){
 
         application.app.controllers.cadastrarCartao.getAllCadastrarCartao(application, req, res);

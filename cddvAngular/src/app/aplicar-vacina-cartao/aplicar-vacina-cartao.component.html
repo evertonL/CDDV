@@ -82,9 +82,9 @@
                     <select class="form-control"
                             id   = "vacinas_id" 
                             name = "vacinas_id"
-                            [(ngModel)]="aplicarVacina.vacinas_id"
+                            [(ngModel)]="aplicarVacina.vacinas_id" 
                     >
-                        <option *ngFor="let vacinaAplicar of workspaceUbsVacinas" value={{vacinaAplicar.id_vacina}}>{{vacinaAplicar.nome}}</option>
+                        <option *ngFor="let vacinaAplicar of workspaceUbsVacinas" value={{vacinaAplicar.id_vacina}} >{{vacinaAplicar.nome}}</option>
     
                     </select>
             </div>

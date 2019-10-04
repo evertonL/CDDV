@@ -27,8 +27,10 @@ export class AplicarVacinaCartaoComponent {
   private camposObrigatorios                          = false;
   private mensagemAviso                               = null;
   private errosApi                                    = null;
+
   private tipoDaVacina        : String                = null;
   private tempoVacina         : number                = null;
+  
   private data: String;
   private status                  = false;
   
@@ -61,6 +63,7 @@ export class AplicarVacinaCartaoComponent {
   
         //verifico se esta atualizando ou cadastrando
         this.setStatus(queryParams['verificacao']);
+        console.log("justo",this.setStatus(queryParams['verificacao']));
 
         this.tipoDaVacina = queryParams['select']; // tipo da vacina A=ano,M=mes,D=dia,U=unica
         this.tempoVacina = queryParams['periodo']; //numero de tempo que vale a vacina
@@ -85,10 +88,10 @@ export class AplicarVacinaCartaoComponent {
 
   }
 
-   /**
+  /**
   * @description Função valida se informações do formulário estão corretas. 
   */
- private registrarVacina(){
+  private registrarVacina(){
 
   if( this.validarCampus() ){
 
@@ -129,10 +132,10 @@ export class AplicarVacinaCartaoComponent {
     
   }
 
-   /**
+  /**
  * @description Se inscreve no serviço que envia solicitação para API atualizar a vacinas na base de dados.
  */
- private atualizarAplicarVacina(){
+  private atualizarAplicarVacina(){
 
   //Envia solicitação para atualizar formulário
   this.aplicarVacinaService.atualizarAplicarVacina(this.aplicarVacina).subscribe(
@@ -145,7 +148,7 @@ export class AplicarVacinaCartaoComponent {
                           this.setErrosApi(erros);
                         }
             );
- }
+  }
 
   /**
    * @description Retorna instancia de CadastroPopulacao alocado.
@@ -186,10 +189,10 @@ export class AplicarVacinaCartaoComponent {
   }
 
 
-   /**
+  /**
   * @description: Se inscreve no serviço que envia solicitação para API resgatar todos as vacinas na base de dados.
   */
- getAllVacinasPorUbs(){
+  getAllVacinasPorUbs(){
   console.log("CNES",this.adsUsuario.getAuth().decodificaToken().cnes)
   this.inscricao = this.workspaceUbsService.getAllVacinasPorUbs(this.adsUsuario.getAuth().decodificaToken().cnes).subscribe(
 
@@ -202,7 +205,7 @@ export class AplicarVacinaCartaoComponent {
                   this.setErrosApi(error);
                }
   );
-}
+  }
 
   /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
@@ -215,9 +218,9 @@ export class AplicarVacinaCartaoComponent {
     console.log(this.errosApi);
   }
 
-   /**
-   * @description função que gera a data de valide de acordo com o tempo de imunizacao da vacina
-   */
+  /**
+  * @description função que gera a data de valide de acordo com o tempo de imunizacao da vacina quando esta atualizando
+  */
   gerarDataValidade(){
    if(this.tipoDaVacina == 'A'){
     var data = new Date();

@@ -7,7 +7,7 @@ export class Agente{
     private nome           :   String;
     private senha          :   String;
     private rg             :   String;
-    private bloqueado      :   boolean;
+    private bloqueado      :   boolean = false;
     private cnes           :   String; // quando tiver logando tirar daquio valor
   
     /**

@@ -135,14 +135,14 @@ export class WorkspaceAdsComponent implements OnInit {
   compararData(dataValidade){
     
     let dia = dataValidade.substr(8,2);
-    let mes = dataValidade.substr(6,1);
+    let mes = dataValidade.substr(5,2) - 1;
     let ano = dataValidade.substr(0,4);
 
     let hoje = new Date();
 
     dataValidade = new Date(ano,mes,dia);
-    
-      return hoje>= dataValidade ? true:false
+    console.log("hoja= ",hoje,"DataValidade= ",dataValidade,"return",hoje >= dataValidade ? true:false);
+      return hoje >= dataValidade ? true:false
   }
 
 

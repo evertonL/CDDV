@@ -10,7 +10,7 @@ export class Vacina {
     private nome_da_unidade          : String;
     private cnes                     : String;
     private select_tempo_imunizacao  : String;
-    private periodo_de_imunizacao    : String;
+    private periodo_de_imunizacao    : Number;
    
     
 
@@ -25,7 +25,7 @@ export class Vacina {
     */
     constructor(qtd_vacinas?: number, nome?: String,
         lote?: String, nome_da_unidade?: String,
-        periodo_de_imunizacao?: String, select_tempo_imunizacao?: String) {
+        periodo_de_imunizacao?: Number, select_tempo_imunizacao?: String) {
 
         this.qtd_vacinas = qtd_vacinas;
         this.nome = nome;
@@ -74,7 +74,7 @@ export class Vacina {
     * @description: Retorna o periodo_de_imunizacao
     * @return {String} ( periodo_de_imunizacao ) - código identificador.
     */
-    public getPeriodoDeImunizacao(): String {
+    public getPeriodoDeImunizacao(): Number {
         return this.periodo_de_imunizacao;
     }
     
@@ -84,6 +84,14 @@ export class Vacina {
     */
     public getSelectImunizacao(): String {
         return this.select_tempo_imunizacao;
+    }
+
+     /**
+    * @description: Retorna o periodo_de_imunizacao
+    * @return {String} ( Id_vacina ) - código identificador.
+    */
+    public getVacinaId(): String {
+        return this.id_vacina;
     }
 
     //-----------------SET-----------------------
@@ -124,7 +132,7 @@ export class Vacina {
     * @description Seta código identicador.
     * @param periodo_de_imunizacao - Código identicador.
     */
-    public setPeriodoDeImunizacao(periodo_de_imunizacao: String): void {
+    public setPeriodoDeImunizacao(periodo_de_imunizacao: Number): void {
         this.periodo_de_imunizacao = periodo_de_imunizacao;
     }
 

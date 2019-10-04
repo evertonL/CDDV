@@ -5,6 +5,8 @@ import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Ubs } from '../cadastrar-ubs/ubs';
+import { Agente } from '../cadastrar-ads/agente';
+import { Populacao } from '../cadastrar-populacao/populacao';
 
 
 const httpOption = {
@@ -17,7 +19,9 @@ const httpOption = {
 
 export class AdministradorService {
 
-  private AdministradorApi: string = "http://localhost:3000/api/cadastrarUbs"
+  private AdministradorApi1 : string = "http://localhost:3000/api/cadastrarUbs"
+  private AdministradorApi2 : string = "http://localhost:3000/api/cadastrarAds"
+  private AdministradorApi3 : string = "http://localhost:3000/api/cadastrarPopulacao"
 
   constructor(private http: HttpClient) { }
   
@@ -27,7 +31,7 @@ export class AdministradorService {
   */
  getAllUbs() : Observable<Ubs[]>{
 
-  return this.http.get<Ubs[]>(this.AdministradorApi)
+  return this.http.get<Ubs[]>(this.AdministradorApi1)
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -36,18 +40,31 @@ export class AdministradorService {
 }
 
  /**
-  * @description envia solicitação para API verificar se o nome da Ubs informado está cadastrado no saite.
+  * @description envia solicitação para API consultar todas as UBS cadastradas 
+  *              na base de dados.
   */
- getUbsCnes(pesquisa:String) : Observable<Ubs[]>{
+ getAllAds() : Observable<Agente[]>{
 
-  console.log("passou aqui " + pesquisa);
-  return this.http.get<Ubs[]>(this.AdministradorApi + "/" + pesquisa )
-                .pipe(
-                        catchError(
-                                    this.errorHandler
-                                  )
-                      );
-                      
+  return this.http.get<Agente[]>(this.AdministradorApi2)
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );
+}
+
+ /**
+  * @description envia solicitação para API consultar todas as UBS cadastradas 
+  *              na base de dados.
+  */
+ getAllPopulacao() : Observable<Populacao[]>{
+
+  return this.http.get<Populacao[]>(this.AdministradorApi3)
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );
 }
 
   /**

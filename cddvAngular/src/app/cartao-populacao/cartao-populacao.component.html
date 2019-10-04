@@ -12,142 +12,96 @@
 <body>
 
     <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
-    <nav class="navbar navbar-fixed-top navbar-light navbar-expand-sm">
+	<nav class="navbar  navbar-fixed-top navbar-light navbar-expand-sm">
 
-        <!-- LOGO -->
-        <a class="navbar-brand" routerLink="/">
+		<!-- LOGO -->
+		<a class="navbar-brand">
 
-            <img src="assets/logoxx.png"
-                width="50"
-                height="50"
-                class="d-inline-block align-top"
-                alt=""
-            >
+			<img src="assets/logoxx.png"
+				width="50"
+				height="50"
+				class="d-inline-block align-top"
+				alt=""
+			>
+		</a>
+		<H2></H2>
 
-        </a>
+		<!-- BOTÃO PARA RESPONSIVIDADE -->
+		<button class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation">
 
-        <!-- BOTÃO PARA RESPONSIVIDADE -->
-        <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
 
-            <span class="navbar-toggler-icon"></span>
+		</button>
 
-        </button>
+		<!-- BOTOES DA NAVBAR -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="container">
+				<ul class="navbar-nav mr-auto">
 
-        <!-- BOTOES DA NAVBAR -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="container">
-                <ul class="navbar-nav mr-auto">
+					<button type="button"
+						class="btn btn-outline-success"
+						>Atualizar Informacões
+					</button>
 
-                    <button type="button"
-                        class="voltar btn btn-outline-success"
-                        routerLink="/"
-                        >VOLTAR
-                    </button>
+					<button type="button"
+						class="btn btn-outline-success"
+						(click)="sair()"
+						>Sair
+					</button>
 
-                </ul>
-            </div>
-        </div>
-    </nav>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <!-- Campos De Cadastramento -->
-    <div id="main" class="container-fluid">
+<div style="background-color: rgb(91, 94, 94)">
 
-        <h3 class="page-header">Aplicar vacina no Cartao:</h3>
+	<div class="form-group col-md-5">
+		<div class="input-group-append">
 
-        <form>
-            <!-- Campos : Cartao do SUS, Id da Vacina e Data de Aplicação -->
-            <div class="row">
+			<!--colocar o nome do agente -->
+			<h3>Usuario Logado - {{nomeLogado}}</h3>
 
-                <!--cartao do sus tem que vir do individuo ja cadastrado no banco de dados-->
-                <div class="form-group col-md-4">
-                    <label for="cartao_sus">Cartao do SUS:</label>
-                    <input class="form-control"
-                        type="number"
-                        id="cartao_sus"
-                        name="cartao_sus">
-                </div>
-                <!--O id vem da Vacina ja cadastrada No banco de dados-->
-                <div class="form-group col-md-4">
-                    <label for="id_vacina">Id da Vacina:</label>
-                    <input class="form-control"
-                        type="number"
-                        id="id_vacina"
-                        name="id_vacina"
-                        >
-                </div>
+		</div>
 
-                <div class="form-group col-md-4">
-                    <label for="data_aplicacao">Data de Aplicação:</label>
-                    <input class="form-control"
-                        type="date"
-                        id="data_aplicacao"
-                        name="data_aplicacao"
-                        >
-                </div>
+		<h4>Cartão de Vacinas</h4>
 
-            </div>
+	</div>
 
-            <!-- Campos : tipo da vacina : apicada ou agendada e é do tipo boolean -->
-            <div class="form-group col-md-3">
-
-                <legend class="col-form-label col-sm-2 pt-0">Tipo: </legend>
-
-                <div class="col-sm-10">
-                        <!-- faltando arumar algumas coisas -->
-                    <div class="form-check">
-                        <input class="form-check-input"
-                        type="radio"
-                        name="gridRadios"
-                        id=""
-                        value="option1"
-                        checked>
-                        <label class="form-check-label" for="gridRadios1"> Aplicada </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input"
-                        type="radio" 
-                        name="gridRadios"
-                        id=""
-                        value="option2">
-                        <label class="form-check-label" for="gridRadios2"> Agendada </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Campos : responsavel por ter cadastrado a vacina no cartao do usuario -->
-            <div class="row">
-                <!--quando a vacina for do tipo aplicada este campo e abiltado se for do tipo 
-                    agendada ele e desabiltado-->
-                <div class="form-group col-md-3">
-                    <label for="cpf_agente">Responsavel:</label>
-                    <input class="form-control"
-                        type="number"
-                        id="cpf_agente"
-                        name="cpf_agente">
-                </div>
-
-            </div>
-
-        </form>
-
-    </div>
-
-    <!-- Botão de Registrar Cadastro -->
-    <div>
-        <button type="button" class="btRegistrar btn btn-outline-success">Registrar no Cartão</button>
-    </div>
-
-    <!-- Rodapé
-    <footer class="footer text-center">
-        <p>--Rodapé--</p>
-    </footer> -->
+	<table class="table table-responsive table-hover table-dark" id="tabela">
+			<thead>
+			  <tr>
+				<th scope="col">Vacina</th>
+				<th scope="col">Lote</th>
+				<th scope="col">Resposavel</th>
+				<th scope="col">UBS</th>
+				<th scope="col">Aplicada em</th>
+				<th scope="col">Validade</th>
+				<th ></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr *ngFor="let vacinas of vacinasNoCartao">
+				
+				<td>{{vacinas.vacina_nome}}</td>
+				<td>{{vacinas.lote}}</td>
+				<td>{{vacinas.nome_agente}}</td>
+				<td>{{vacinas.nome_da_unidade}}</td>
+				<td>{{vacinas.data_aplicacao | date:'dd/MM/yyyy'}}</td>
+				<td>{{vacinas.data_validade | date:'dd/MM/yyyy'}}</td>
+				<td *ngIf="vacinas.aplicada">Aplicada</td>
+				<td *ngIf="!vacinas.aplicada">Agendada</td>
+			
+			  </tr>
+			</tbody>
+	</table>
+</div>
 
 </body>
 

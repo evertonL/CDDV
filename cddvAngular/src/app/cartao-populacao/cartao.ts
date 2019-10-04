@@ -3,116 +3,191 @@
  */
 export class Cartao {
 
-    private cartao_sus: number;   // PFK
-    private id_vacina: number;    // FK
-    private data_aplicacao: Date;
-    private aplicada: boolean;
-    private cpf_agente: number;   // FK
-
+    private nomeUsuarioCartao  : String   ;
+    private nomeDaVacina       : String   ;
+    private lote               : String   ;
+    private statusVacina       : boolean  ;
+    private nomeDoAgente       : String   ;
+    private nomeDaUbs          : String   ;
+    private dataDeAplicacao    : Date     ;
+    private dataDeValidade     : Date     ;
+    private cartao_sus         : String   ;
+  
     /**
      * @constructor
-     * @param {number  }  cartao_sus                
-     * @param {number  }  id_vacina                       
-     * @param {Date    }  data_aplicacao             
-     * @param {boolean }  aplicada                  
-     * @param {number  }  cpf_agente                                                   
+     * @param {String  } nomeUsuarioCartao  
+     * @param {String  } nomeDaVacina 
+     * @param {String  } lote
+     * @param {boolean } statusVacina;
+     * @param {String  } nomeDoAgente
+     * @param {String  } nomeDaUbs
+     * @param {Date    } dataDeAplicacao
+     * @param {Data    } dataDeValidade
+     * @param {string  } cartao_sus
      */
-    constructor(cartao_sus?: number, id_vacina?: number,
-        data_aplicacao?: Date, aplicada?: boolean,
-        cpf_agente?: number) {
+    constructor(nomeUsuarioCartao?: String, nomeDaVacina?: String, lote?: String, statusVacina?: boolean, nomeDoAgente?: String ,
+                nomeDaUbs?: String, dataDeAplicacao?: Date, dataDeValidade?: Date, cartao_sus?: String) {
+  
+      this.nomeUsuarioCartao  = nomeUsuarioCartao;
+      this.nomeDaVacina       = nomeDaVacina;
+      this.lote               = lote;
+      this.statusVacina       = statusVacina;
+      this.nomeDoAgente       = nomeDoAgente;
+      this.nomeDaUbs          = nomeDaUbs;
+      this.dataDeAplicacao    = dataDeAplicacao;
+      this.dataDeValidade     = dataDeValidade;
+      this.cartao_sus         = cartao_sus;
 
-        this.cartao_sus = cartao_sus;
-        this.id_vacina = id_vacina;
-        this.data_aplicacao = data_aplicacao;
-        this.aplicada = aplicada;
-        this.cpf_agente = cpf_agente;
     }
 
-    // -----------------GET----------------
+    //--------------GET-------------------//
+  
+    /**
+     * @description: Retorna nome do usuario do cartao de vacinas.
+     * @return {String} ( nomeUsuarioCartao ) - código identificador.
+     */
+    public getnomeUsuarioCartao(): String {
+      return this.nomeUsuarioCartao;
+    }
+  
+    /**
+     * @description: Retorna o nome Da Vacina que esta no cartao de vacinas.
+     * @return {String} ( nomeDaVacina ) - código identificador.
+     */
+    public getNameVacina(): String {
+      return this.nomeDaVacina;
+    }
+  
+    /**
+     * @description: Retorna a lote da vacina que esta no cartao de vacinas.
+     * @return {String} ( lote ) - código identificador.
+     */
+    public getlote(): String {
+      return this.lote;
+    }
 
     /**
-     * @description: Retorna o cartao_sus.
-     * @return {number} ( cartao_sus ) - código identificador.
+     * @description: Retorna true se a vacina estiver aplicada ou false se estiver agendada.
+     * @return {boolean} ( statusVacina ) - código identificador.
      */
-    public getCartaoSus(): number {
+    public getStatusVacina(): boolean {
+        return this.statusVacina;
+      }
+    
+  
+    /**
+     * @description: Retorna o nome do Agente responsalvel pelo cadastro da vacina no cartao.
+     * @return {String} ( nomeDoAgente ) - código identificador.
+     */
+    public getnomeDoAgente(): String {
+      return this.nomeDoAgente;
+    }
+
+    /**
+     * @description: Retorna nome de onde foi alicada a Vacina
+     * @return {String} ( nomeDaUbs ) - código identificador.
+     */
+    public getnomeDaUbs(): String {
+      return this.nomeDaUbs;
+    }
+
+     /**
+     * @description: Retorna a data que a vacina foi aplicada.
+     * @return {date} ( dataDeAplicacao ) - código identificador.
+     */
+    public getdataDeAplicacao(): Date {
+        return this.dataDeAplicacao;
+      }
+    
+       /**
+     * @description: Retorna a data que a vacina perde sua validade.
+     * @return {date} ( dataDeValidade ) - código identificador.
+     */
+    public getdataDeValidade(): Date {
+        return this.dataDeValidade;
+      }
+
+       /**
+     * @description: Retorna o numero do carto do sus do individuo.
+     * @return {String} ( cartao_sus ) - código identificador.
+     */
+    public getCartaoSus(): String {
         return this.cartao_sus;
-    }
-
-    /**
-    * @description: Retorna numero do id_vacina.
-    * @return {number} ( id_vacina ) - código identificador.
-    */
-    public getIdVacina(): number {
-        return this.id_vacina;
-    }
-
-
-    /**
-     * @description: Retorna a data_aplicacao
-     * @return {Date} ( data_aplicacao ) - código identificador.
-     */
-    public getDataAplicacao(): Date {
-        return this.data_aplicacao;
-    }
-
-    /**
-     * @description: Retorna o aplicada
-     * @return {boolean} ( aplicada ) - código identificador.
-     */
-    public getAplicada(): boolean {
-        return this.aplicada;
-    }
-
-    /**
-     * @description: Retorna o cpf_agente
-     * @return {number} ( cpf_agente ) - código identificador.
-     */
-    public getCpfAgente(): number {
-        return this.cpf_agente;
-    }
-
-
-    //-----------------SET-----------------------
-
-    /**
-     * @description Seta código identicador.
-     * @param cartao_sus - Código identicador.
-     */
-    public setCartaoSus(cartao_sus: number): void {
-        this.cartao_sus = cartao_sus;
-    }
+      }
+  
+  //---------------SET------------------
 
     /**
      * @description: Seta código identicador.
-     * @param id_vacina - Código identicador.
+     * @param nomeUsuarioCartao - Código identicador.
      */
-    public setIdVacina(id_vacina: number): void {
-        this.id_vacina = id_vacina;
+    public setnomeUsuarioCartao(nomeUsuarioCartao: String): void {
+      this.nomeUsuarioCartao = nomeUsuarioCartao;
     }
-
+  
+    /**
+     * @description Seta código identicador.
+     * @param nomeDaVacina - Código identicador.
+     */
+    public setNameVacina(nomeDaVacina: String): void {
+      this.nomeDaVacina = nomeDaVacina;
+    }
+  
+    /**
+     * @description Seta código identicador.
+     * @param lote - Código identicador.
+     */
+    public setlote(lote: String): void {
+      this.lote = lote;
+    }
 
     /**
      * @description Seta código identicador.
-     * @param data_aplicacao - Código identicador.
+     * @param {statusVacina} - Código identicador.
      */
-    public setDataAplicacao(data_aplicacao: Date): void {
-        this.data_aplicacao = data_aplicacao;
+    public setStatusVacina(statusVacina: boolean): void {
+        this.statusVacina = statusVacina;
+    }
+  
+    /**
+     * @description Seta código identicador.
+     * @param nomeDoAgente - Código identicador.
+     */
+    public setnomeDoAgente(nomeDoAgente: String): void {
+      this.nomeDoAgente = nomeDoAgente;
     }
 
     /**
-    * @description Seta código identicador.
-    * @param aplicada - Código identicador.
-    */
-    public setAplicada(aplicada: boolean): void {
-        this.aplicada = aplicada;
+     * @description Seta código identicador.
+     * @param nomeDaUbs - Código identicador.
+     */
+    public setnomeDaUbs(nomeDaUbs: String): void {
+      this.nomeDaUbs = nomeDaUbs;
     }
 
     /**
-    * @description Seta código identicador.
-    * @param cpf_agente - Código identicador.
-    */
-    public setCpfAgente(cpf_agente: number): void {
-        this.cpf_agente = cpf_agente;
+     * @description Seta código identicador.
+     * @param dataDeAplicacao - Código identicador.
+     */
+    public setdataDeAplicacao(dataDeAplicacao: Date): void {
+      this.dataDeValidade = dataDeAplicacao;
     }
+
+     /**
+     * @description Seta código identicador.
+     * @param dataDeValidade - Código identicador.
+     */
+    public setdataDeValidade(dataDeValidade: Date): void {
+        this.dataDeValidade = dataDeValidade;
+      }
+    
+     /**
+     * @description Seta código identicador.
+     * @param cartao_sus - Código identicador.
+     */
+    public setCartaoSus(cartao_sus: String): void {
+        this.cartao_sus = cartao_sus;
+      }
+
 
 }

@@ -32,8 +32,33 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
     private agenteService: AgenteService,
     private route: ActivatedRoute,
     private ubsUsuario: UbsService) {
+    // this.agente = new Agente();
+    
+  }
 
-    this.agente = new Agente();
+  chamaAtualizar(){
+           //Recupera o conteudo dos parametros e inicializa campos.
+    //Também resgata a instancia da inscrição.
+    this.inscricao = this.route.queryParams.subscribe(
+      (queryParams: any) => {
+
+       
+        this.getCadastrarAds().setNameAgente(queryParams['nome']);
+        this.getCadastrarAds().setSenha(queryParams['senha']);
+        this.getCadastrarAds().setRgAgente(queryParams['rg']);
+        this.getCadastrarAds().setCnes(this.ubsUsuario.getAuth().decodificaToken().cnes);
+        this.getCadastrarAds().setBloqueado(false);
+        this.getCadastrarAds().setCpfAgente(queryParams['cpf']);
+        let status    : Boolean              = false;
+        status = queryParams['verificacao']
+
+        console.log("entrou", status);
+    
+        // if (this.statusAds == true) {
+        //   this.atualizarAgente();
+        // }
+      }
+    );
   }
 
   /**
@@ -85,6 +110,26 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
     
   }
 
+    /**
+   * @description Se inscreve no serviço que envia solicitação para API salvar frequência na base de dados.
+   */
+  private atualizarAgente(){
+
+    this.getCadastrarAds().setBloqueado(true);
+    console.log(this.getCadastrarAds());
+    
+     this.agenteService.atualizarAgente(this.getCadastrarAds())
+                           .subscribe( 
+                                         result =>{ 
+                                                     this.agente = new Agente();
+                                                     this.confirmaSenha = '';
+                                                     this.router.navigate(['workspace-ubs']);
+                                                  }
+                                      );
+ 
+     
+   }
+
   /**
    * @description Retorna instancia de CadastroAgente alocado.
    * @return {Agente} - Instância alocada em memória
@@ -128,5 +173,13 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
            this.confirmaSenha                     == null  
             ? true : false;
   }
+
+  // public getStatus(){
+  //   return this.status;
+  // }
+
+  // public setStatus(status: boolean): void {
+  //   this.status = status;
+  // }
 
 }

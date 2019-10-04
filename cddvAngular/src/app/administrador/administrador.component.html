@@ -54,17 +54,16 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+    </nav>
 
-        			<!-- TABELA DE VACINAS -->
+    <!-- TABELA DE UBS -->
 							  
-<!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
-<div style="background-color:  rgb(91, 94, 94)">
+    <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
+    <div style="background-color:  rgb(91, 94, 94)">
 
 	<div class="nomeSujeito">
-		<h2>Unidades basicas de saude Cadastradas:</h2>
+		<h2>Unidades Basicas de Saude</h2>
 	</div>
-
 
 	<!--Campo PESQUISA -->
 	<div class="form-group col-md-5">
@@ -77,16 +76,8 @@
 				   class="form-control" 
 				   autocomplete="off"
 				   [(ngModel)]="pesquisaAdmUbs"
-				   (keyup.enter)="getUbsCnes()"
-				   placeholder="Digite o Nome da UBS"              
+				   placeholder="Digite o Numero do CNES"              
 			>
-
-			<!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
-			<input type="button" 
-				   id="pesquisaAdmUbs"  
-				   (click)="getUbsCnes()"
-				   class="buttonPesquisaUbs"
-			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
 		</div>
 	</div>
 
@@ -126,6 +117,139 @@
 
 	</table>
 
-</div>
+    </div>
+
+    <!-- TABELA DE AGENTES -->
+    							  
+    <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
+    <div style="background-color:  rgb(91, 94, 94)">
+
+        <div class="nomeSujeito">
+            <h2>Agentes Cadastrados</h2>
+        </div>
+    
+    
+        <!--Campo PESQUISA -->
+        <div class="form-group col-md-5">
+            <div class="input-group-append">
+    
+                <input type = "text"
+                       id   = "pesquisaAdmAds" 
+                       required 
+                       maxlength="8" 
+                       class="form-control" 
+                       autocomplete="off"
+                       [(ngModel)]="pesquisaAdmAds"
+                       (keyup.enter)="getUbsCnes()"
+                       placeholder="Digite o Numero do CPF"              
+                >
+    
+                <!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
+                <input type="button" 
+                       id="pesquisaAdmAds"  
+                       (click)="getAdsCpf()"
+                       class="buttonPesquisaAds"
+                       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+            </div>
+        </div>
+    
+        <table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
+    
+                <thead>
+                    
+                    <th scope="col">CPF</th>
+                    <th scope="col">NOME</th>
+                    <th scope="col">RG</th>
+                    <th scope="col">CNES</th>
+                    <th scope="col">STATUS</th>
+                    <th></th>
+    
+                </thead>
+    
+                <tbody>
+    
+                  <tr *ngFor="let ads of administradorAds">
+    
+                    <td>{{ads.cpf}}</td>
+                    <td>{{ads.nome}}</td>
+                    <td>{{ads.rg}}</td>
+                    <td>{{ads.cnes}}</td>
+                    <td *ngIf="ads.bloqueado">Bloqueado</td>
+                    <td *ngIf="!ads.bloqueado">Ativo</td>
+                    <td><input type="button" class="btn btn-success" value="entrar"></td>
+    
+                  </tr>
+                  
+                </tbody>
+    
+        </table>
+    
+    </div>
+
+    <!-- TABELA DA POPULACAO -->
+    							  
+    <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
+    <div style="background-color:  rgb(91, 94, 94)">
+
+            <div class="nomeSujeito">
+                <h2>Populacao Cadastrada</h2>
+            </div>
+        
+        
+            <!--Campo PESQUISA -->
+            <div class="form-group col-md-5">
+                <div class="input-group-append">
+        
+                    <input type = "text"
+                           id   = "pesquisaAdmPopulacao" 
+                           required 
+                           maxlength="8" 
+                           class="form-control" 
+                           autocomplete="off"
+                           [(ngModel)]="pesquisaAdmPopulacao"
+                           (keyup.enter)="getPopulacaoCartaoSus()"
+                           placeholder="Digite o Numero do CARTAO do SUS "              
+                    >
+        
+                    <!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
+                    <input type="button" 
+                           id="pesquisaAdmPopulacao"  
+                           (click)="getPopulacaoCartaoSus()"
+                           class="buttonPesquisaUbs"
+                           value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+                </div>
+            </div>
+        
+            <table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
+        
+                    <thead>
+                        
+                        <th scope="col">CARTAO DO SUS</th>
+                        <th scope="col">NOME</th>
+                        <th scope="col">ESTADO</th>
+                        <th scope="col">MUNICIPIO</th>
+                        <th></th>
+        
+                    </thead>
+        
+                    <tbody>
+        
+                      <tr *ngFor="let populacao of administradorPopulacao">
+        
+                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.cartao_sus}}</td>
+                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.nome}}</td>
+                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.estado}}</td>
+                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.municipio_de_nacimento}}</td>
+                        <td *ngIf="populacao.cartao_sus != '0'"><input type="button" class="btn btn-success" value="entrar"></td>
+                        
+        
+                      </tr>
+                      
+                    </tbody>
+        
+            </table>
+        
+    </div>
+
 </body>
 </html>

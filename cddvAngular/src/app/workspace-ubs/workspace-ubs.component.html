@@ -109,7 +109,7 @@
 				<th scope="col">CPF</th>
 				<th scope="col">Nome do Agente</th>
 				<th scope="col">RG</th>
-				<th>Status</th>
+				<th scope="col">Status</th>
 				<th></th>
 
 			</thead>
@@ -122,8 +122,22 @@
 				<td>{{workspaceUbs.rg}}</td>
 				<td *ngIf="workspaceUbs.bloqueado">Bloqueado</td>
 				<td *ngIf="!workspaceUbs.bloqueado">Ativo</td>
-				<td><input type="button" class="btn btn-secondary buttonBloquear" value="Bloquear Agente"></td>
-
+				<td *ngIf="workspaceUbs.bloqueado"></td>
+				<td *ngIf="!workspaceUbs.bloqueado">
+				    <input type="button" 
+						class="btn btn-danger buttonBloquear" 
+						value="Bloquear Agente"
+						routerLink="cadastrar-ads/"
+							[queryParams]="{
+								varificando:true,
+								cpf:workspaceUbs.cpf,
+								nome:workspaceUbs.nome,
+								rg:workspaceUbs.rg,
+								bloqueado:workspaceUbs.bloqueado,
+								senha:workspaceUbs.senha
+							  }"
+				    >
+				</td>
 			  </tr>
 
 			</tbody>

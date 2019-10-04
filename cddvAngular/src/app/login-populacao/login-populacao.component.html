@@ -55,35 +55,40 @@
 
 	<!--CORPO DO LOGIN-->
 	
-		<div class="login-box">
-			<form method="post" autocomplete="off">
-				<!-- CPF LOGIN -->
-				<label for="inputCSusLogin">Cartão do SUS</label>
-				<input type="number"
-					placeholder="Numero do Cartão do SUS"
-					maxlength=14
-					required 
-					[(ngModel)]="user"
-					id="inputCSusLogin"
-					name="inputCSusLogin"
-					#inputCpf
-				>
+	<div class="login-box">
+		<form method="post" autocomplete="off">
+			<!-- CPF LOGIN -->
+			<label for="cartaoSusLogin">Cartão do SUS</label>
+			<input type="text"
+				placeholder="Entre com numero do Cartao do SUS"
+				maxlength=15 
+				required
+				[(ngModel)]="userPopulacao"
+				(keydown)="formataCartaoSus(inputCartaoSus.value)"
+				id="cartaoSusLogin"
+				name="cartaoSusLogin"
+				#inputCartaoSus
+			>
 
-				<!-- SENHA -->
-				<label for="inputSenhaLogin">Senha</label>
-				<input type="password"
-					placeholder="Entre com a senha"
-					maxlength=20
-					required
-					[(ngModel)]="senha"
-					id="inputSenhaLogin"
-					name="inputSenhaLogin"
-				>
+			<!-- SENHA -->
+			<label for="inputSenhaLogin">Senha</label>
+			<input type="password"
+				placeholder="Entre com a senha"
+				maxlength=20
+				required
+				[(ngModel)]="senha"
+				id="inputSenhaLogin"
+				name="inputSenhaLogin"
+			>
 
-				<!-- BOTÃO ENTRAR -->
-				<input type="submit" value="Entrar" id="buttonLogin">
-			</form>
-		</div>
+			<!-- BOTÃO ENTRAR -->
+			<input type = "submit" 
+				   value = "Entrar" 
+				   id = "buttonLogin"
+				   (click) = "loginPopulacao()"
+			>
+		</form>
+	</div>
 
 	<!-- Rodapé
 	<footer class="footer sticky-row text-center container-fluid">

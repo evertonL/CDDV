@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription      } from 'rxjs';
 import { Ubs } from '../cadastrar-ubs/ubs';
 import { AdministradorService } from './administradorService';
+import { Populacao } from '../cadastrar-populacao/populacao';
+import { Agente } from '../cadastrar-ads/agente';
 
 @Component({
   selector: 'app-administrador',
@@ -11,18 +13,24 @@ import { AdministradorService } from './administradorService';
 export class AdministradorComponent implements OnInit {
 
 
-  private inscricao               = new Subscription ;
-  private resultadoApi            = null             ;
-  private errosApi                = null             ;
-  private administradorUbs: Ubs[] = []               ;
-  private pesquisaAdmUbs: String  = ""               ;
-  private cnesLogado              = "11111111"       ;
+  private inscricao                            = new Subscription ;
+  private resultadoApi                         = null             ;
+  private errosApi                             = null             ;
+  private administradorUbs       : Ubs[]       = []               ;
+  private administradorAds       : Agente[]    = []               ;
+  private administradorPopulacao : Populacao[] = []               ;
+  private pesquisaAdmUbs         : String      = ""               ;
+  private pesquisaAdmAds         : String      = ""               ;
+  private pesquisaAdmPopulacao   : String      = ""               ;
+
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
   constructor( private administradorService: AdministradorService ) {
 
     this.getAllUbs();
+    this.getAllAds();
+    this.getAllPopulacao();
 
  }
 
@@ -41,7 +49,7 @@ export class AdministradorComponent implements OnInit {
 
 
  /**
-  * @description: Se inscreve no serviço que envia solicitação para API resgatar todos os agentes na base de dados.
+  * @description: Se inscreve no serviço que envia solicitação para API resgatar todas as ubs na base de dados.
   */
  getAllUbs(){
   
@@ -62,28 +70,40 @@ export class AdministradorComponent implements OnInit {
   /**
   * @description: Se inscreve no serviço que envia solicitação para API resgatar todos os agentes na base de dados.
   */
- getUbsCnes(){
-  if(this.pesquisaAdmUbs.trim() == ""){
-    
-    this.getAllUbs();
-
-  }else{
-  console.log(this.pesquisaAdmUbs)
-  this.inscricao = this.administradorService.getUbsCnes(this.pesquisaAdmUbs).subscribe(
+ getAllAds(){
+  
+  this.inscricao = this.administradorService.getAllAds().subscribe(
 
       result => {
                   this.resultadoApi = result;
-                  this.administradorService  = this.resultadoApi.registros;
-                  console.log(this.administradorService);
+                  this.administradorAds  = this.resultadoApi.registros;
+                     
                 },
       error => {
                   this.setErrosApi(error);
                }
-       );
-       console.log("testGet" + this.administradorService)
-  }
+  );
+  console.log("testComponent" + this.administradorService)
 }
 
+  /**
+  * @description: Se inscreve no serviço que envia solicitação para API resgatar todos os agentes na base de dados.
+  */
+ getAllPopulacao(){
+  
+  this.inscricao = this.administradorService.getAllPopulacao().subscribe(
+
+      result => {
+                  this.resultadoApi = result;
+                  this.administradorPopulacao  = this.resultadoApi.registros;
+                     
+                },
+      error => {
+                  this.setErrosApi(error);
+               }
+  );
+  console.log("testComponent" + this.administradorService)
+}
 
  /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
