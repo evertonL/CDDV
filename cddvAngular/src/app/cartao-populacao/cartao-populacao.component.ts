@@ -57,7 +57,7 @@ export class CartaoPopulacaoComponent implements OnInit {
 
         if (this.vacinasNoCartao.length == 0) {
 
-          alert("Não a Vacinas para o cartao pesquisado! ");
+          alert(" Voce não tem vacinas Aplicas ou Agendadas. Visite a Unidade basica mais proxima para Atualizar Seu Cartao.");
 
         }
 

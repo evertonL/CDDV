@@ -21,9 +21,9 @@ export class WorkspaceUbsComponent implements OnInit {
   private pesquisaAgente     : String   = "";
   private pesquisaVacina     : String   = "";
   private cnesLogado                    = this.usuario.getAuth().decodificaToken().cnes; //pego o cnes do token da ubs que efetuo o login
-  private nomeUbsLogado                 = this.usuario.getAuth().decodificaToken().nome;
+  private nomeUbsLogado                 = this.usuario.getAuth().decodificaToken().nome_da_unidade;
   private atualizandoVacina  : boolean  = true; //tenho que arrumar esta vindo como indefinido
-
+  
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
   constructor( private workspaceUbsService: WorkspaceUbsService ,
@@ -33,6 +33,7 @@ export class WorkspaceUbsComponent implements OnInit {
 
     this.getAllAdsPorUbs();
     this.getAllVacinasPorUbs();
+    console.log(this.nomeUbsLogado);
     
  }
 

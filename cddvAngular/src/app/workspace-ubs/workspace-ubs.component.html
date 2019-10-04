@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
 	<!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
 	<nav class="navbar  navbar-fixed-top navbar-light navbar-expand-sm">
 
@@ -70,40 +71,32 @@
 		</div>
 	</nav>
 
-					<!-- TABELA DE AGENTES -->
+	<!--colocar o nome do agente -->
+	<h3>{{nomeUbsLogado}}</h3>
+		<!-- TABELA DE AGENTES -->
 					   
 	<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
-<div style="background-color: rgb(91, 94, 94)">
-
-	<!--Campo PESQUISA -->
-	<div class="form-group col-md-5">
-
-			<h2>Agentes Cadastrados</h2>	
-
-		<div class="input-group-append">
-
-			<input type = "text"
-				   id   = "pesquisarAgentePorUbs" 
-				   required 
-				   maxlength="50" 
-				   class="form-control" 
-				   autocomplete="off"
-				   [(ngModel)]="pesquisa"
-				   (keyup.enter)="getAgentePeloNome()"
-				   placeholder="Digite o Nome do Agente"              
-			>
+    <div style="background-color:  rgb(146, 162, 255)">
 
 
-			<input type="button" 
-				   id="pesquisarAgentePorUbs"  
-				   (click)="getAgentePeloNome()"
-				   class="btn btn-light buttonPesquisa"
-			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+		<div style="text-align: center"><h3>Agentes de Saude Cadastrados</h3></div>
+	
+			<!--Campo PESQUISA -->
+		<div class="form-group col-md-5">
+			<div class="input-group-append" >
+		
+				<input type = "text"
+					id   = "pesquisaAds" 
+					name="pesquisaAds"
+					class="form-control" 
+					[(ngModel)]="filterAgente"
+					placeholder="Pesquisar por Agente de Saude"             
+				>
+
+			</div>
 		</div>
 
-	</div>
-
-	<table class="table table-responsive table-hover table-dark" id="tabelaAgente">
+	    <table class="table table-responsive table-hover " id="tabelaAgente">
 			<thead>
 				
 				<th scope="col">CPF</th>
@@ -115,7 +108,7 @@
 			</thead>
 			<tbody>
 
-			  <tr *ngFor="let workspaceUbs of workspaceUbsAgentes">
+			  <tr *ngFor="let workspaceUbs of workspaceUbsAgentes | filter:filterAgente; let i = index">
 
 				<td>{{workspaceUbs.cpf}}</td>
 				<td>{{workspaceUbs.nome}}</td>
@@ -129,106 +122,95 @@
 						value="Bloquear Agente"
 						routerLink="cadastrar-ads/"
 							[queryParams]="{
-								varificando:true,
 								cpf:workspaceUbs.cpf,
 								nome:workspaceUbs.nome,
 								rg:workspaceUbs.rg,
 								bloqueado:workspaceUbs.bloqueado,
-								senha:workspaceUbs.senha
+								senha:workspaceUbs.senha,
+								verificacao:true
 							  }"
 				    >
 				</td>
 			  </tr>
 
 			</tbody>
-	</table>
+	    </table>
 
-</div>
+    </div>
 
-				<!-- TABELA DE VACINAS -->
+		<!-- TABELA DE VACINAS -->
 							  
-<!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
-<div style="background-color:  rgb(91, 94, 94)">
+    <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
+    <div style="background-color:    rgb(146, 162, 255)">
 
-	<div class="nomeSujeito">
-		<h2>Vacinas Cadastradas</h2>
-	</div>
+		<div style="text-align: center"><h3>Vacinas Cadastradas</h3></div>
 
-
-	<!--Campo PESQUISA -->
-	<div class="form-group col-md-5">
-		<div class="input-group-append">
-
-			<input type = "text"
-				   id   = "pesquisarVacinas" 
-				   required 
-				   maxlength="50" 
-				   class="form-control" 
-				   autocomplete="off"
-				   [(ngModel)]="pesquisaVacina"
-				   (keyup.enter)="getAgentePeloNome()"
-				   placeholder="Digite o Nome da Vacina"              
-			>
-
-			<!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
-			<input type="button" 
-				   id="pesquisarVacinas"  
-				   (click)="getAgentePeloNome()"
-				   class="buttonPesquisavacina"
-			       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
+		<!--Campo PESQUISA -->
+		<div class="form-group col-md-5">
+				<div class="input-group-append">
+			
+					<input type = "text"
+						id   = "pesquisaVacina" 
+						name="pesquisaVacina"
+						class="form-control" 
+						[(ngModel)]="filterVacina"
+						placeholder="Pesquisar por Vacina"              
+					>
+	
+				</div>
 		</div>
-	</div>
 
-	<table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
+	    <table class="table table-responsive table-hover " id="tabelaVaciana">
+    
+	    		<thead>
+	    			
+	    			<th scope="col">Nome</th>
+	    			<th scope="col">Lote</th>
+	    			<th scope="col">UBS</th>
+	    			<th scope="col">Tempo de Imunização</th>
+	    			<th scope="col">Quantidade de Vacinas</th>
+	    			<th></th>
+    
+	    		</thead>
+    
+	    		<tbody>
+	    		  <tr *ngFor="let workspaceUbs of workspaceUbsVacinas | filter:filterVacina; let i = index">
+    
+	    			<td>{{workspaceUbs.nome}}</td>
+	    			<td>{{workspaceUbs.lote}}</td>
+	    			<td>{{workspaceUbs.nome_da_unidade}}</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'D' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Dia</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'D' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Dias</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'M' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Mês</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'M' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Meses</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'A' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Ano</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'A' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Anos</td>
+	    			<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'U'">{{workspaceUbs.periodo_de_imunizacao}}-Unica</td>
+	    			<td>{{workspaceUbs.qtd_vacinas}}</td>
+	    			<td *ngIf="workspaceUbs.qtd_vacinas == '0' ">
+						<input  type="button"
+	    						class="btn btn-danger buttonBloquear"
+	    						value="Atualizar Vacina"
+	    						routerLink="cadastrar-vacina/"
+	    						[queryParams]="{
+	    							nome:workspaceUbs.nome,
+	    							lote:workspaceUbs.lote,
+	    							nome_da_unidade:workspaceUbs.nome_da_unidade,
+	    							qtd_vacinas:workspaceUbs.qtd_vacinas,
+	    							periodo_de_imunizacao:workspaceUbs.periodo_de_imunizacao,
+	    							select_tempo_imunizacao:workspaceUbs.select_tempo_imunizacao,
+	    							id_vacina:workspaceUbs.id_vacina,
+	    							verificacao:true
+	    						  }"
+	    				>
+	    			</td>
+    
+	    		  </tr>
+	    		</tbody>
+    
+	    </table>
 
-			<thead>
-				
-				<th scope="col">Nome</th>
-				<th scope="col">Lote</th>
-				<th scope="col">UBS</th>
-				<th scope="col">Tempo de Imunização</th>
-				<th scope="col">Quantidade de Vacinas</th>
-				<th></th>
-
-			</thead>
-
-			<tbody>
-			  <tr *ngFor="let workspaceUbs of workspaceUbsVacinas">
-
-				<td>{{workspaceUbs.nome}}</td>
-				<td>{{workspaceUbs.lote}}</td>
-				<td>{{workspaceUbs.nome_da_unidade}}</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'D' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Dia</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'D' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Dias</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'M' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Mês</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'M' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Meses</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'A' && workspaceUbs.periodo_de_imunizacao == '1'">{{workspaceUbs.periodo_de_imunizacao}} - Ano</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'A' && workspaceUbs.periodo_de_imunizacao > '1'">{{workspaceUbs.periodo_de_imunizacao}} - Anos</td>
-				<td *ngIf="workspaceUbs.select_tempo_imunizacao == 'U'">{{workspaceUbs.periodo_de_imunizacao}}-Unica</td>
-				<td>{{workspaceUbs.qtd_vacinas}}</td>
-				<td><input  type="button"
-							class="btn btn-danger buttonBloquear"
-							value="Atualizar Vacina"
-							routerLink="cadastrar-vacina/"
-							[queryParams]="{
-								nome:workspaceUbs.nome,
-								lote:workspaceUbs.lote,
-								nome_da_unidade:workspaceUbs.nome_da_unidade,
-								qtd_vacinas:workspaceUbs.qtd_vacinas,
-								periodo_de_imunizacao:workspaceUbs.periodo_de_imunizacao,
-								select_tempo_imunizacao:workspaceUbs.select_tempo_imunizacao,
-								id_vacina:workspaceUbs.id_vacina,
-								verificacao:true
-							  }"
-							>
-				</td>
-
-			  </tr>
-			</tbody>
-
-	</table>
-
-</div>
+    </div>
 
 </body>
 

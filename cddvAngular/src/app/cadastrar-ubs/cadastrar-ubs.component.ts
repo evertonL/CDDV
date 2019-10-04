@@ -31,6 +31,7 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   private camposObrigatorios      = false;
   private mensagemAviso           = null;
   private errosApi                = null;
+  private status                  = false;
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -39,32 +40,32 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
     private ubsService: UbsService,
     private route: ActivatedRoute) {
 
-    this.ubs = new Ubs();
+    // this.ubs = new Ubs();
+
+        //Recupera o conteudo dos parametros e inicializa campos.
+    //Também resgata a instancia da inscrição.
+    this.inscricao = this.route.queryParams.subscribe(
+      (queryParams: any) => {
+
+        this.getCadastrarUbs().setCnes(queryParams['cnes']);
+        this.getCadastrarUbs().setNomeDaUnidade( queryParams['nome']);
+        this.getCadastrarUbs().setMunicipio(queryParams['municipio']);
+        this.getCadastrarUbs().setBairro(queryParams['bairro']);
+        this.getCadastrarUbs().setEndereco(queryParams['endereco'])             
+        this.getCadastrarUbs().setEstado(queryParams['estado']);
+        this.getCadastrarUbs().setTelefone(queryParams['telefone']);
+        this.getCadastrarUbs().setCep(queryParams['cep']); 
+        this.getCadastrarUbs().setSenha(queryParams['senha']);
+        this.getCadastrarUbs().setBloqueado(queryParams['bloqueado']);
+        this.confirmaSenha = this.getCadastrarUbs().getSenha();
+        this.setStatus(queryParams['verificacao']);
+
+      }
+    );
   }
 
 
-  // ngOnInit() {
-
-  //   //Recupera o conteudo dos parametros e inicializa campos.
-  //   //Também resgata a instancia da inscrição.
-  //   this.inscricao = this.route.queryParams.subscribe(
-  //     (queryParams: any) => {
-
-  //       this.getCadastrarUbs().setCnes(queryParams['cnes']);
-  //       this.getCadastrarUbs().setNomeDaUnidade( queryParams['nome_da_unidade']);
-  //       this.getCadastrarUbs().setMunicipio(queryParams['municipio']);
-  //       this.getCadastrarUbs().setBairro(queryParams['bairro']);
-  //       this.getCadastrarUbs().setEndereco(queryParams['endereco'])             
-  //       this.getCadastrarUbs().setEstado(queryParams['estado']);
-  //       this.getCadastrarUbs().setTelefone(queryParams['telefone']);
-  //       this.getCadastrarUbs().setCep(queryParams['cep']); 
-  //       this.getCadastrarUbs().setSenha(queryParams['senha']);
-  //       // this.getCadastrarUbs().setBloqueado(queryParams['bloqueado']);
-
-  //     }
-  //   );
-
-  // }
+  // ngOnInit() {}
 
   /**
  * Destruo o registro ao finalizar
@@ -74,29 +75,52 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
     this.inscricao.unsubscribe();
   }
 
-    /**
+     /**
    * @description Função valida se informações do formulário estão corretas. 
    */
   private registrar(){
 
     if( this.validarCampus() ){
 
-      this.camposObrigatorios = true;
-      alert("Prencha todos os Campos");
+      // this.camposObrigatorios = true;
+      alert("prencha todos os Campos");
       return;
 
     }else if(this.getCadastrarUbs().getSenha() != this.confirmaSenha){
 
-      alert("Campo Senha e Confirma Senha não são iguais!");
-      return;
+      alert("As senhas não são iguais")
 
-    }else{
+    }else if(this.getStatus() == undefined){
 
-      this.camposObrigatorios = false;
+      // this.camposObrigatorios = false;
+      console.log("salva",this.status)
       this.salvaUbs()
-
+      
+    }else{
+      console.log("atulizar",this.status)
+      this.atualizarUbs()
     }
   }
+
+  /**
+  * @description Se inscreve no serviço que envia solicitação para API salvar frequência na base de dados.
+  */
+  private atualizarUbs(){
+
+    // this.getCadastrarAds().setBloqueado(true);
+    console.log(this.getCadastrarUbs());
+    
+     this.ubsService.atualizarUbs(this.getCadastrarUbs())
+                           .subscribe( 
+                                         result =>{ 
+                                                     this.ubs = new Ubs();
+                                                     this.confirmaSenha = '';
+                                                     this.router.navigate(['administrador']);
+                                                  }
+                                      );
+ 
+     
+   }
 
   /**
    * @description Se inscreve no serviço que envia solicitação para API salvar frequência na base de dados.
@@ -108,6 +132,7 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
                                         result =>{ 
                                                     alert("Registrado com Sucesso");
                                                     this.ubs = new Ubs();
+                                                    this.router.navigate(['administrador']);
                                                  }
                                      );
 
@@ -168,4 +193,13 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
            this.confirmaSenha                               == null      
             ? true : false;
   }
+
+  public getStatus(){
+    return this.status;
+  }
+
+  public setStatus(status: boolean): void {
+    this.status = status;
+  }
+
 }

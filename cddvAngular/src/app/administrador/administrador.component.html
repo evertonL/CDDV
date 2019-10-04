@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -59,29 +59,27 @@
     <!-- TABELA DE UBS -->
 							  
     <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
-    <div style="background-color:  rgb(91, 94, 94)">
+    <div style="background-color:   rgb(146, 162, 255)">
 
-	<div class="nomeSujeito">
-		<h2>Unidades Basicas de Saude</h2>
-	</div>
+	    <div style="text-align: center">
+	    	<h2>Unidades Basicas de Saude</h2>
+	    </div>
 
-	<!--Campo PESQUISA -->
-	<div class="form-group col-md-5">
-		<div class="input-group-append">
+	    <!--Campo PESQUISA -->
+	    <div class="form-group col-md-5">
+	    	<div class="input-group-append">
+    
+	    		<input type = "text"
+                       id   = "searchUbs" 
+                       name="searchUbs"
+	    			   class="form-control" 
+	    			   [(ngModel)]="filterUbs"
+	    			   placeholder="Pesquisa por UBS"              
+	    		>
+	    	</div>
+	    </div>
 
-			<input type = "text"
-				   id   = "pesquisaAdmUbs" 
-				   required 
-				   maxlength="8" 
-				   class="form-control" 
-				   autocomplete="off"
-				   [(ngModel)]="pesquisaAdmUbs"
-				   placeholder="Digite o Numero do CNES"              
-			>
-		</div>
-	</div>
-
-	<table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
+	    <table class="table table-responsive table-hover " id="tabelaVaciana">
 
 			<thead>
 				
@@ -98,8 +96,8 @@
 
 			<tbody>
 
-			  <tr *ngFor="let ubs of administradorUbs">
-
+			  <tr *ngFor="let ubs of administradorUbs | filter:filterUbs; let i = index">
+                
 				<td>{{ubs.cnes}}</td>
 				<td>{{ubs.nome_da_unidade}}</td>
 				<td>{{ubs.municipio}}</td>
@@ -108,52 +106,59 @@
                 <td>{{ubs.cep}}</td>
                 <td *ngIf="ubs.bloqueado">Bloqueado</td>
 				<td *ngIf="!ubs.bloqueado">Ativo</td>
-                <td><input type="button" class="btn btn-danger buttonBloquear" value="Bloquear"></td>
-                <td><input type="button" class="btn btn-success" value="entrar"></td>
-
+                <td *ngIf="ubs.bloqueado != true">
+                    <input  type="button"
+					    class="btn btn-danger buttonBloquear"
+					    value="Bloquear UBS"
+					    routerLink="cadastrar-ubs/"
+					    [queryParams]="{
+						                cnes:ubs.cnes,
+						                nome:ubs.nome_da_unidade,
+                                        municipio:ubs.municipio,
+                                        bairro:ubs.bairro,
+						                endereco:ubs.endereco,
+                                        estado:ubs.estado,
+                                        telefone:ubs.telefone,
+										cep:ubs.cep,
+                                        senha:ubs.senha,
+                                        bloqueado:ubs.bloqueado,
+                                        verificacao:true
+					    }"
+                    ></td>
+                <td></td>
               </tr>
               
 			</tbody>
 
-	</table>
+	    </table>
 
     </div>
 
     <!-- TABELA DE AGENTES -->
     							  
     <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
-    <div style="background-color:  rgb(91, 94, 94)">
+    <div style="background-color:   rgb(146, 162, 255)">
 
-        <div class="nomeSujeito">
+        <div style="text-align: center">
             <h2>Agentes Cadastrados</h2>
         </div>
     
     
-        <!--Campo PESQUISA -->
-        <div class="form-group col-md-5">
+	    <!--Campo PESQUISA -->
+	    <div class="form-group col-md-5">
             <div class="input-group-append">
     
                 <input type = "text"
-                       id   = "pesquisaAdmAds" 
-                       required 
-                       maxlength="8" 
+                       id   = "searchAds" 
+                       name="searchAds"
                        class="form-control" 
-                       autocomplete="off"
-                       [(ngModel)]="pesquisaAdmAds"
-                       (keyup.enter)="getUbsCnes()"
-                       placeholder="Digite o Numero do CPF"              
+                       [(ngModel)]="filterAds"
+                       placeholder="Pesquisa por Agente de Saude"              
                 >
-    
-                <!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
-                <input type="button" 
-                       id="pesquisaAdmAds"  
-                       (click)="getAdsCpf()"
-                       class="buttonPesquisaAds"
-                       value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
             </div>
         </div>
     
-        <table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
+        <table class="table table-responsive table-hover " id="tabelaVaciana">
     
                 <thead>
                     
@@ -168,7 +173,7 @@
     
                 <tbody>
     
-                  <tr *ngFor="let ads of administradorAds">
+                  <tr *ngFor="let ads of administradorAds | filter:filterAds; let i = index">
     
                     <td>{{ads.cpf}}</td>
                     <td>{{ads.nome}}</td>
@@ -176,7 +181,6 @@
                     <td>{{ads.cnes}}</td>
                     <td *ngIf="ads.bloqueado">Bloqueado</td>
                     <td *ngIf="!ads.bloqueado">Ativo</td>
-                    <td><input type="button" class="btn btn-success" value="entrar"></td>
     
                   </tr>
                   
@@ -189,65 +193,53 @@
     <!-- TABELA DA POPULACAO -->
     							  
     <!-- coloco q cor de fundo da tela(provisorio futuaramente mudar para o arquivo de css) -->
-    <div style="background-color:  rgb(91, 94, 94)">
+    <div style="background-color:  rgb(146, 162, 255)">
 
-            <div class="nomeSujeito">
-                <h2>Populacao Cadastrada</h2>
+        <div style="text-align: center">
+            <h2>Populacao Cadastrada</h2>
+        </div>
+    
+    
+        <!--Campo PESQUISA -->
+	    <div class="form-group col-md-5">
+            <div class="input-group-append">
+    
+                <input type = "text"
+                       id   = "searchPopulacao" 
+                       name="searchPopulacao"
+                       class="form-control" 
+                       [(ngModel)]="filterPopulacao"
+                       placeholder="Pesquisa por Agente de Saude"              
+                >
             </div>
-        
-        
-            <!--Campo PESQUISA -->
-            <div class="form-group col-md-5">
-                <div class="input-group-append">
-        
-                    <input type = "text"
-                           id   = "pesquisaAdmPopulacao" 
-                           required 
-                           maxlength="8" 
-                           class="form-control" 
-                           autocomplete="off"
-                           [(ngModel)]="pesquisaAdmPopulacao"
-                           (keyup.enter)="getPopulacaoCartaoSus()"
-                           placeholder="Digite o Numero do CARTAO do SUS "              
-                    >
-        
-                    <!-- Botão de Pesquisa |>Arrumar o espaco entre o campo de peqsuisa e o botao--> 
-                    <input type="button" 
-                           id="pesquisaAdmPopulacao"  
-                           (click)="getPopulacaoCartaoSus()"
-                           class="buttonPesquisaUbs"
-                           value="Pesquisar"><!-- Botao do campo de pesquisa | colocar uma imagem nesse botao e tirar o value pesquisar -->
-                </div>
-            </div>
-        
-            <table class="table table-responsive table-hover table-dark" id="tabelaVaciana">
-        
-                    <thead>
-                        
-                        <th scope="col">CARTAO DO SUS</th>
-                        <th scope="col">NOME</th>
-                        <th scope="col">ESTADO</th>
-                        <th scope="col">MUNICIPIO</th>
-                        <th></th>
-        
-                    </thead>
-        
-                    <tbody>
-        
-                      <tr *ngFor="let populacao of administradorPopulacao">
-        
-                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.cartao_sus}}</td>
-                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.nome}}</td>
-                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.estado}}</td>
-                        <td *ngIf="populacao.cartao_sus != '0'">{{populacao.municipio_de_nacimento}}</td>
-                        <td *ngIf="populacao.cartao_sus != '0'"><input type="button" class="btn btn-success" value="entrar"></td>
-                        
-        
-                      </tr>
-                      
-                    </tbody>
-        
-            </table>
+        </div>
+    
+        <table class="table table-responsive table-hover " id="tabelaVaciana">
+    
+            <thead>
+                
+                <th scope="col">CARTAO DO SUS</th>
+                <th scope="col">NOME</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">MUNICIPIO</th>
+                <th></th>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let populacao of administradorPopulacao | filter:filterPopulacao; let i = index">
+
+                    <td *ngIf="populacao.cartao_sus != '0'">{{populacao.cartao_sus}}</td>
+                    <td *ngIf="populacao.cartao_sus != '0'">{{populacao.nome}}</td>
+                    <td *ngIf="populacao.cartao_sus != '0'">{{populacao.estado}}</td>
+                    <td *ngIf="populacao.cartao_sus != '0'">{{populacao.municipio_de_nacimento}}</td>
+                
+                </tr>
+              
+            </tbody>
+    
+        </table>
         
     </div>
 

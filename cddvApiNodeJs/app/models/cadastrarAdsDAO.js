@@ -69,7 +69,7 @@ class CadastrarUbsDAO {
 
         let aValues = [
             cpfAgente.nome,
-            cpfAgente.senha = crypto.createHash('MD5').update(cadastrarAds.senha).digest('hex'), //criptogafando a senha
+            cpfAgente.senha = crypto.createHash('MD5').update(cpfAgente.senha).digest('hex'), //criptogafando a senha
             cpfAgente.rg,
             cpfAgente.cnes,
             cpfAgente.bloqueado,

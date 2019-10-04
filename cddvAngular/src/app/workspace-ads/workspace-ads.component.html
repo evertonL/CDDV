@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</nav>
-<div style="background-color: rgb(91, 94, 94)">
+<div style="background-color: rgb(146, 162, 255)">
 
 	<!--Campo PESQUISA -->
 	<div class="form-group col-md-5">
@@ -68,7 +68,7 @@
 			<input type="button" 
 				   id="inputAplicarNovaVacina"  
 				   routerLink="nova-vacina" 
-				   class="buttonPesquisa"
+				   class="buttonPesquisa btn btn-success"
 				   value="Nova Vacina"
 			>
 		</div>
@@ -93,13 +93,13 @@
 			<input type="button" 
 				   id="inputPesquisaCartao"  
 				   (click)="getChecarPopulacao()"
-				   class="buttonPesquisa"
+				   class="buttonPesquisa btn btn-success"
 				   value="Pesquisar">
 			
 		</div>
 	</div>
 
-	<table class="table table-responsive table-hover table-dark" id="tabela">
+	<table class="table table-responsive table-hover" id="tabela">
 			<thead>
 			  <tr>
 				<th scope="col">Usuario</th>
@@ -122,10 +122,11 @@
 				<td>{{workspaceAds.nome_agente}}</td>
 				<td>{{workspaceAds.nome_da_unidade}}</td>
 				<td>{{workspaceAds.data_aplicacao | date:'dd/MM/yyyy'}}</td>
-				<td>{{workspaceAds.data_validade | date:'dd/MM/yyyy'}}</td>
+				<td *ngIf="workspaceAds.select_tempo_imunizacao != 'U'">{{workspaceAds.data_validade | date:'dd/MM/yyyy'}}</td>
+				<td *ngIf="workspaceAds.select_tempo_imunizacao == 'U'">Infinita</td>
 				<td *ngIf="workspaceAds.aplicada">Aplicada</td>
 				<td *ngIf="!workspaceAds.aplicada">Agendada</td>
-				<td *ngIf="compararData(workspaceAds.data_validade)">
+				<td *ngIf="compararData(workspaceAds.data_validade) && workspaceAds.select_tempo_imunizacao != 'U'">
 						<input  type="button"
 					    class="btn btn-danger buttonBloquear"
 					    value="Atualizar Vacina"

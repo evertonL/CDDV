@@ -60,6 +60,22 @@ export class UbsService {
       );
   }
 
+  /**
+  * @description envia solicitação para API atualizar usuario na base de dados.
+  * @param Ubs objeto da usuario que deve ser atualizada.
+  * @returns Observable
+  */
+  public atualizarUbs(Ubs : Ubs): Observable<Ubs>{
+  
+  return this.http.put<Ubs>(this.UbsApi, Ubs, httpOption)
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );    
+ }
+
+
   
   /**
   * @description envia solicitação para API consultar todas as UBS cadastradas 

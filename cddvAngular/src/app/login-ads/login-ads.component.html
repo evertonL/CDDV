@@ -87,6 +87,12 @@
 				       (click) = "loginAds()"
 		        >
 			</form>
+
+			<div *ngIf="erro" class="alert-warning">
+					<div class="alerta-login-invalido">
+					  {{ erro }}
+					</div>
+			</div>
 		</div>
 
 	<!-- Rodapé

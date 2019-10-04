@@ -4,6 +4,7 @@ import { NgModule     } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule  } from '@angular/forms';
 
+
 import { AdministradorComponent        } from './administrador.component';
 
 import { rotas                          } from 'src/app/rotas';

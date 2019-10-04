@@ -26,6 +26,7 @@ import { RelatorioUbsComponent } from './relatorio-ubs/relatorio-ubs.component';
 
 import { rotas            } from './rotas';
 import { AplicarVacinaCartaoComponent } from './aplicar-vacina-cartao/aplicar-vacina-cartao.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 const appRoutes = rotas
 
@@ -53,7 +54,8 @@ const appRoutes = rotas
     LoginPopulacaoModule,
     LoginAdsModule,
     LoginUbsModule,
-    CartaoPopulacaoModule
+    CartaoPopulacaoModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

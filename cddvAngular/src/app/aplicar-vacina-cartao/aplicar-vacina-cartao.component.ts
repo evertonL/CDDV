@@ -29,7 +29,7 @@ export class AplicarVacinaCartaoComponent {
   private errosApi                                    = null;
 
   private tipoDaVacina        : String                = null;
-  private tempoVacina         : number                = null;
+  private tempoVacina         : Number                = null;
   
   private data: String;
   private status                  = false;
@@ -101,12 +101,26 @@ export class AplicarVacinaCartaoComponent {
 
   }else if(this.getStatus() == undefined){
 
+    // let id = this.getAplicadaVacinaCartao().getVacinasId()
+  
+    // console.log("pegoID",id);
+    // for (let i = 0; i < this.workspaceUbsVacinas.length; i++) {
+    //   if(id == this.workspaceUbsVacinas[i].getVacinaId()){
+
+    //     this.tipoDaVacina = this.workspaceUbsVacinas[i].getSelectImunizacao();
+    //     this.tempoVacina = this.workspaceUbsVacinas[i].getPeriodoDeImunizacao();
+    //     console.log("testG",this.tipoDaVacina,this.tempoVacina)
+    //   }
+    // }
+    // this.gerarDataValidade()
+    
     console.log("salva",this.status)
     this.camposObrigatorios = false;
     this.salvaAplicarVacina()
 
   }else{
-   
+
+
    console.log("atulizar",this.status)
    this.camposObrigatorios = false;
    this.status = false;

@@ -20,10 +20,11 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
 
   private inscricao = new Subscription;
   private agente: Agente = null;
-  private confirmaSenha: string;
+  private confirmaSenha: String;
   private camposObrigatorios      = false;
   private mensagemAviso           = null;
   private errosApi                = null;
+  private status                  = false;
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -34,31 +35,23 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
     private ubsUsuario: UbsService) {
     // this.agente = new Agente();
     
-  }
-
-  chamaAtualizar(){
-           //Recupera o conteudo dos parametros e inicializa campos.
+    //Recupera o conteudo dos parametros e inicializa campos.
     //Também resgata a instancia da inscrição.
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {
 
-       
         this.getCadastrarAds().setNameAgente(queryParams['nome']);
         this.getCadastrarAds().setSenha(queryParams['senha']);
         this.getCadastrarAds().setRgAgente(queryParams['rg']);
         this.getCadastrarAds().setCnes(this.ubsUsuario.getAuth().decodificaToken().cnes);
-        this.getCadastrarAds().setBloqueado(false);
+        this.getCadastrarAds().setBloqueado(queryParams['bloqueado']);
         this.getCadastrarAds().setCpfAgente(queryParams['cpf']);
-        let status    : Boolean              = false;
-        status = queryParams['verificacao']
+        this.confirmaSenha = this.getCadastrarAds().getSenha();
+        this.setStatus(queryParams['verificacao']);
 
-        console.log("entrou", status);
-    
-        // if (this.statusAds == true) {
-        //   this.atualizarAgente();
-        // }
       }
     );
+    
   }
 
   /**
@@ -81,13 +74,18 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
       return;
 
     }else if(this.getCadastrarAds().getSenha() != this.confirmaSenha){
-      alert("As senhas não são iguais");
-    }else{
+
+      alert("As senhas não são iguais")
+
+    }else if(this.getStatus() == undefined){
 
       // this.camposObrigatorios = false;
-      this.getCadastrarAds().setCnes(this.ubsUsuario.getAuth().decodificaToken().cnes); // pego o cnes da ubs que esta logada
+      console.log("salva",this.status)
       this.salvaAgente()
       
+    }else{
+      console.log("atulizar",this.status)
+      this.atualizarAgente()
     }
   }
 
@@ -104,6 +102,7 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
                                                     alert("Registrado com Sucesso");
                                                     this.agente = new Agente();
                                                     this.confirmaSenha = '';
+                                                    this.router.navigate(['workspace-ubs']);
                                                  }
                                      );
 
@@ -115,7 +114,7 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
    */
   private atualizarAgente(){
 
-    this.getCadastrarAds().setBloqueado(true);
+    // this.getCadastrarAds().setBloqueado(true);
     console.log(this.getCadastrarAds());
     
      this.agenteService.atualizarAgente(this.getCadastrarAds())
@@ -174,12 +173,12 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
             ? true : false;
   }
 
-  // public getStatus(){
-  //   return this.status;
-  // }
+  public getStatus(){
+    return this.status;
+  }
 
-  // public setStatus(status: boolean): void {
-  //   this.status = status;
-  // }
+  public setStatus(status: boolean): void {
+    this.status = status;
+  }
 
 }
