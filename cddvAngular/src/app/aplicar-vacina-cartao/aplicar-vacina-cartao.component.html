@@ -145,7 +145,7 @@
                     name="cpf_agente"
                 >
             </div>
-
+            <!--
             <div class="form-group col-md-4">
                     <label for="data_aplicacao">Data de Validade:</label>
                     <input class="form-control"
@@ -155,6 +155,7 @@
                        name="data_validade"
                     >
             </div>
+            -->
         </div>
     </form>
 
@@ -168,6 +169,12 @@
                 Registrar
             </button>
         </div>
+    </div>
+</div>
+
+<div *ngIf="errosApi" class="alert-warning">
+    <div class="alerta-login-invalido">
+      {{ errosApi  }}
     </div>
 </div>
 

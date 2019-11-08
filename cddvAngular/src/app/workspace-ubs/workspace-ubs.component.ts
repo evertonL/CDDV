@@ -20,8 +20,8 @@ export class WorkspaceUbsComponent implements OnInit {
   private workspaceUbsVacinas: Vacina[] = [];
   private pesquisaAgente     : String   = "";
   private pesquisaVacina     : String   = "";
-  private cnesLogado                    = this.usuario.getAuth().decodificaToken().cnes; //pego o cnes do token da ubs que efetuo o login
-  private nomeUbsLogado                 = this.usuario.getAuth().decodificaToken().nome_da_unidade;
+  private cnesLogado                    = "12345678" //this.usuario.getAuth().decodificaToken().cnes; //pego o cnes do token da ubs que efetuo o login
+  private nomeUbsLogado                 = "UBS-Test" //this.usuario.getAuth().decodificaToken().nome_da_unidade;
   private atualizandoVacina  : boolean  = true; //tenho que arrumar esta vindo como indefinido
   
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
