@@ -8,7 +8,7 @@ import { PopulacaoService } from '../cadastrar-populacao/cadastrar-populacao-ser
 import * as jsPDF from 'jspdf'
 
 /**
-* @description Componente fornece o relatório de vistorias realizadas de um determinado formulário.
+* @description Componente fornece o relatório de vacinasAplicadas realizadas de um determinado formulário.
 * @see http://www.rotisedapsales.com/snr/cloud2/website/jsPDF-master/docs/jspdf.js.html
 */
 
@@ -100,9 +100,11 @@ export class CartaoPopulacaoComponent implements OnInit {
 
   }
 
-  
+
 
   private imprimirCartao(){
+
+    let resultadoApi = null;
 
     //declarção da intancia do pdf 
     let documento = new jsPDF({
@@ -112,8 +114,130 @@ export class CartaoPopulacaoComponent implements OnInit {
       format: 'a4',
     });
 
-    documento.output("dataurlnewwindow");
+    this.serviceCartao.getCartaoDaPopulacao(this.cartao_sus_token).subscribe(
+
+      result => {
+
+        resultadoApi = result;
+
+        if(resultadoApi.linhas_afetada > 0){
+
+            this.processaInformacoesDoCartao(documento, resultadoApi.registros);
+            documento.output("dataurlnewwindow");
+
+        }else{
+          alert(" Voce não tem vacinas Aplicas. Visite a Unidade basica mais proxima para Atualizar Seu Cartao.");
+        }
+
+      },
+      error => {
+
+        this.setErrosApi(error);
+
+      }
+    );
+    console.log(this.vacinasNoCartao);
   }
 
+  /**
+   * @description: processar as informacoes que vem da api.
+   * @param {jsPDF} documento, intancia do pdf a qual será trabalhada.
+   * @param {*} vacinasAplicadas, resultset da consulta realizada no banco de dados com as vacinasAplicadas
+   */
+  private processaInformacoesDoCartao(documento, vacinasAplicadas) {
+
+    let vacinasAplicadas_aux = [];
+    let vacinaAplicada      = [];
+    let umaVacinaAplicada   = true;
+
+    // Percorre todas as vacinasAplicadas
+    for (let index in vacinasAplicadas) {
+
+      
+        // Carrega os itens da vistoria no array
+        vacinaAplicada.push(vacinasAplicadas[index]);
+      
+        // Verifica se próxima posição existe
+        if(vacinasAplicadas.length > (Number.parseInt(index) + 1)) {
+
+            //// Verifica se mudou a vistoria
+            //if(vacinasAplicadas[index].emissao != vacinasAplicadas[Number.parseInt(index) + 1].emissao ||
+            //vacinasAplicadas[index].hora    != vacinasAplicadas[Number.parseInt(index) + 1].hora    ){
+
+                // Guarda a vistoria corrente em uma posição especifica da matriz.
+                vacinasAplicadas_aux.push(vacinaAplicada);
+                console.log("vistoria = ", vacinaAplicada);
+                vacinaAplicada = [];
+                umaVacinaAplicada = false;
+        }
+    }
+
+    //Tratativa quando for somente uma vistoria
+    if(umaVacinaAplicada) {
+
+       vacinaAplicada  = [];
+       vacinasAplicadas_aux = [];
+
+        for (let index in vacinasAplicadas) {
+          vacinaAplicada.push(vacinasAplicadas[index]);
+        }
+        vacinasAplicadas_aux.push(vacinaAplicada);
+        console.log("Há somente uma Vacina", vacinasAplicadas_aux)
+
+    }else{
+      // Se não tiver somente um vacinaAplicada, eu pego a ultima que não entrou no if e verifico se mudou
+      vacinasAplicadas_aux.push(vacinaAplicada);
+    }
+    console.log("vacinasAplicadas_aux", vacinasAplicadas_aux);
+
+
+    // Inicia impressão relatorio
+    for(let index in vacinasAplicadas_aux) {
+
+      this.imprimeCabecalho(documento, vacinasAplicadas_aux[index][0]);
+      this.imprimeCabecalhoItens(documento);
+      this.imprimeItens(documento, vacinasAplicadas_aux[index]);
+      this.imprimeRodape(documento, vacinasAplicadas_aux[index][0]);
+
+      if(Number.parseInt(index)+1 < vacinasAplicadas_aux.length){
+        documento.addPage();
+      }
+    }
+    console.log("vacinasAplicadas_aux = ", vacinasAplicadas_aux);
+  }
+  
+  /**
+   * @description: Imprime o cabeçalho do relatório
+   * @param {jsPDF} documento, intancia do pdf a qual será trabalhada.
+   * @param {*} vacinaAplicada
+   */
+  private imprimeCabecalho(documento, vacinaAplicada) {
+
+  }
+
+  /**
+   * @description: Imprime o cabeçalho dos itens do relatório.
+   * @param documento, intancia do pdf a qual será trabalhada.
+   */
+  private imprimeCabecalhoItens(documento) {
+
+  }
+
+  /**
+   * @description Imprime os itens do relatório
+   * @param documento, intancia do pdf a qual será trabalhada.
+   * @param vacinaAplicada 
+   */
+  private imprimeItens(documento, vacinaAplicada) {
+
+  }
+
+  /**
+   * @description Imprime o rodapé do relatório
+   * @param documento, intancia do pdf a qual será trabalhada.
+   */
+  private imprimeRodape(documento, vacinaAplicada) {
+
+  }
   
 }
