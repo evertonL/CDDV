@@ -120,7 +120,7 @@ export class CartaoPopulacaoComponent implements OnInit {
 
         resultadoApi = result;
 
-        if(resultadoApi.linhas_afetada > 0){
+        if(resultadoApi.length > 0){
 
             this.processaInformacoesDoCartao(documento, resultadoApi.registros);
             documento.output("dataurlnewwindow");
@@ -154,25 +154,25 @@ export class CartaoPopulacaoComponent implements OnInit {
     for (let index in vacinasAplicadas) {
 
       
-        // Carrega os itens da vistoria no array
+        // Carrega os itens da vacinaAplicada no array
         vacinaAplicada.push(vacinasAplicadas[index]);
       
         // Verifica se próxima posição existe
         if(vacinasAplicadas.length > (Number.parseInt(index) + 1)) {
 
-            //// Verifica se mudou a vistoria
+            //// Verifica se mudou a vacinaAplicada
             //if(vacinasAplicadas[index].emissao != vacinasAplicadas[Number.parseInt(index) + 1].emissao ||
             //vacinasAplicadas[index].hora    != vacinasAplicadas[Number.parseInt(index) + 1].hora    ){
 
-                // Guarda a vistoria corrente em uma posição especifica da matriz.
+                // Guarda a vacinaAplicada corrente em uma posição especifica da matriz.
                 vacinasAplicadas_aux.push(vacinaAplicada);
-                console.log("vistoria = ", vacinaAplicada);
+                console.log("vacinasAplicadas = ", vacinaAplicada);
                 vacinaAplicada = [];
                 umaVacinaAplicada = false;
         }
     }
 
-    //Tratativa quando for somente uma vistoria
+    //Tratativa quando for somente uma vacinasAplicadas
     if(umaVacinaAplicada) {
 
        vacinaAplicada  = [];

@@ -26,7 +26,7 @@ export class CartaoService {
   */
 getCartaoDaPopulacao(cartao_sus:String) : Observable<Cartao[]>{
 
-  console.log("passou aqui " + cartao_sus);
+  console.log("Passou pela funcao Do service: " + cartao_sus);
   return this.http.get<Cartao[]>(this.cartaoApiVacinas + "/" + cartao_sus )
                 .pipe(
                         catchError(
