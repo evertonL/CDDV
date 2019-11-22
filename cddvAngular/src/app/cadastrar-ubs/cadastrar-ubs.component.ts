@@ -89,8 +89,9 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
     this.inscricao.unsubscribe();
   }
 
-  buscaCep(){
-    cep(this.getCadastrarUbs().getCep())
+  buscaCep(cepUbs){
+
+    cep(cepUbs)
     .then(this.cepCorreto)
     .catch(this.cepIncorreto)
   }
@@ -101,7 +102,6 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
 
   cepCorreto(endereco){
     console.log("entrou "+  endereco.city)
-    
   }
 
 
@@ -109,9 +109,7 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
    * @description Função valida se informações do formulário estão corretas. 
    */
   private registrar(){
-
-    this.buscaCep();
-
+    
     if( this.validarCampus() ){
 
       alert("prencha todos os Campos");

@@ -97,6 +97,8 @@
                         id="cep"
                         name="cep"
                         required
+                        (blur)="buscaCep(inputCep.value)"
+                        #inputCep
                         maxlength={{SIZE_CEP}}
                         placeholder="Digite o CEP"
                     >
