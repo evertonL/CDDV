@@ -52,6 +52,9 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
 
+  // variaveis auxiliares para endereço
+  private municipioUbs = "";
+
   constructor(private router: Router,
     private ubsService: UbsService,
     private route: ActivatedRoute) {
@@ -94,23 +97,38 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   buscaCep(cepUbs){
 
     cep(cepUbs)
-    .then((this.cepCorreto))
-    .catch(this.cepIncorreto)
-    
+    .then( result => { 
+                       this.cepCorreto;
+                       this.getCadastrarUbs().setMunicipio(result.city);
+                       this.getCadastrarUbs().setEstado(result.state);
+                       this.getCadastrarUbs().setEndereco(result.street);
+                     } 
+          )
+    .catch(this.cepIncorreto)    
+
   }
   
+  preencheCamposEndereco(){
+    //Popula informações do endereço
+    this.getCadastrarUbs().setMunicipio(this.municipioUbs);
+    console.log(this.municipioUbs);
+
+  }
+
   cepIncorreto(){
-    alert('CEP Invalido')
+     console.log("CEP Invalido")
+     alert("CEP Invalido")
   }
 
   cepCorreto(endereco){
-    this.test = endereco.city;
-    console.log("T "+ this.test)
+   
+    console.log("cepCorreto", endereco )
+    return endereco
   }
 
   funcaoSet(){ // funcao criada afim de tentar jogar municipio no campo
     this.getCadastrarUbs().setMunicipio(this.test);
-    console.log("testando " + this.test);
+    console.log( this.test);
   }
 
 

@@ -5,7 +5,7 @@ export class Ubs {
 
     private cnes               : string;
     private nome_da_unidade    : string;
-    private municipio          : string;
+    private municipio          : String;
     private bairro             : string;
     private endereco           : string;
     private estado             : string;
@@ -67,7 +67,7 @@ export class Ubs {
      * @description: Retorna a municipio
      * @return {string} ( municipio ) - código identificador.
      */
-    public getMunicipio(): string {
+    public getMunicipio(): String {
         return this.municipio;
     }
 
@@ -150,7 +150,7 @@ export class Ubs {
      * @description Seta código identicador.
      * @param municipio - Código identicador.
      */
-    public setMunicipio(municipio: string): void {
+    public setMunicipio(municipio: String): void {
         this.municipio = municipio;
     }
 

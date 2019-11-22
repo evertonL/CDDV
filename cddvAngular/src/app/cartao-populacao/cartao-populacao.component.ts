@@ -5,6 +5,13 @@ import { CartaoService } from './cartaoService';
 import { Router } from '@angular/router';
 import { PopulacaoService } from '../cadastrar-populacao/cadastrar-populacao-service.service';
 
+import * as jsPDF from 'jspdf'
+
+/**
+* @description Componente fornece o relatório de vistorias realizadas de um determinado formulário.
+* @see http://www.rotisedapsales.com/snr/cloud2/website/jsPDF-master/docs/jspdf.js.html
+*/
+
 @Component({
   selector: 'app-cartao-populacao',
   templateUrl: './cartao-populacao.component.html',
@@ -92,4 +99,21 @@ export class CartaoPopulacaoComponent implements OnInit {
     console.log(this.errosApi);
 
   }
+
+  
+
+  private imprimirCartao(){
+
+    //declarção da intancia do pdf 
+    let documento = new jsPDF({
+
+      orientation: 'p',
+      unit: 'mm',
+      format: 'a4',
+    });
+
+    documento.output("dataurlnewwindow");
+  }
+
+  
 }
