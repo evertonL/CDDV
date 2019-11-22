@@ -28,6 +28,7 @@ import { rotas            } from './rotas';
 import { AplicarVacinaCartaoComponent } from './aplicar-vacina-cartao/aplicar-vacina-cartao.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+
 const appRoutes = rotas
 
 @NgModule({

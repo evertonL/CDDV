@@ -9,7 +9,7 @@ import {  Agente   } from '../cadastrar-ads/agente';
 // COMPONENTES DE TERCEIROS 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const KEY = '#CddvAdsToken';
+const KEY = '#Token';
 const jwtHelper = new JwtHelperService();
 
 const httpOption = {

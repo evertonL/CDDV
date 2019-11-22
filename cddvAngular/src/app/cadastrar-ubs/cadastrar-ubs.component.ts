@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UbsService } from './cadastrarUbsService';
 import { Subscription } from 'rxjs'; // precisa instalar
 
+import * as cep from 'cep-promise'
+
 @Component({
   selector: 'app-cadastrar-ubs',
   templateUrl: './cadastrar-ubs.component.html',
@@ -24,6 +26,18 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   public SIZE_CEP             = 8  ;
   public SIZE_SENHA           = 32 ;
   public SIZE_CONFIRMA_SENHA  = 32 ;
+
+  private statusCnes      = false;
+  private statusUbs       = false;
+  private statusCep       = false;
+  private statusBairro    = false;
+  private statusMunicipio = false;
+  private statusTelefone  = false;
+  private statusEndereco  = false;
+  private statusEstado    = false;
+  private statusSenha     = false;
+  private statusConfSenha = false;
+
 
   private confirmaSenha: string;
   private inscricao               = new Subscription;
@@ -65,7 +79,7 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   }
 
 
-  // ngOnInit() {}
+ ngOnInit() {}
 
   /**
  * Destruo o registro ao finalizar
@@ -75,14 +89,31 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
     this.inscricao.unsubscribe();
   }
 
+  buscaCep(){
+    cep(this.getCadastrarUbs().getCep())
+    .then(this.cepCorreto)
+    .catch(this.cepIncorreto)
+  }
+
+  cepIncorreto(){
+    alert('CEP Invalido')
+  }
+
+  cepCorreto(endereco){
+    console.log("entrou "+  endereco.city)
+    
+  }
+
+
      /**
    * @description Função valida se informações do formulário estão corretas. 
    */
   private registrar(){
 
+    this.buscaCep();
+
     if( this.validarCampus() ){
 
-      // this.camposObrigatorios = true;
       alert("prencha todos os Campos");
       return;
 

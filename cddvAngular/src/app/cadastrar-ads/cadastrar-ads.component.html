@@ -42,10 +42,10 @@
             <div class="container">
                 <ul class="navbar-nav mr-auto">
 
-                    <button class="voltar btn btn-outline-success"
-                        type="button"
-                        routerLink="workspace-ubs">
-                        VOLTAR
+                    <button type="button"
+                        class="voltar btn btn-outline-success"
+                        routerLink="workspace-ubs"
+                        >VOLTAR
                     </button>
 
                 </ul>
@@ -56,7 +56,7 @@
     <!-- Campos De Cadastramento -->
     <div id="main" class="container-fluid">
 
-        <h3 class="page-header">Digite os dados do Novo Agente de Saude:</h3>
+        <h3 class="page-header" style="text-align: center;">Digite os dados do Novo Agente de Saude:</h3>
 
         <form>
             <!-- Campos : CPF e Nome do Agente -->
@@ -70,6 +70,7 @@
                         id="cpf"
                         name="cpf" 
                         maxlength = {{SIZE_CPF}}
+                        [class.is-invalid] = "statusCpf"
                         placeholder="Numero do CPF do Agente">
                 </div>
 
@@ -81,6 +82,7 @@
                         id="nome"
                         name="nome" 
                         maxlength = {{SIZE_NOME}}
+                        [class.is-invalid] = "statusNome"
                         placeholder="Nome do Agente">
                 </div>
 
@@ -95,7 +97,8 @@
                     type="password" 
                     [(ngModel)]="agente.senha" 
                     id="senha"
-                    name="senha" 
+                    name="senha"
+                    [class.is-invalid] = "statusSenha"
                     maxlength = {{SIZE_SENHA}}
                     placeholder="Digite a Senha para sua conta">
                 </div>
@@ -107,6 +110,7 @@
                     [(ngModel)]="confirmaSenha"
                     id="confirmaSenha"
                     name="confirmaSenha"
+                    [class.is-invalid] = "statusConfSenha"
                     maxlength = {{SIZE_SENHA}}
                     placeholder="Confirme sua Senha">
                 </div>
@@ -118,6 +122,7 @@
                     [(ngModel)]="agente.rg"
                     id="rg"
                     name="rg"
+                    [class.is-invalid] = "statusRg"
                     maxlength = {{SIZE_RG}}
                     placeholder="Numero do RG do Agente">
                 </div>
@@ -127,7 +132,8 @@
 
                     <select id   = "inputBloqueado" 
                             name = "inputBloqueado" 
-                            required 
+                            required
+                            [class.is-invalid] = "statusBloqueado"
                             [(ngModel)]="agente.bloqueado" 
                             class="form-control"
                     >
@@ -143,7 +149,7 @@
 
         <!-- Botao de Registrar  -->
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-12">
                 <button class="btRegistrar btn btn-outline-success"
                     type="button"
                     (click)="registrar()">

@@ -9,7 +9,7 @@ import { Ubs    } from '../cadastrar-ubs/ubs';
 // COMPONENTES DE TERCEIROS 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const KEY = '#CddvUbsToken';
+const KEY = '#Token'; //#token
 const jwtHelper = new JwtHelperService();
 
 const httpOption = {

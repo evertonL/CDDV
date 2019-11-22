@@ -66,8 +66,8 @@
 	    </div>
 
 	    <!--Campo PESQUISA -->
-	    <div class="form-group col-md-5">
-	    	<div class="input-group-append">
+	    <div class="form-group col-md-9">
+	    	<div class="campo input-group-append">
     
                 <input type = "text"
                        id   = "searchUbs" 
@@ -79,7 +79,7 @@
 	    	</div>
 	    </div>
 
-	    <table class="table table-responsive table-hover " id="tabelaVaciana">
+	    <table class="table table-responsive table-hover " style="text-align: center;" id="tabelaVaciana">
 
 			<thead>
 				
@@ -90,7 +90,8 @@
                 <th scope="col">Telefone</th>
                 <th scope="col">CEP</th>
                 <th scope="col">Status</th>
-				<th></th>
+                <th></th>
+                <th></th>
 
 			</thead>
 
@@ -124,8 +125,21 @@
                                         bloqueado:ubs.bloqueado,
                                         verificacao:true
 					    }"
-                    ></td>
-                <td></td>
+                    >
+                </td>
+                <td *ngIf="!ubs.bloqueado != true"></td>
+                <td>
+                    <input  type="button"
+                        class="btn btn-danger buttonBloquear"
+                        value="Acessar Ubs"
+                        routerLink="workspace-ubs/"
+                        [queryParams]="{
+                                        cnes:ubs.cnes,
+                                        nome:ubs.nome_da_unidade
+                        }"
+                    >
+                </td>
+                
               </tr>
               
 			</tbody>

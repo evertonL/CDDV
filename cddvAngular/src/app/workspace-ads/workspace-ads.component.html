@@ -59,11 +59,11 @@
 <div style="background-color: rgb(146, 162, 255)">
 
 	<!--Campo PESQUISA -->
-	<div class="form-group col-md-5">
+	<div class="form-group col-md-12">
 		<div class="input-group-append">
 
 			<!--colocar o nome do agente -->
-			<h3>Agente de Saude - {{nomeAdsLogado}}</h3>
+			<h2>Agente de Saude - {{nomeAdsLogado}}</h2>
 			<!-- Botao para cadastrar nova vacina para o peessoa em questao -->
 			<input type="button" 
 				   id="inputAplicarNovaVacina"  
@@ -75,8 +75,9 @@
 	</div>
 
 	<!--Campo PESQUISA -->
-	<div class="form-group col-md-5">
-		<div class="input-group-append">
+	<div class="form-group col-md-8">
+		<h4 style="text-align: center;">Verificar o Cartão da Peessoa</h4>
+		<div class="campo input-group-append">
 		
 			<input type = "text"
 				   id   = "inputPesquisaCartao" 
@@ -99,7 +100,7 @@
 		</div>
 	</div>
 
-	<table class="table table-responsive table-hover" id="tabela">
+	<table class="table table-responsive table-hover" style="text-align: center;" id="tabela">
 			<thead>
 			  <tr>
 				<th scope="col">Usuario</th>

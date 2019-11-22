@@ -21,11 +21,13 @@
     "@angular/router": "~8.1.1",
     "@auth0/angular-jwt": "^3.0.0",
     "bootstrap": "^4.3.1",
+    "cep-promise": "^3.0.7",
     "jquery": "^3.4.1",
     "ng2-search-filter": "^0.5.1",
     "popper": "^1.0.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
+    "validar-cpf": "^2.1.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

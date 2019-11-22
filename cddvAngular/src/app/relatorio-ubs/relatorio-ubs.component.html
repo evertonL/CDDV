@@ -52,7 +52,116 @@
         </div>
     </nav>
 
-    <!--Emprementar as tabelas-->
+    <!--colocar o nome do agente -->
+	<h3>{{nomeUbsLogado}}</h3>
+    <!-- TABELA DE AGENTES -->
+                   
+<!-- coloco q cor de fundo da tela(provisorio furuaramente mudar parao aruivo de css) -->
+<div style="background-color:  rgb(146, 162, 255)">
+
+
+    <div style="text-align: center"><h3>Emitir Relatorio De Vacinas Aplicadas</h3></div>
+
+        <!--Campo PESQUISA -->
+    <div class="form-group col-md-5">
+        <div class="input-group-append" >
+    
+            <input type = "text"
+                id   = "pesquisaAds" 
+                name="pesquisaAds"
+                class="form-control" 
+                [(ngModel)]="filterAgente"
+                placeholder="Pesquisar por Agente de Saude"             
+            >
+
+        </div>
+    </div>
+
+     <!-- Campos : tipo de dia/mes/ano -->
+    <div class="row">
+
+        <div class="form-group col-md-3">
+
+            <legend class="col-form-label col-sm-2 pt-0">Selecione:</legend>
+
+            <div class="col-sm-10">
+                        
+                <div class="form-check">
+                    <input class="form-check-input"
+                    type="radio"
+                    name="filtro"
+                    id="filtro"
+                    value="dia"
+                    >
+                    <label class="form-check-label" for="aplicada"> DIA </label>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input"
+                    type="radio" 
+                    name="filtro"
+                    id="filtro"
+                    value="mes">
+                    <label class="form-check-label" for="aplicada"> MES </label>
+                </div>
+            </div>
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                    type="radio"
+                    name="filtro"
+                    id="filtro"
+                    value="mes">
+                    <label class="form-check-label" for="aplicada"> ANO </label>
+                </div>
+
+            
+        </div>
+    </div>
+
+    <table class="table table-responsive table-hover " id="tabelaAgente">
+        <thead>
+            
+            <th scope="col">CPF</th>
+            <th scope="col">Nome do Agente</th>
+            <th scope="col">RG</th>
+            <th scope="col">Status</th>
+            <th></th>
+
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let workspaceUbs of workspaceUbsAgentes | filter:filterAgente; let i = index">
+
+            <td>{{workspaceUbs.cpf}}</td>
+            <td>{{workspaceUbs.nome}}</td>
+            <td>{{workspaceUbs.rg}}</td>
+            <td *ngIf="workspaceUbs.bloqueado">Bloqueado</td>
+            <td *ngIf="!workspaceUbs.bloqueado">Ativo</td>
+            <td *ngIf="workspaceUbs.bloqueado"></td>
+            <td *ngIf="!workspaceUbs.bloqueado">
+                <input type="button" 
+                    class="btn btn-danger buttonBloquear" 
+                    value="Bloquear Agente"
+                    routerLink="cadastrar-ads/"
+                        [queryParams]="{
+                            cpf:workspaceUbs.cpf,
+                            nome:workspaceUbs.nome,
+                            rg:workspaceUbs.rg,
+                            bloqueado:workspaceUbs.bloqueado,
+                            senha:workspaceUbs.senha,
+                            verificacao:true
+                          }"
+                >
+            </td>
+          </tr>
+
+        </tbody>
+    </table>
+
+</div>
 
     <!--Rodapé-->
     <!-- <footer class="footer sticky-row text-center container-fluid">

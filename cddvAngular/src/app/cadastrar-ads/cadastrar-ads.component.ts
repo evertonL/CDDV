@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AgenteService } from './cadastrarAdsService';
 import { Subscription } from 'rxjs';
 import { UbsService } from '../cadastrar-ubs/cadastrarUbsService';
+import * as validarCpf from 'validar-cpf';
 
 @Component({
   selector: 'app-cadastrar-ads',
@@ -22,9 +23,17 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
   private agente: Agente = null;
   private confirmaSenha: String;
   private camposObrigatorios      = false;
+  private statusCpf               = false;
+  private statusNome              = false;
+  private statusSenha             = false;
+  private statusRg                = false;
+  private statusBloqueado         = false;
+  private statusConfSenha         = false;
   private mensagemAviso           = null;
   private errosApi                = null;
   private status                  = false;
+  private admUsuario = JSON.parse(localStorage.getItem('ADMusuario'));
+  private admNome = localStorage.getItem('ADMnome');
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -35,6 +44,7 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
     private ubsUsuario: UbsService) {
     // this.agente = new Agente();
     
+    console.log("admUsuario " + this.admUsuario);
     //Recupera o conteudo dos parametros e inicializa campos.
     //Também resgata a instancia da inscrição.
     this.inscricao = this.route.queryParams.subscribe(
@@ -67,9 +77,14 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
    */
   private registrar(){
 
+    if(  ! validarCpf(this.getCadastrarAds().getCpfAgente()) ){
+      alert("CPF inválido!");
+      return;
+    }
+
     if( this.validarCampus() ){
 
-      // this.camposObrigatorios = true;
+      this.validarStatusCampo();
       alert("prencha todos os Campos");
       return;
 
@@ -79,11 +94,12 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
 
     }else if(this.getStatus() == undefined){
 
-      // this.camposObrigatorios = false;
-      console.log("salva",this.status)
+      this.camposObrigatorios = false;
+      console.log("salva",this.status) 
       this.salvaAgente()
       
     }else{
+      this.camposObrigatorios = false;
       console.log("atulizar",this.status)
       this.atualizarAgente()
     }
@@ -171,6 +187,55 @@ export class CadastrarAdsComponent /*implements OnInit*/ {
            this.getCadastrarAds().getBloqueado()  == null       ||
            this.confirmaSenha                     == null  
             ? true : false;
+  }
+
+  private validarStatusCampo(){
+    if (this.getCadastrarAds().getCpfAgente() ==  undefined || 
+        this.getCadastrarAds().getCpfAgente()  == ''        ||
+        this.getCadastrarAds().getCpfAgente()  == null       ){
+      this.statusCpf = true;
+    }else{
+      this.statusCpf = false;
+    }
+
+    if ( this.getCadastrarAds().getNameAgente() == undefined  ||
+         this.getCadastrarAds().getNameAgente() == ''         || 
+         this.getCadastrarAds().getNameAgente() == null      ) {
+      this.statusNome = true
+    }else{
+      this.statusNome = false;
+    }
+
+    if ( this.getCadastrarAds().getSenha() == undefined  ||
+         this.getCadastrarAds().getSenha() == ''         || 
+         this.getCadastrarAds().getSenha() == null      ) {
+      this.statusSenha = true
+    }else{
+      this.statusSenha = false;
+    }
+
+    if ( this.confirmaSenha == undefined  ||
+         this.confirmaSenha == null      ) {
+      this.statusConfSenha = true
+    }else{
+      this.statusConfSenha = false;
+    }
+
+    if ( this.getCadastrarAds().getRgAgente() == undefined  ||
+         this.getCadastrarAds().getRgAgente() == ''         || 
+         this.getCadastrarAds().getRgAgente() == null      ) {
+      this.statusRg = true
+    }else{
+      this.statusRg = false;
+    }
+
+    if ( this.getCadastrarAds().getBloqueado() == undefined  || 
+         this.getCadastrarAds().getBloqueado() == null      ) {
+      this.statusBloqueado = true
+    }else{
+         this.statusBloqueado = false;
+    }
+
   }
 
   public getStatus(){

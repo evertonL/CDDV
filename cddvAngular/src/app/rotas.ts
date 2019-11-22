@@ -34,6 +34,7 @@ export const rotas : Routes = [
     { path: "administrador"                                         , component  : AdministradorComponent      },
     { path: "administrador/cadastrar-ubs"                           , component  : CadastrarUbsComponent       },
     { path: "administrador/workspace-ubs"                           , component  : WorkspaceUbsComponent       },
+    { path: "administrador/workspace-ubs/cadastrar-ads"             , component  : CadastrarAdsComponent       },
     { path: 'workspace-ubs/cadastrar-ads/workspace-ubs'             , redirectTo : 'workspace-ubs'             },
     { path: 'workspace-ubs/cadastrar-vacina/workspace-ubs'          , redirectTo : 'workspace-ubs'             },
     { path: 'workspace-ubs/relatorio/workspace-ubs'                 , redirectTo : 'workspace-ubs'             },
@@ -41,6 +42,7 @@ export const rotas : Routes = [
     { path: 'workspace-ads/nova-vacina/nova-vacina'                 , redirectTo : 'workspace-ads'             },
     { path: 'home/cadastrar-populacao/cadastrar-populacao'          , redirectTo : 'home'                      },
     { path: 'administrador/cadastrar-ubs/administrador'             , redirectTo : 'administrador'             },
+    { path: 'administrador/workspace-ubs/cadastrar-ads/workspace-ubs' , redirectTo : 'administrador/workspace-ubs'           },
     { path: ''                                                      , redirectTo : 'home'        , pathMatch: 'full' }
 
 ];  

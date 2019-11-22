@@ -44,7 +44,7 @@ export class CadastrarVacinaComponent /*implements OnInit*/ {
    this.inscricao = this.route.queryParams.subscribe(
      (queryParams: any) => {
 
-       this.getCadastrarVacina().setIdVacina(queryParams['id_vacina'])
+       this.getCadastrarVacina().setIdVacina(queryParams['id_vacina']);
        this.getCadastrarVacina().setNome(queryParams['nome']);
        this.getCadastrarVacina().setNomeDaUnidade( queryParams['nome_da_unidade']);
        this.getCadastrarVacina().setLote(queryParams['lote']);

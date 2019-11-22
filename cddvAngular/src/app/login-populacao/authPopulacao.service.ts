@@ -9,7 +9,7 @@ import {  Populacao  } from '../cadastrar-populacao/populacao';
 // COMPONENTES DE TERCEIROS 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const KEY = '#CddvPopulacaoToken';
+const KEY = '#Token';
 const jwtHelper = new JwtHelperService();
 
 const httpOption = {

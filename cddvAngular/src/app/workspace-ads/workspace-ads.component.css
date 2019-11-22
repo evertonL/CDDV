@@ -26,3 +26,14 @@ ul{
 img{
     position: center;   
 }
+
+.campo{  
+
+    -webkit-margin-start: 30%;
+    
+}
+
+#inputAplicarNovaVacina{
+
+    margin-inline-start: 50%;
+}
