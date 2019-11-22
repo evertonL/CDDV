@@ -27,6 +27,8 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   public SIZE_SENHA           = 32 ;
   public SIZE_CONFIRMA_SENHA  = 32 ;
 
+  private test ; //Variavel criada para test DO CEP
+
   private statusCnes      = false;
   private statusUbs       = false;
   private statusCep       = false;
@@ -92,16 +94,23 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
   buscaCep(cepUbs){
 
     cep(cepUbs)
-    .then(this.cepCorreto)
+    .then((this.cepCorreto))
     .catch(this.cepIncorreto)
+    
   }
-
+  
   cepIncorreto(){
     alert('CEP Invalido')
   }
 
   cepCorreto(endereco){
-    console.log("entrou "+  endereco.city)
+    this.test = endereco.city;
+    console.log("T "+ this.test)
+  }
+
+  funcaoSet(){ // funcao criada afim de tentar jogar municipio no campo
+    this.getCadastrarUbs().setMunicipio(this.test);
+    console.log("testando " + this.test);
   }
 
 
@@ -109,7 +118,8 @@ export class CadastrarUbsComponent /*implements OnInit*/ {
    * @description Função valida se informações do formulário estão corretas. 
    */
   private registrar(){
-    
+    this.funcaoSet();
+
     if( this.validarCampus() ){
 
       alert("prencha todos os Campos");
