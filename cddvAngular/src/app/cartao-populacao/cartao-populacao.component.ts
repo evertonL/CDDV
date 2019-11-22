@@ -43,7 +43,7 @@ export class CartaoPopulacaoComponent implements OnInit {
     /**
   * destruo a inscrição ao fechar.
   */
- ngOnDestroy() {
+  ngOnDestroy() {
 
   this.inscricao.unsubscribe();
 
@@ -119,8 +119,8 @@ export class CartaoPopulacaoComponent implements OnInit {
       result => {
 
         resultadoApi = result;
-
-        if(resultadoApi.length > 0){
+        console.log("t" + resultadoApi)
+        if(resultadoApi.linhas_afetadas > 0){
 
             this.processaInformacoesDoCartao(documento, resultadoApi.registros);
             documento.output("dataurlnewwindow");
@@ -146,64 +146,15 @@ export class CartaoPopulacaoComponent implements OnInit {
    */
   private processaInformacoesDoCartao(documento, vacinasAplicadas) {
 
-    let vacinasAplicadas_aux = [];
-    let vacinaAplicada      = [];
-    let umaVacinaAplicada   = true;
-
-    // Percorre todas as vacinasAplicadas
-    for (let index in vacinasAplicadas) {
-
-      
-        // Carrega os itens da vacinaAplicada no array
-        vacinaAplicada.push(vacinasAplicadas[index]);
-      
-        // Verifica se próxima posição existe
-        if(vacinasAplicadas.length > (Number.parseInt(index) + 1)) {
-
-            //// Verifica se mudou a vacinaAplicada
-            //if(vacinasAplicadas[index].emissao != vacinasAplicadas[Number.parseInt(index) + 1].emissao ||
-            //vacinasAplicadas[index].hora    != vacinasAplicadas[Number.parseInt(index) + 1].hora    ){
-
-                // Guarda a vacinaAplicada corrente em uma posição especifica da matriz.
-                vacinasAplicadas_aux.push(vacinaAplicada);
-                console.log("vacinasAplicadas = ", vacinaAplicada);
-                vacinaAplicada = [];
-                umaVacinaAplicada = false;
-        }
-    }
-
-    //Tratativa quando for somente uma vacinasAplicadas
-    if(umaVacinaAplicada) {
-
-       vacinaAplicada  = [];
-       vacinasAplicadas_aux = [];
-
-        for (let index in vacinasAplicadas) {
-          vacinaAplicada.push(vacinasAplicadas[index]);
-        }
-        vacinasAplicadas_aux.push(vacinaAplicada);
-        console.log("Há somente uma Vacina", vacinasAplicadas_aux)
-
-    }else{
-      // Se não tiver somente um vacinaAplicada, eu pego a ultima que não entrou no if e verifico se mudou
-      vacinasAplicadas_aux.push(vacinaAplicada);
-    }
-    console.log("vacinasAplicadas_aux", vacinasAplicadas_aux);
-
-
     // Inicia impressão relatorio
-    for(let index in vacinasAplicadas_aux) {
+    for(let index in vacinasAplicadas) {
 
-      this.imprimeCabecalho(documento, vacinasAplicadas_aux[index][0]);
+      this.imprimeCabecalho(documento, vacinasAplicadas[index][0]);
       this.imprimeCabecalhoItens(documento);
-      this.imprimeItens(documento, vacinasAplicadas_aux[index]);
-      this.imprimeRodape(documento, vacinasAplicadas_aux[index][0]);
-
-      if(Number.parseInt(index)+1 < vacinasAplicadas_aux.length){
-        documento.addPage();
-      }
+      this.imprimeItens(documento, vacinasAplicadas[index]);
+      this.imprimeRodape(documento, vacinasAplicadas[index][0]);
     }
-    console.log("vacinasAplicadas_aux = ", vacinasAplicadas_aux);
+    console.log("vacinasAplicadas_aux = ", vacinasAplicadas);
   }
   
   /**
@@ -212,6 +163,143 @@ export class CartaoPopulacaoComponent implements OnInit {
    * @param {*} vacinaAplicada
    */
   private imprimeCabecalho(documento, vacinaAplicada) {
+
+     // FAZENDO EM LINHAS HORIZONTAIS
+    //documento.rect( 0,  0,  50, 32, "S");
+    //documento.line(0,  8, 210,  8, 'S');
+    //documento.line(0, 16, 210, 16, 'S');
+    documento.line(0, 22, 210, 22, 'S');
+    documento.line(0, 34, 210, 34, 'S');
+    documento.line(0, 60, 210, 60 ,'S');
+    documento.line(0, 75, 210, 75 ,'S');
+
+
+    documento.setFont("Roman");
+    documento.setFontStyle("bold");
+    documento.setFontSize(20);
+    documento.text("Cartão de Vacinas", 75, 13);
+    documento.text("Vacinas", 90, 50);
+    documento.setFontSize(12);
+
+    // TEXTOS FIXOS
+    documento.setFontStyle("normal");
+    documento.text("Nome :",  15, 30);
+    documento.text("Nome da Vacina",  10, 70);
+    documento.text("Lote ",  50, 70);
+    documento.text("Responsavel",  90, 70);
+    documento.text("UBS" , 140, 70);
+    documento.text("Validade"  , 180, 70);
+
+    documento.rect( 0,  75,  47, 12, "S");
+    documento.rect( 47, 75,  30, 12, "S");
+    documento.rect( 77, 75,  47, 12, "S");
+    documento.rect( 124,75,  47, 12, "S");
+    documento.rect( 171,75,  47, 12, "S");
+
+    documento.rect( 0,  87,  47, 12, "S");
+    documento.rect( 47, 87,  30, 12, "S");
+    documento.rect( 77, 87,  47, 12, "S");
+    documento.rect( 124,87,  47, 12, "S");
+    documento.rect( 171,87,  47, 12, "S");
+
+    documento.rect( 0,  99,  47, 12, "S");
+    documento.rect( 47, 99,  30, 12, "S");
+    documento.rect( 77, 99,  47, 12, "S");
+    documento.rect( 124,99,  47, 12, "S");
+    documento.rect( 171,99,  47, 12, "S");
+
+    documento.rect( 0,  111,  47, 12, "S");
+    documento.rect( 47, 111,  30, 12, "S");
+    documento.rect( 77, 111,  47, 12, "S");
+    documento.rect( 124,111,  47, 12, "S");
+    documento.rect( 171,111,  47, 12, "S");
+
+    documento.rect( 0,  123,  47, 12, "S");
+    documento.rect( 47, 123,  30, 12, "S");
+    documento.rect( 77, 123,  47, 12, "S");
+    documento.rect( 124,123,  47, 12, "S");
+    documento.rect( 171,123,  47, 12, "S");
+
+    documento.rect( 0,  135,  47, 12, "S");
+    documento.rect( 47, 135,  30, 12, "S");
+    documento.rect( 77, 135,  47, 12, "S");
+    documento.rect( 124,135,  47, 12, "S");
+    documento.rect( 171,135,  47, 12, "S");
+
+    documento.rect( 0,  147,  47, 12, "S");
+    documento.rect( 47, 147,  30, 12, "S");
+    documento.rect( 77, 147,  47, 12, "S");
+    documento.rect( 124,147,  47, 12, "S");
+    documento.rect( 171,147,  47, 12, "S");
+
+    documento.rect( 0,  159,  47, 12, "S");
+    documento.rect( 47, 159,  30, 12, "S");
+    documento.rect( 77, 159,  47, 12, "S");
+    documento.rect( 124,159,  47, 12, "S");
+    documento.rect( 171,159,  47, 12, "S");
+
+    documento.rect( 0,  171,  47, 12, "S");
+    documento.rect( 47, 171,  30, 12, "S");
+    documento.rect( 77, 171,  47, 12, "S");
+    documento.rect( 124,171,  47, 12, "S");
+    documento.rect( 171,171,  47, 12, "S");
+
+    documento.rect( 0,  183,  47, 12, "S");
+    documento.rect( 47, 183,  30, 12, "S");
+    documento.rect( 77, 183,  47, 12, "S");
+    documento.rect( 124,183,  47, 12, "S");
+    documento.rect( 171,183,  47, 12, "S");
+
+    documento.rect( 0,  195,  47, 12, "S");
+    documento.rect( 47, 195,  30, 12, "S");
+    documento.rect( 77, 195,  47, 12, "S");
+    documento.rect( 124,195,  47, 12, "S");
+    documento.rect( 171,195,  47, 12, "S");
+
+    documento.rect( 0,  207,  47, 12, "S");
+    documento.rect( 47, 207,  30, 12, "S");
+    documento.rect( 77, 207,  47, 12, "S");
+    documento.rect( 124,207,  47, 12, "S");
+    documento.rect( 171,207,  47, 12, "S");
+
+    documento.rect( 0,  219,  47, 12, "S");
+    documento.rect( 47, 219,  30, 12, "S");
+    documento.rect( 77, 219,  47, 12, "S");
+    documento.rect( 124,219,  47, 12, "S");
+    documento.rect( 171,219,  47, 12, "S");
+
+    documento.rect( 0,  231,  47, 12, "S");
+    documento.rect( 47, 231,  30, 12, "S");
+    documento.rect( 77, 231,  47, 12, "S");
+    documento.rect( 124,231,  47, 12, "S");
+    documento.rect( 171,231,  47, 12, "S");
+
+    documento.rect( 0,  243,  47, 12, "S");
+    documento.rect( 47, 243,  30, 12, "S");
+    documento.rect( 77, 243,  47, 12, "S");
+    documento.rect( 124,243,  47, 12, "S");
+    documento.rect( 171,243,  47, 12, "S");
+
+    documento.rect( 0,  255,  47, 12, "S");
+    documento.rect( 47, 255,  30, 12, "S");
+    documento.rect( 77, 255,  47, 12, "S");
+    documento.rect( 124,255,  47, 12, "S");
+    documento.rect( 171,255,  47, 12, "S");
+
+    documento.rect( 0,  267,  47, 12, "S");
+    documento.rect( 47, 267,  30, 12, "S");
+    documento.rect( 77, 267,  47, 12, "S");
+    documento.rect( 124,267,  47, 12, "S");
+    documento.rect( 171,267,  47, 12, "S");
+
+    documento.rect( 0,  279,  47, 12, "S");
+    documento.rect( 47, 279,  30, 12, "S");
+    documento.rect( 77, 279,  47, 12, "S");
+    documento.rect( 124,279,  47, 12, "S");
+    documento.rect( 171,279,  47, 12, "S");
+
+    // INFORMAÇÕES DO BD
+    documento.text(this.nomeLogado                   , 30, 30);
 
   }
 
